@@ -9,7 +9,6 @@ pnpm-debug.log*
 lib/**/*.map
 lib/**/*.tsbuildinfo
 dist/
-generated/
 
 # Local env
 .env
