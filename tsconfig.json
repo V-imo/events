@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "target": "ES2024",
+    "module": "CommonJS",
+    "declaration": true,
+    "outDir": "lib",
+    "rootDir": "generated",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "Node",
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts", "src/index.js", "generated/**/*.ts"],
+  "exclude": ["node_modules", ".github"]
+}

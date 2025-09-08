@@ -1,0 +1,35 @@
+{
+  "name": "vimo-events",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node src/index.js && tsc -p tsconfig.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/V-imo/events.git"
+  },
+  "author": "AlfGoto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/V-imo/events/issues"
+  },
+  "homepage": "https://github.com/V-imo/events#readme",
+  "description": "",
+  "private": false,
+  "devDependencies": {
+    "semver": "^7.6.0",
+    "typescript": "^5.4.0",
+    "ts-node": "^10.9.2",
+    "@types/node": "^22.13.5"
+  },
+  "type": "module"
+}

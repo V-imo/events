@@ -1,0 +1,71 @@
+{
+  "name": "sample-complex-types",
+  "description": "Event showcasing enums, unions, and array types",
+  "attributes": [
+    {
+      "name": "status",
+      "enum": [
+        "active",
+        "disabled",
+        "pending"
+      ],
+      "description": "Account status (enum)"
+    },
+    {
+      "name": "rating",
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "description": "Numeric rating (enum)"
+    },
+    {
+      "name": "tags",
+      "arrayOf": "string",
+      "description": "List of tags (array of strings)"
+    },
+    {
+      "name": "values",
+      "arrayOf": [
+        "string",
+        "number"
+      ],
+      "description": "Mixed primitive values (array of union)"
+    },
+    {
+      "name": "payload",
+      "oneOf": [
+        "string",
+        {
+          "attributes": [
+            {
+              "name": "id",
+              "type": "string",
+              "description": "Payload ID"
+            },
+            {
+              "name": "meta",
+              "attributes": [
+                {
+                  "name": "createdBy",
+                  "type": "string",
+                  "description": "Creator"
+                },
+                {
+                  "name": "version",
+                  "type": "number",
+                  "description": "Version"
+                }
+              ],
+              "description": "Metadata"
+            }
+          ]
+        }
+      ],
+      "description": "Union of string or object payload"
+    }
+  ]
+}

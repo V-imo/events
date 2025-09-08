@@ -1,0 +1,30 @@
+# Exclude sources and configs from the published package
+# Keep built JavaScript in lib/
+
+# Source files
+src/
+generated/
+
+# Tests and coverage
+__tests__/
+coverage/
+
+# Node
+node_modules/
+*.log
+
+# Tooling/config
+.github/
+.vscode/
+.idea/
+*.tsbuildinfo
+
+# Root project files not needed in package
+.eslintrc*
+.prettierrc*
+*.config.js
+*.config.cjs
+*.config.mjs
+
+# Keep package.json, README, LICENSE automatically
+# Do not ignore lib/ as it contains the build output
