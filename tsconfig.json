@@ -2,7 +2,7 @@
   "compilerOptions": {
     "resolveJsonModule": true,
     "target": "ES2024",
-    "module": "ES2024",
+    "module": "NodeNext",
     "declaration": true,
     "outDir": "lib",
     "rootDir": "generated",
