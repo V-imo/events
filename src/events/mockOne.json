@@ -5,7 +5,8 @@
     {
       "name": "id",
       "type": "string",
-      "description": "User ID"
+      "description": "User ID",
+      "required": true
     },
     {
       "name": "age",
@@ -14,6 +15,7 @@
     },
     {
       "name": "profile",
+      "required": true,
       "attributes": [
         {
           "name": "bio",
@@ -23,7 +25,8 @@
         {
           "name": "verified",
           "type": "boolean",
-          "description": "Verification"
+          "description": "Verification",
+          "required": true
         }
       ],
       "description": "Nested profile"

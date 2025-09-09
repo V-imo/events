@@ -18,7 +18,7 @@ function generate(eventFileName) {
   eventTypes.push({ ...jsonType, camelName: kebabToCamelCase(jsonType.name) })
 
   let str = ""
-  str += `export const ${camelNameEvent}DataJson = \`${JSON.stringify(jsonType)}\`\n`
+  // str += `export const ${camelNameEvent}DataJson = \`${JSON.stringify(jsonType)}\`\n`
 
   str += "/**\n"
   str += ` * ${jsonType.description}\n`
@@ -37,7 +37,7 @@ function generate(eventFileName) {
 
 function generateAttributeDefinition(attribute, nest, isOneOf = false) {
   let str = isOneOf ? "" : `${indent(nest)}/** ${attribute.description} */\n`
-  str += isOneOf ? "" : `${indent(nest)}${attribute.name}: `
+  str += isOneOf ? "" : `${indent(nest)}${attribute.name}${attribute.required ? "" : "?"}: `
 
   if (attribute.attributes !== undefined) {
     str += "{\n" + attribute.attributes.map(atr => generateAttributeDefinition(atr, nest + 1)).join("\n") + "\n" + indent(nest) + "}"

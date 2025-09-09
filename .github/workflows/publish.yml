@@ -58,6 +58,9 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --access public
 
+      - name: redeploy preview
+        run: curl https://api.vercel.com/v1/integrations/deploy/prj_dofmmkrthXFDUgvN2qqP6DTAGCj6/zBlucAkow2
+
       - name: Restore files
         run: |
           git checkout package.json

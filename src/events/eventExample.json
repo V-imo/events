@@ -10,7 +10,8 @@
     {
       "name": "simpleNumber",
       "type": "number",
-      "description": "A basic number value"
+      "description": "A basic number value",
+      "required": true
     },
     {
       "name": "simpleBoolean",
@@ -19,11 +20,13 @@
     },
     {
       "name": "objectAttribute",
+      "required": true,
       "attributes": [
         {
           "name": "id",
           "type": "string",
-          "description": "Identifier inside an object"
+          "description": "Identifier inside an object",
+          "required": true
         },
         {
           "name": "count",
@@ -32,6 +35,7 @@
         },
         {
           "name": "nested",
+          "required": true,
           "attributes": [
             {
               "name": "enabled",
@@ -41,7 +45,8 @@
             {
               "name": "label",
               "type": "string",
-              "description": "Nested label"
+              "description": "Nested label",
+              "required": true
             }
           ],
           "description": "A nested object attribute"
@@ -106,6 +111,7 @@
     },
     {
       "name": "unionWithObject",
+      "required": true,
       "oneOf": [
         "string",
         {
@@ -117,6 +123,7 @@
             },
             {
               "name": "details",
+              "required": true,
               "attributes": [
                 {
                   "name": "message",
@@ -143,7 +150,8 @@
         "string",
         "number"
       ],
-      "description": "Array whose items can be string or number"
+      "description": "Array whose items can be string or number",
+      "required": true
     }
   ]
 }
