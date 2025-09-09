@@ -63,7 +63,7 @@ export declare namespace EventExampleEvent {
     };
     const type = "event-example";
 }
-export declare const SampleComplexTypesEventDataJson = "{\"name\":\"sample-complex-types\",\"description\":\"Event showcasing enums, unions, and array types\",\"attributes\":[{\"name\":\"status\",\"enum\":[\"active\",\"disabled\",\"pending\"],\"description\":\"Account status (enum)\"},{\"name\":\"rating\",\"enum\":[1,2,3,4,5],\"description\":\"Numeric rating (enum)\"},{\"name\":\"tags\",\"arrayOf\":\"string\",\"description\":\"List of tags (array of strings)\"},{\"name\":\"values\",\"arrayOf\":[\"string\",\"number\"],\"description\":\"Mixed primitive values (array of union)\"},{\"name\":\"payload\",\"oneOf\":[\"string\",{\"attributes\":[{\"name\":\"id\",\"type\":\"string\",\"description\":\"Payload ID\"},{\"name\":\"meta\",\"attributes\":[{\"name\":\"createdBy\",\"type\":\"string\",\"description\":\"Creator\"},{\"name\":\"version\",\"type\":\"number\",\"description\":\"Version\"}],\"description\":\"Metadata\"}]}],\"description\":\"Union of string or object payload\"}]}";
+export declare const SampleComplexTypesEventDataJson = "{\"name\":\"sample-complex-types\",\"description\":\"Event showcasing enums, unions, and array types\",\"attributes\":[{\"name\":\"status\",\"enum\":[\"active\",\"disabled\",\"pending\"],\"description\":\"Account status (enum)\"},{\"name\":\"rating\",\"enum\":[1,2,3,4,5],\"description\":\"Numeric rating (enum)\"},{\"name\":\"tags\",\"arrayOf\":\"string\",\"description\":\"List of tags (array of strings)\"},{\"name\":\"values\",\"arrayOf\":[\"string\",\"number\"],\"description\":\"Mixed primitive values (array of union)\"},{\"name\":\"payload\",\"oneOf\":[\"string\",{\"attributes\":[{\"name\":\"id\",\"type\":\"string\",\"description\":\"Payload ID\"},{\"name\":\"meta\",\"attributes\":[{\"name\":\"createdBy\",\"type\":\"string\",\"description\":\"Creator\"},{\"name\":\"version\",\"type\":\"number\",\"description\":\"Version\"}],\"description\":\"Metadata\"}]}],\"description\":\"Union of string or object payload\"},{\"name\":\"deepNest\",\"attributes\":[{\"name\":\"level1\",\"attributes\":[{\"name\":\"level2\",\"attributes\":[{\"name\":\"level3\",\"attributes\":[{\"name\":\"value\",\"type\":\"string\",\"description\":\"Innermost value\"},{\"name\":\"meta\",\"attributes\":[{\"name\":\"createdAt\",\"type\":\"string\",\"description\":\"ISO date\"}],\"description\":\"More nesting\"}],\"description\":\"Third level object\"}],\"description\":\"Second level object\"}],\"description\":\"First level object\"}],\"description\":\"Deeply nested object for testing\"}]}";
 /**
  * Event showcasing enums, unions, and array types
  */
@@ -86,6 +86,25 @@ export type SampleComplexTypesEventData = {
             createdBy: string;
             /** Version */
             version: number;
+        };
+    };
+    /** Deeply nested object for testing */
+    deepNest: {
+        /** First level object */
+        level1: {
+            /** Second level object */
+            level2: {
+                /** Third level object */
+                level3: {
+                    /** Innermost value */
+                    value: string;
+                    /** More nesting */
+                    meta: {
+                        /** ISO date */
+                        createdAt: string;
+                    };
+                };
+            };
         };
     };
 };
@@ -266,24 +285,28 @@ export declare const DEFINITIONS: ({
         description: string;
         arrayOf?: undefined;
         oneOf?: undefined;
+        attributes?: undefined;
     } | {
         name: string;
         enum: number[];
         description: string;
         arrayOf?: undefined;
         oneOf?: undefined;
+        attributes?: undefined;
     } | {
         name: string;
         arrayOf: string;
         description: string;
         enum?: undefined;
         oneOf?: undefined;
+        attributes?: undefined;
     } | {
         name: string;
         arrayOf: string[];
         description: string;
         enum?: undefined;
         oneOf?: undefined;
+        attributes?: undefined;
     } | {
         name: string;
         oneOf: (string | {
@@ -306,6 +329,40 @@ export declare const DEFINITIONS: ({
         description: string;
         enum?: undefined;
         arrayOf?: undefined;
+        attributes?: undefined;
+    } | {
+        name: string;
+        attributes: {
+            name: string;
+            attributes: {
+                name: string;
+                attributes: {
+                    name: string;
+                    attributes: ({
+                        name: string;
+                        type: string;
+                        description: string;
+                        attributes?: undefined;
+                    } | {
+                        name: string;
+                        attributes: {
+                            name: string;
+                            type: string;
+                            description: string;
+                        }[];
+                        description: string;
+                        type?: undefined;
+                    })[];
+                    description: string;
+                }[];
+                description: string;
+            }[];
+            description: string;
+        }[];
+        description: string;
+        enum?: undefined;
+        arrayOf?: undefined;
+        oneOf?: undefined;
     })[];
     camelName: string;
 })[];
