@@ -1,0 +1,66 @@
+{
+  "name": "agency-created",
+  "description": "Agency created event",
+  "attributes": [
+    {
+      "name": "agencyId",
+      "type": "string",
+      "description": "Agency ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Agency name",
+      "required": true
+    },
+    {
+      "name": "address",
+      "attributes": [
+        {
+          "name": "street",
+          "type": "string",
+          "description": "Agency street",
+          "required": true
+        },
+        {
+          "name": "city",
+          "type": "string",
+          "description": "Agency city",
+          "required": true
+        },
+        {
+          "name": "country",
+          "type": "string",
+          "description": "Agency country",
+          "required": true
+        },
+        {
+          "name": "zipCode",
+          "type": "string",
+          "description": "Agency zip code",
+          "required": true
+        },
+        {
+          "name": "number",
+          "type": "string",
+          "description": "Agency number of the street. String because it can countains 'bis', 'ter', 'quater', etc.",
+          "required": true
+        }
+      ],
+      "description": "Agency address",
+      "required": true
+    },
+    {
+      "name": "contactMail",
+      "type": "string",
+      "description": "Agency contact mail",
+      "required": true
+    },
+    {
+      "name": "contactPhone",
+      "type": "string",
+      "description": "Agency contact phone number"
+    }
+  ]
+}

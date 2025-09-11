@@ -1,0 +1,82 @@
+{
+  "name": "property-updated",
+  "description": "Property updated event",
+  "attributes": [
+    {
+      "name": "propertyId",
+      "type": "string",
+      "description": "Property ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "agencyId",
+      "type": "string",
+      "description": "Agency ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "address",
+      "attributes": [
+        {
+          "name": "street",
+          "type": "string",
+          "description": "Property street",
+          "required": true
+        },
+        {
+          "name": "city",
+          "type": "string",
+          "description": "Property city",
+          "required": true
+        },
+        {
+          "name": "country",
+          "type": "string",
+          "description": "Property country",
+          "required": true
+        },
+        {
+          "name": "zipCode",
+          "type": "string",
+          "description": "Property zip code",
+          "required": true
+        },
+        {
+          "name": "number",
+          "type": "string",
+          "description": "Property number of the street. String because it can countains 'bis', 'ter', 'quater', etc.",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "owner",
+      "description": "Property owner",
+      "attributes": [
+        {
+          "name": "firstName",
+          "type": "string",
+          "description": "Property owner first name",
+          "required": true
+        },
+        {
+          "name": "lastName",
+          "type": "string",
+          "description": "Property owner last name",
+          "required": true
+        },
+        {
+          "name": "contactMail",
+          "type": "string",
+          "description": "Property contact mail"
+        }
+      ]
+    },
+    {
+      "name": "rooms",
+      "type": "any",
+      "description": "Rooms, can be created by the inspector",
+      "required": true
+    }
+  ]
+}

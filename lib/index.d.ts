@@ -1,4 +1,90 @@
 /**
+ * Agency created event
+ */
+export type AgencyCreatedEventData = {
+    /** Agency ID (uuid) */
+    agencyId: string;
+    /** Agency name */
+    name: string;
+    /** Agency address */
+    address: {
+        /** Agency street */
+        street: string;
+        /** Agency city */
+        city: string;
+        /** Agency country */
+        country: string;
+        /** Agency zip code */
+        zipCode: string;
+        /** Agency number of the street. String because it can countains 'bis', 'ter', 'quater', etc. */
+        number: string;
+    };
+    /** Agency contact mail */
+    contactMail: string;
+    /** Agency contact phone number */
+    contactPhone?: string;
+};
+export declare namespace AgencyCreatedEvent {
+    const build: (data: AgencyCreatedEventData) => {
+        type: string;
+        data: AgencyCreatedEventData;
+        timestamp: number;
+        source: string;
+    };
+    const type = "agency-created";
+}
+/**
+ * Agency deleted event
+ */
+export type AgencyDeletedEventData = {
+    /** Agency ID (uuid) */
+    agencyId: string;
+};
+export declare namespace AgencyDeletedEvent {
+    const build: (data: AgencyDeletedEventData) => {
+        type: string;
+        data: AgencyDeletedEventData;
+        timestamp: number;
+        source: string;
+    };
+    const type = "agency-deleted";
+}
+/**
+ * Agency updated event
+ */
+export type AgencyUpdatedEventData = {
+    /** Agency ID (uuid) */
+    agencyId: string;
+    /** Agency name */
+    name: string;
+    /** Agency address */
+    address: {
+        /** Agency street */
+        street: string;
+        /** Agency city */
+        city: string;
+        /** Agency country */
+        country: string;
+        /** Agency zip code */
+        zipCode: string;
+        /** Agency number of the street. String because it can countains 'bis', 'ter', 'quater', etc. */
+        number: string;
+    };
+    /** Agency contact mail */
+    contactMail: string;
+    /** Agency contact phone number */
+    contactPhone?: string;
+};
+export declare namespace AgencyUpdatedEvent {
+    const build: (data: AgencyUpdatedEventData) => {
+        type: string;
+        data: AgencyUpdatedEventData;
+        timestamp: number;
+        source: string;
+    };
+    const type = "agency-updated";
+}
+/**
  * Comprehensive example event demonstrating all supported attribute type patterns.
  */
 export type EventExampleEventData = {
@@ -63,107 +149,122 @@ export declare namespace EventExampleEvent {
     const type = "event-example";
 }
 /**
- * Event showcasing enums, unions, and array types
+ * Inspection created event
  */
-export type SampleComplexTypesEventData = {
-    /** Account status (enum) */
-    status?: "active" | "disabled" | "pending";
-    /** Numeric rating (enum) */
-    rating?: 1 | 2 | 3 | 4 | 5;
-    /** List of tags (array of strings) */
-    tags?: string[];
-    /** Mixed primitive values (array of union) */
-    values?: (string | number)[];
-    /** Union of string or object payload */
-    payload?: string | {
-        /** Payload ID */
-        id?: string;
-        /** Metadata */
-        meta?: {
-            /** Creator */
-            createdBy?: string;
-            /** Version */
-            version?: number;
-        };
-    };
-    /** Deeply nested object for testing */
-    deepNest?: {
-        /** First level object */
-        level1?: {
-            /** Second level object */
-            level2?: {
-                /** Third level object */
-                level3?: {
-                    /** Innermost value */
-                    value?: string;
-                    /** More nesting */
-                    meta?: {
-                        /** ISO date */
-                        createdAt?: string;
-                    };
-                };
-            };
-        };
-    };
+export type InspectionCreatedEventData = {
+    /** Inspection ID (uuid) */
+    inspectionId: string;
+    /** Property ID (uuid) */
+    propertyId: string;
+    /** Agency ID (uuid) */
+    agencyId: string;
+    /** Inspector ID (uuid) */
+    inspectorId: string;
+    /** Rooms, can be created by the inspector */
+    rooms?: any;
+    /** Inspection date, in IsoString format: YYYY-MM-DDTHH:mm:ss.sssZ */
+    date: string;
+    /** Inspection status, on the created events it should always be TO_DO */
+    status: "TO_DO" | "IN_PROGRESS" | "DONE";
 };
-export declare namespace SampleComplexTypesEvent {
-    const build: (data: SampleComplexTypesEventData) => {
+export declare namespace InspectionCreatedEvent {
+    const build: (data: InspectionCreatedEventData) => {
         type: string;
-        data: SampleComplexTypesEventData;
+        data: InspectionCreatedEventData;
         timestamp: number;
         source: string;
     };
-    const type = "sample-complex-types";
+    const type = "inspection-created";
 }
 /**
- * User registered event
+ * Inspection deleted event
  */
-export type UserRegisteredOneEventData = {
-    /** User ID */
-    id: string;
-    /** User age */
-    age?: number;
-    /** Nested profile */
-    profile: {
-        /** User bio */
-        bio?: string;
-        /** Verification */
-        verified: boolean;
-    };
+export type InspectionDeletedEventData = {
+    /** Inspection ID (uuid) */
+    inspectionId: string;
+    /** Property ID (uuid) */
+    propertyId: string;
+    /** Agency ID (uuid) */
+    agencyId: string;
 };
-export declare namespace UserRegisteredOneEvent {
-    const build: (data: UserRegisteredOneEventData) => {
+export declare namespace InspectionDeletedEvent {
+    const build: (data: InspectionDeletedEventData) => {
         type: string;
-        data: UserRegisteredOneEventData;
+        data: InspectionDeletedEventData;
         timestamp: number;
         source: string;
     };
-    const type = "user-registered-one";
+    const type = "inspection-deleted";
 }
 /**
- * User registered event
+ * Inspection updated event
  */
-export type UserRegisteredTwoEventData = {
-    /** User ID */
-    id: string;
-    /** User age */
-    age?: number;
-    /** Nested profile */
-    profile: {
-        /** User bio */
-        bio?: any;
-        /** Verification */
-        verified: boolean;
-    };
+export type InspectionUpdatedEventData = {
+    /** Inspection ID (uuid) */
+    inspectionId: string;
+    /** Property ID (uuid) */
+    propertyId: string;
+    /** Agency ID (uuid) */
+    agencyId: string;
+    /** Inspector ID (uuid) */
+    inspectorId: string;
+    /** Rooms, can be updated by the inspector */
+    rooms?: any;
+    /** Inspection date, in IsoString format: YYYY-MM-DDTHH:mm:ss.sssZ */
+    date: string;
+    /** Inspection status */
+    status: "TO_DO" | "IN_PROGRESS" | "DONE";
 };
-export declare namespace UserRegisteredTwoEvent {
-    const build: (data: UserRegisteredTwoEventData) => {
+export declare namespace InspectionUpdatedEvent {
+    const build: (data: InspectionUpdatedEventData) => {
         type: string;
-        data: UserRegisteredTwoEventData;
+        data: InspectionUpdatedEventData;
         timestamp: number;
         source: string;
     };
-    const type = "user-registered-two";
+    const type = "inspection-updated";
+}
+/**
+ * Property created event
+ */
+export type PropertyCreatedEventData = {
+    /** Property ID (uuid) */
+    propertyId: string;
+    /** Agency ID (uuid) */
+    agencyId: string;
+    /** undefined */
+    address?: {
+        /** Property street */
+        street: string;
+        /** Property city */
+        city: string;
+        /** Property country */
+        country: string;
+        /** Property zip code */
+        zipCode: string;
+        /** Property number of the street. String because it can countains 'bis', 'ter', 'quater', etc. */
+        number: string;
+    };
+    /** Property owner */
+    owner?: {
+        /** Property owner first name */
+        firstName: string;
+        /** Property owner last name */
+        lastName: string;
+        /** Property contact mail */
+        contactMail?: string;
+    };
+    /** Rooms, can be created by the inspector */
+    rooms: any;
+};
+export declare namespace PropertyCreatedEvent {
+    const build: (data: PropertyCreatedEventData) => {
+        type: string;
+        data: PropertyCreatedEventData;
+        timestamp: number;
+        source: string;
+    };
+    const type = "property-created";
 }
 export declare const DEFINITIONS: ({
     name: string;
@@ -319,88 +420,60 @@ export declare const DEFINITIONS: ({
     description: string;
     attributes: ({
         name: string;
+        type: string;
+        description: string;
+        required: boolean;
+        enum?: undefined;
+    } | {
+        name: string;
+        type: string;
+        description: string;
+        required?: undefined;
+        enum?: undefined;
+    } | {
+        name: string;
         enum: string[];
         description: string;
-        arrayOf?: undefined;
-        oneOf?: undefined;
-        attributes?: undefined;
-    } | {
+        required: boolean;
+        type?: undefined;
+    })[];
+    camelName: string;
+} | {
+    name: string;
+    description: string;
+    attributes: ({
         name: string;
-        enum: number[];
+        type: string;
         description: string;
-        arrayOf?: undefined;
-        oneOf?: undefined;
-        attributes?: undefined;
-    } | {
-        name: string;
-        arrayOf: string;
-        description: string;
-        enum?: undefined;
-        oneOf?: undefined;
-        attributes?: undefined;
-    } | {
-        name: string;
-        arrayOf: string[];
-        description: string;
-        enum?: undefined;
-        oneOf?: undefined;
-        attributes?: undefined;
-    } | {
-        name: string;
-        oneOf: (string | {
-            attributes: ({
-                name: string;
-                type: string;
-                description: string;
-                attributes?: undefined;
-            } | {
-                name: string;
-                attributes: {
-                    name: string;
-                    type: string;
-                    description: string;
-                }[];
-                description: string;
-                type?: undefined;
-            })[];
-        })[];
-        description: string;
-        enum?: undefined;
-        arrayOf?: undefined;
+        required: boolean;
         attributes?: undefined;
     } | {
         name: string;
         attributes: {
             name: string;
-            attributes: {
-                name: string;
-                attributes: {
-                    name: string;
-                    attributes: ({
-                        name: string;
-                        type: string;
-                        description: string;
-                        attributes?: undefined;
-                    } | {
-                        name: string;
-                        attributes: {
-                            name: string;
-                            type: string;
-                            description: string;
-                        }[];
-                        description: string;
-                        type?: undefined;
-                    })[];
-                    description: string;
-                }[];
-                description: string;
-            }[];
+            type: string;
             description: string;
+            required: boolean;
         }[];
+        type?: undefined;
+        description?: undefined;
+        required?: undefined;
+    } | {
+        name: string;
         description: string;
-        enum?: undefined;
-        arrayOf?: undefined;
-        oneOf?: undefined;
+        attributes: ({
+            name: string;
+            type: string;
+            description: string;
+            required: boolean;
+        } | {
+            name: string;
+            type: string;
+            description: string;
+            required?: undefined;
+        })[];
+        type?: undefined;
+        required?: undefined;
     })[];
     camelName: string;
 })[];

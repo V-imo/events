@@ -1,0 +1,12 @@
+{
+  "name": "agency-deleted",
+  "description": "Agency deleted event",
+  "attributes": [
+    {
+      "name": "agencyId",
+      "type": "string",
+      "description": "Agency ID (uuid)",
+      "required": true
+    }
+  ]
+}
