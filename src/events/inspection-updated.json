@@ -1,0 +1,47 @@
+{
+  "name": "inspection-updated",
+  "description": "Inspection updated event",
+  "attributes": [
+    {
+      "name": "inspectionId",
+      "type": "string",
+      "description": "Inspection ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "propertyId",
+      "type": "string",
+      "description": "Property ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "agencyId",
+      "type": "string",
+      "description": "Agency ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "inspectorId",
+      "type": "string",
+      "description": "Inspector ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "rooms",
+      "type": "any",
+      "description": "Rooms, can be updated by the inspector"
+    },
+    {
+      "name": "date",
+      "type": "string",
+      "description": "Inspection date, in IsoString format: YYYY-MM-DDTHH:mm:ss.sssZ",
+      "required": true
+    },
+    {
+      "name": "status",
+      "enum": ["TO_DO", "IN_PROGRESS", "DONE"],
+      "description": "Inspection status",
+      "required": true
+    }
+  ]
+}

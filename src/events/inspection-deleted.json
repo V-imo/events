@@ -1,0 +1,24 @@
+{
+  "name": "inspection-deleted",
+  "description": "Inspection deleted event",
+  "attributes": [
+    {
+      "name": "inspectionId",
+      "type": "string",
+      "description": "Inspection ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "propertyId",
+      "type": "string",
+      "description": "Property ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "agencyId",
+      "type": "string",
+      "description": "Agency ID (uuid)",
+      "required": true
+    }
+  ]
+}
