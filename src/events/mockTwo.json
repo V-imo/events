@@ -4,13 +4,13 @@
   "attributes": [
     {
       "name": "id",
-      "type": "string",
+      "type": "any",
       "description": "User ID",
       "required": true
     },
     {
       "name": "age",
-      "type": "number",
+      "type": "any",
       "description": "User age"
     },
     {
