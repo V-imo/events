@@ -27,6 +27,16 @@ function generate(eventFileName) {
   str += jsonType.attributes.map(atr => generateAttributeDefinition(atr, 1)).join("\n")
   str += `\n}\n`
 
+  str += `export type ${camelNameEvent}Envelope = {\n`
+  str += `  detailType: "${jsonType.name}",\n`
+  str += `  data: ${camelNameEvent}Data,\n`
+  str += `  time: number,\n`
+  str += `  source: string,\n`
+  str += `  account: string,\n`
+  str += `  version: string,\n`
+  str += `  id: string,\n`
+  str += `}\n`
+
   str += createEvent(jsonType, camelNameEvent)
 
   str += "\n\n"

@@ -24,6 +24,15 @@ export type AgencyCreatedEventData = {
     /** Agency contact phone number */
     contactPhone?: string;
 };
+export type AgencyCreatedEventEnvelope = {
+    detailType: "agency-created";
+    data: AgencyCreatedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
+};
 export declare namespace AgencyCreatedEvent {
     const build: (data: AgencyCreatedEventData) => {
         type: string;
@@ -39,6 +48,15 @@ export declare namespace AgencyCreatedEvent {
 export type AgencyDeletedEventData = {
     /** Agency ID (uuid) */
     agencyId: string;
+};
+export type AgencyDeletedEventEnvelope = {
+    detailType: "agency-deleted";
+    data: AgencyDeletedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
 };
 export declare namespace AgencyDeletedEvent {
     const build: (data: AgencyDeletedEventData) => {
@@ -74,6 +92,15 @@ export type AgencyUpdatedEventData = {
     contactMail: string;
     /** Agency contact phone number */
     contactPhone?: string;
+};
+export type AgencyUpdatedEventEnvelope = {
+    detailType: "agency-updated";
+    data: AgencyUpdatedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
 };
 export declare namespace AgencyUpdatedEvent {
     const build: (data: AgencyUpdatedEventData) => {
@@ -139,6 +166,15 @@ export type EventExampleEventData = {
     /** Array whose items can be string or number */
     unionArray: (string | number)[];
 };
+export type EventExampleEventEnvelope = {
+    detailType: "event-example";
+    data: EventExampleEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
+};
 export declare namespace EventExampleEvent {
     const build: (data: EventExampleEventData) => {
         type: string;
@@ -165,7 +201,16 @@ export type InspectionCreatedEventData = {
     /** Inspection date, in IsoString format: YYYY-MM-DDTHH:mm:ss.sssZ */
     date: string;
     /** Inspection status, on the created events it should always be TO_DO */
-    status: "TO_DO" | "IN_PROGRESS" | "DONE";
+    status: "TO_DO" | "IN_PROGRESS" | "DONE" | "CANCELED";
+};
+export type InspectionCreatedEventEnvelope = {
+    detailType: "inspection-created";
+    data: InspectionCreatedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
 };
 export declare namespace InspectionCreatedEvent {
     const build: (data: InspectionCreatedEventData) => {
@@ -187,6 +232,15 @@ export type InspectionDeletedEventData = {
     /** Agency ID (uuid) */
     agencyId: string;
 };
+export type InspectionDeletedEventEnvelope = {
+    detailType: "inspection-deleted";
+    data: InspectionDeletedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
+};
 export declare namespace InspectionDeletedEvent {
     const build: (data: InspectionDeletedEventData) => {
         type: string;
@@ -195,6 +249,39 @@ export declare namespace InspectionDeletedEvent {
         source: string;
     };
     const type = "inspection-deleted";
+}
+/**
+ * Inspection PDF generated event
+ */
+export type InspectionPdfGeneratedEventData = {
+    /** Inspection ID (uuid) */
+    inspectionId: string;
+    /** Property ID (uuid) */
+    propertyId: string;
+    /** Agency ID (uuid) */
+    agencyId: string;
+    /** Inspection PDF key in the S3 */
+    key: string;
+    /** S3 bucket name */
+    bucketName: string;
+};
+export type InspectionPdfGeneratedEventEnvelope = {
+    detailType: "inspection-pdf-generated";
+    data: InspectionPdfGeneratedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
+};
+export declare namespace InspectionPdfGeneratedEvent {
+    const build: (data: InspectionPdfGeneratedEventData) => {
+        type: string;
+        data: InspectionPdfGeneratedEventData;
+        timestamp: number;
+        source: string;
+    };
+    const type = "inspection-pdf-generated";
 }
 /**
  * Inspection updated event
@@ -213,7 +300,16 @@ export type InspectionUpdatedEventData = {
     /** Inspection date, in IsoString format: YYYY-MM-DDTHH:mm:ss.sssZ */
     date: string;
     /** Inspection status */
-    status: "TO_DO" | "IN_PROGRESS" | "DONE";
+    status: "TO_DO" | "IN_PROGRESS" | "DONE" | "CANCELED";
+};
+export type InspectionUpdatedEventEnvelope = {
+    detailType: "inspection-updated";
+    data: InspectionUpdatedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
 };
 export declare namespace InspectionUpdatedEvent {
     const build: (data: InspectionUpdatedEventData) => {
@@ -233,7 +329,7 @@ export type PropertyCreatedEventData = {
     /** Agency ID (uuid) */
     agencyId: string;
     /** undefined */
-    address?: {
+    address: {
         /** Property street */
         street: string;
         /** Property city */
@@ -257,6 +353,15 @@ export type PropertyCreatedEventData = {
     /** Rooms, can be created by the inspector */
     rooms: any;
 };
+export type PropertyCreatedEventEnvelope = {
+    detailType: "property-created";
+    data: PropertyCreatedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
+};
 export declare namespace PropertyCreatedEvent {
     const build: (data: PropertyCreatedEventData) => {
         type: string;
@@ -265,6 +370,84 @@ export declare namespace PropertyCreatedEvent {
         source: string;
     };
     const type = "property-created";
+}
+/**
+ * Property deleted event
+ */
+export type PropertyDeletedEventData = {
+    /** Property ID (uuid) */
+    propertyId: string;
+    /** Agency ID (uuid) */
+    agencyId: string;
+};
+export type PropertyDeletedEventEnvelope = {
+    detailType: "property-deleted";
+    data: PropertyDeletedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
+};
+export declare namespace PropertyDeletedEvent {
+    const build: (data: PropertyDeletedEventData) => {
+        type: string;
+        data: PropertyDeletedEventData;
+        timestamp: number;
+        source: string;
+    };
+    const type = "property-deleted";
+}
+/**
+ * Property updated event
+ */
+export type PropertyUpdatedEventData = {
+    /** Property ID (uuid) */
+    propertyId: string;
+    /** Agency ID (uuid) */
+    agencyId: string;
+    /** undefined */
+    address: {
+        /** Property street */
+        street: string;
+        /** Property city */
+        city: string;
+        /** Property country */
+        country: string;
+        /** Property zip code */
+        zipCode: string;
+        /** Property number of the street. String because it can countains 'bis', 'ter', 'quater', etc. */
+        number: string;
+    };
+    /** Property owner */
+    owner?: {
+        /** Property owner first name */
+        firstName: string;
+        /** Property owner last name */
+        lastName: string;
+        /** Property contact mail */
+        contactMail?: string;
+    };
+    /** Rooms, can be created by the inspector */
+    rooms: any;
+};
+export type PropertyUpdatedEventEnvelope = {
+    detailType: "property-updated";
+    data: PropertyUpdatedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
+};
+export declare namespace PropertyUpdatedEvent {
+    const build: (data: PropertyUpdatedEventData) => {
+        type: string;
+        data: PropertyUpdatedEventData;
+        timestamp: number;
+        source: string;
+    };
+    const type = "property-updated";
 }
 export declare const DEFINITIONS: ({
     name: string;
@@ -449,6 +632,7 @@ export declare const DEFINITIONS: ({
         attributes?: undefined;
     } | {
         name: string;
+        required: boolean;
         attributes: {
             name: string;
             type: string;
@@ -457,7 +641,6 @@ export declare const DEFINITIONS: ({
         }[];
         type?: undefined;
         description?: undefined;
-        required?: undefined;
     } | {
         name: string;
         description: string;
