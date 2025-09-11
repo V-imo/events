@@ -1,0 +1,36 @@
+{
+  "name": "inspection-pdf-generated",
+  "description": "Inspection PDF generated event",
+  "attributes": [
+    {
+      "name": "inspectionId",
+      "type": "string",
+      "description": "Inspection ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "propertyId",
+      "type": "string",
+      "description": "Property ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "agencyId",
+      "type": "string",
+      "description": "Agency ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "key",
+      "type": "string",
+      "description": "Inspection PDF key in the S3",
+      "required": true
+    },
+    {
+      "name": "bucketName",
+      "type": "string",
+      "description": "S3 bucket name",
+      "required": true
+    }
+  ]
+}

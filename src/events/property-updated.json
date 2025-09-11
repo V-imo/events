@@ -16,6 +16,7 @@
     },
     {
       "name": "address",
+      "required": true,
       "attributes": [
         {
           "name": "street",
