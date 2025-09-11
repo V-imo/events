@@ -39,7 +39,7 @@
     },
     {
       "name": "status",
-      "enum": ["TO_DO", "IN_PROGRESS", "DONE"],
+      "enum": ["TO_DO", "IN_PROGRESS", "DONE", "CANCELED"],
       "description": "Inspection status, on the created events it should always be TO_DO",
       "required": true
     }

@@ -39,7 +39,7 @@
     },
     {
       "name": "status",
-      "enum": ["TO_DO", "IN_PROGRESS", "DONE"],
+      "enum": ["TO_DO", "IN_PROGRESS", "DONE", "CANCELED"],
       "description": "Inspection status",
       "required": true
     }
