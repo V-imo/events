@@ -58,8 +58,12 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --access public
 
-      - name: Deploy preview
-        run: curl https://api.vercel.com/v1/integrations/deploy/prj_dofmmkrthXFDUgvN2qqP6DTAGCj6/zBlucAkow2
+      - name: Trigger frontend update
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PAT_FRONTEND }} # Personal Access Token with repo rights on frontend
+          repository: V-imo/events-preview # org/name of the frontend repo
+          event-type: package-updated # custom event name
 
       - name: Restore files
         run: |
