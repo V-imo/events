@@ -151,7 +151,7 @@ export type UserRegisteredTwoEventData = {
     /** Nested profile */
     profile: {
         /** User bio */
-        bio?: string;
+        bio?: any;
         /** Verification */
         verified: boolean;
     };

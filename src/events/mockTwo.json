@@ -19,7 +19,7 @@
       "attributes": [
         {
           "name": "bio",
-          "type": "string",
+          "type": "any",
           "description": "User bio"
         },
         {
