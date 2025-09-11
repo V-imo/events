@@ -28,7 +28,7 @@ function generate(eventFileName) {
   str += `\n}\n`
 
   str += `export type ${camelNameEvent}Envelope = {\n`
-  str += `  detailType: "${jsonType.name}",\n`
+  str += `  type: "${jsonType.name}",\n`
   str += `  data: ${camelNameEvent}Data,\n`
   str += `  time: number,\n`
   str += `  source: string,\n`
