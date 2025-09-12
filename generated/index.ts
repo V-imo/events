@@ -25,7 +25,7 @@ export type AgencyCreatedEventData = {
   contactPhone?: string;
 }
 export type AgencyCreatedEventEnvelope = {
-  detailType: "agency-created",
+  type: "agency-created",
   data: AgencyCreatedEventData,
   time: number,
   source: string,
@@ -57,7 +57,7 @@ export type AgencyDeletedEventData = {
   agencyId: string;
 }
 export type AgencyDeletedEventEnvelope = {
-  detailType: "agency-deleted",
+  type: "agency-deleted",
   data: AgencyDeletedEventData,
   time: number,
   source: string,
@@ -108,7 +108,7 @@ export type AgencyUpdatedEventData = {
   contactPhone?: string;
 }
 export type AgencyUpdatedEventEnvelope = {
-  detailType: "agency-updated",
+  type: "agency-updated",
   data: AgencyUpdatedEventData,
   time: number,
   source: string,
@@ -190,7 +190,7 @@ export type EventExampleEventData = {
   unionArray: (string | number)[];
 }
 export type EventExampleEventEnvelope = {
-  detailType: "event-example",
+  type: "event-example",
   data: EventExampleEventData,
   time: number,
   source: string,
@@ -234,7 +234,7 @@ export type InspectionCreatedEventData = {
   status: "TO_DO" | "IN_PROGRESS" | "DONE" | "CANCELED";
 }
 export type InspectionCreatedEventEnvelope = {
-  detailType: "inspection-created",
+  type: "inspection-created",
   data: InspectionCreatedEventData,
   time: number,
   source: string,
@@ -270,7 +270,7 @@ export type InspectionDeletedEventData = {
   agencyId: string;
 }
 export type InspectionDeletedEventEnvelope = {
-  detailType: "inspection-deleted",
+  type: "inspection-deleted",
   data: InspectionDeletedEventData,
   time: number,
   source: string,
@@ -310,7 +310,7 @@ export type InspectionPdfGeneratedEventData = {
   bucketName: string;
 }
 export type InspectionPdfGeneratedEventEnvelope = {
-  detailType: "inspection-pdf-generated",
+  type: "inspection-pdf-generated",
   data: InspectionPdfGeneratedEventData,
   time: number,
   source: string,
@@ -354,7 +354,7 @@ export type InspectionUpdatedEventData = {
   status: "TO_DO" | "IN_PROGRESS" | "DONE" | "CANCELED";
 }
 export type InspectionUpdatedEventEnvelope = {
-  detailType: "inspection-updated",
+  type: "inspection-updated",
   data: InspectionUpdatedEventData,
   time: number,
   source: string,
@@ -412,7 +412,7 @@ export type PropertyCreatedEventData = {
   rooms: any;
 }
 export type PropertyCreatedEventEnvelope = {
-  detailType: "property-created",
+  type: "property-created",
   data: PropertyCreatedEventData,
   time: number,
   source: string,
@@ -446,7 +446,7 @@ export type PropertyDeletedEventData = {
   agencyId: string;
 }
 export type PropertyDeletedEventEnvelope = {
-  detailType: "property-deleted",
+  type: "property-deleted",
   data: PropertyDeletedEventData,
   time: number,
   source: string,
@@ -504,7 +504,7 @@ export type PropertyUpdatedEventData = {
   rooms: any;
 }
 export type PropertyUpdatedEventEnvelope = {
-  detailType: "property-updated",
+  type: "property-updated",
   data: PropertyUpdatedEventData,
   time: number,
   source: string,
