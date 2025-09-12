@@ -1,3 +1,5 @@
+import { PutEventsCommand } from "@aws-sdk/client-eventbridge"
+
 /**
  * Agency created event
  */
@@ -35,7 +37,7 @@ export type AgencyCreatedEventEnvelope = {
 }
 export namespace AgencyCreatedEvent {
     
-  export const build = (data: AgencyCreatedEventData) => {
+  export const buildData = (data: AgencyCreatedEventData) => {
       
     if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
         return {
@@ -44,6 +46,22 @@ export namespace AgencyCreatedEvent {
           timestamp: Math.floor(Date.now() / 1000),
           source: process.env.SERVICE,
         }
+  }
+  export const build = (data: AgencyCreatedEventData) => {
+      
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
+        if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
+        const envelope = AgencyCreatedEvent.buildData(data)
+        return new PutEventsCommand({
+          Entries: [
+            {
+              Detail: JSON.stringify(envelope),
+              DetailType: "agency-created",
+              EventBusName: process.env.EVENT_BUS_NAME!,
+              Source: process.env.SERVICE!,
+            },
+          ],
+        })
   }
   export const type = "agency-created"
 } 
@@ -67,7 +85,7 @@ export type AgencyDeletedEventEnvelope = {
 }
 export namespace AgencyDeletedEvent {
     
-  export const build = (data: AgencyDeletedEventData) => {
+  export const buildData = (data: AgencyDeletedEventData) => {
       
     if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
         return {
@@ -76,6 +94,22 @@ export namespace AgencyDeletedEvent {
           timestamp: Math.floor(Date.now() / 1000),
           source: process.env.SERVICE,
         }
+  }
+  export const build = (data: AgencyDeletedEventData) => {
+      
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
+        if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
+        const envelope = AgencyDeletedEvent.buildData(data)
+        return new PutEventsCommand({
+          Entries: [
+            {
+              Detail: JSON.stringify(envelope),
+              DetailType: "agency-deleted",
+              EventBusName: process.env.EVENT_BUS_NAME!,
+              Source: process.env.SERVICE!,
+            },
+          ],
+        })
   }
   export const type = "agency-deleted"
 } 
@@ -118,7 +152,7 @@ export type AgencyUpdatedEventEnvelope = {
 }
 export namespace AgencyUpdatedEvent {
     
-  export const build = (data: AgencyUpdatedEventData) => {
+  export const buildData = (data: AgencyUpdatedEventData) => {
       
     if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
         return {
@@ -127,6 +161,22 @@ export namespace AgencyUpdatedEvent {
           timestamp: Math.floor(Date.now() / 1000),
           source: process.env.SERVICE,
         }
+  }
+  export const build = (data: AgencyUpdatedEventData) => {
+      
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
+        if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
+        const envelope = AgencyUpdatedEvent.buildData(data)
+        return new PutEventsCommand({
+          Entries: [
+            {
+              Detail: JSON.stringify(envelope),
+              DetailType: "agency-updated",
+              EventBusName: process.env.EVENT_BUS_NAME!,
+              Source: process.env.SERVICE!,
+            },
+          ],
+        })
   }
   export const type = "agency-updated"
 } 
@@ -200,7 +250,7 @@ export type EventExampleEventEnvelope = {
 }
 export namespace EventExampleEvent {
     
-  export const build = (data: EventExampleEventData) => {
+  export const buildData = (data: EventExampleEventData) => {
       
     if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
         return {
@@ -209,6 +259,22 @@ export namespace EventExampleEvent {
           timestamp: Math.floor(Date.now() / 1000),
           source: process.env.SERVICE,
         }
+  }
+  export const build = (data: EventExampleEventData) => {
+      
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
+        if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
+        const envelope = EventExampleEvent.buildData(data)
+        return new PutEventsCommand({
+          Entries: [
+            {
+              Detail: JSON.stringify(envelope),
+              DetailType: "event-example",
+              EventBusName: process.env.EVENT_BUS_NAME!,
+              Source: process.env.SERVICE!,
+            },
+          ],
+        })
   }
   export const type = "event-example"
 } 
@@ -244,7 +310,7 @@ export type InspectionCreatedEventEnvelope = {
 }
 export namespace InspectionCreatedEvent {
     
-  export const build = (data: InspectionCreatedEventData) => {
+  export const buildData = (data: InspectionCreatedEventData) => {
       
     if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
         return {
@@ -253,6 +319,22 @@ export namespace InspectionCreatedEvent {
           timestamp: Math.floor(Date.now() / 1000),
           source: process.env.SERVICE,
         }
+  }
+  export const build = (data: InspectionCreatedEventData) => {
+      
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
+        if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
+        const envelope = InspectionCreatedEvent.buildData(data)
+        return new PutEventsCommand({
+          Entries: [
+            {
+              Detail: JSON.stringify(envelope),
+              DetailType: "inspection-created",
+              EventBusName: process.env.EVENT_BUS_NAME!,
+              Source: process.env.SERVICE!,
+            },
+          ],
+        })
   }
   export const type = "inspection-created"
 } 
@@ -280,7 +362,7 @@ export type InspectionDeletedEventEnvelope = {
 }
 export namespace InspectionDeletedEvent {
     
-  export const build = (data: InspectionDeletedEventData) => {
+  export const buildData = (data: InspectionDeletedEventData) => {
       
     if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
         return {
@@ -289,6 +371,22 @@ export namespace InspectionDeletedEvent {
           timestamp: Math.floor(Date.now() / 1000),
           source: process.env.SERVICE,
         }
+  }
+  export const build = (data: InspectionDeletedEventData) => {
+      
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
+        if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
+        const envelope = InspectionDeletedEvent.buildData(data)
+        return new PutEventsCommand({
+          Entries: [
+            {
+              Detail: JSON.stringify(envelope),
+              DetailType: "inspection-deleted",
+              EventBusName: process.env.EVENT_BUS_NAME!,
+              Source: process.env.SERVICE!,
+            },
+          ],
+        })
   }
   export const type = "inspection-deleted"
 } 
@@ -320,7 +418,7 @@ export type InspectionPdfGeneratedEventEnvelope = {
 }
 export namespace InspectionPdfGeneratedEvent {
     
-  export const build = (data: InspectionPdfGeneratedEventData) => {
+  export const buildData = (data: InspectionPdfGeneratedEventData) => {
       
     if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
         return {
@@ -329,6 +427,22 @@ export namespace InspectionPdfGeneratedEvent {
           timestamp: Math.floor(Date.now() / 1000),
           source: process.env.SERVICE,
         }
+  }
+  export const build = (data: InspectionPdfGeneratedEventData) => {
+      
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
+        if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
+        const envelope = InspectionPdfGeneratedEvent.buildData(data)
+        return new PutEventsCommand({
+          Entries: [
+            {
+              Detail: JSON.stringify(envelope),
+              DetailType: "inspection-pdf-generated",
+              EventBusName: process.env.EVENT_BUS_NAME!,
+              Source: process.env.SERVICE!,
+            },
+          ],
+        })
   }
   export const type = "inspection-pdf-generated"
 } 
@@ -364,7 +478,7 @@ export type InspectionUpdatedEventEnvelope = {
 }
 export namespace InspectionUpdatedEvent {
     
-  export const build = (data: InspectionUpdatedEventData) => {
+  export const buildData = (data: InspectionUpdatedEventData) => {
       
     if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
         return {
@@ -373,6 +487,22 @@ export namespace InspectionUpdatedEvent {
           timestamp: Math.floor(Date.now() / 1000),
           source: process.env.SERVICE,
         }
+  }
+  export const build = (data: InspectionUpdatedEventData) => {
+      
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
+        if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
+        const envelope = InspectionUpdatedEvent.buildData(data)
+        return new PutEventsCommand({
+          Entries: [
+            {
+              Detail: JSON.stringify(envelope),
+              DetailType: "inspection-updated",
+              EventBusName: process.env.EVENT_BUS_NAME!,
+              Source: process.env.SERVICE!,
+            },
+          ],
+        })
   }
   export const type = "inspection-updated"
 } 
@@ -422,7 +552,7 @@ export type PropertyCreatedEventEnvelope = {
 }
 export namespace PropertyCreatedEvent {
     
-  export const build = (data: PropertyCreatedEventData) => {
+  export const buildData = (data: PropertyCreatedEventData) => {
       
     if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
         return {
@@ -431,6 +561,22 @@ export namespace PropertyCreatedEvent {
           timestamp: Math.floor(Date.now() / 1000),
           source: process.env.SERVICE,
         }
+  }
+  export const build = (data: PropertyCreatedEventData) => {
+      
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
+        if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
+        const envelope = PropertyCreatedEvent.buildData(data)
+        return new PutEventsCommand({
+          Entries: [
+            {
+              Detail: JSON.stringify(envelope),
+              DetailType: "property-created",
+              EventBusName: process.env.EVENT_BUS_NAME!,
+              Source: process.env.SERVICE!,
+            },
+          ],
+        })
   }
   export const type = "property-created"
 } 
@@ -456,7 +602,7 @@ export type PropertyDeletedEventEnvelope = {
 }
 export namespace PropertyDeletedEvent {
     
-  export const build = (data: PropertyDeletedEventData) => {
+  export const buildData = (data: PropertyDeletedEventData) => {
       
     if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
         return {
@@ -465,6 +611,22 @@ export namespace PropertyDeletedEvent {
           timestamp: Math.floor(Date.now() / 1000),
           source: process.env.SERVICE,
         }
+  }
+  export const build = (data: PropertyDeletedEventData) => {
+      
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
+        if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
+        const envelope = PropertyDeletedEvent.buildData(data)
+        return new PutEventsCommand({
+          Entries: [
+            {
+              Detail: JSON.stringify(envelope),
+              DetailType: "property-deleted",
+              EventBusName: process.env.EVENT_BUS_NAME!,
+              Source: process.env.SERVICE!,
+            },
+          ],
+        })
   }
   export const type = "property-deleted"
 } 
@@ -514,7 +676,7 @@ export type PropertyUpdatedEventEnvelope = {
 }
 export namespace PropertyUpdatedEvent {
     
-  export const build = (data: PropertyUpdatedEventData) => {
+  export const buildData = (data: PropertyUpdatedEventData) => {
       
     if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
         return {
@@ -523,6 +685,22 @@ export namespace PropertyUpdatedEvent {
           timestamp: Math.floor(Date.now() / 1000),
           source: process.env.SERVICE,
         }
+  }
+  export const build = (data: PropertyUpdatedEventData) => {
+      
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
+        if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
+        const envelope = PropertyUpdatedEvent.buildData(data)
+        return new PutEventsCommand({
+          Entries: [
+            {
+              Detail: JSON.stringify(envelope),
+              DetailType: "property-updated",
+              EventBusName: process.env.EVENT_BUS_NAME!,
+              Source: process.env.SERVICE!,
+            },
+          ],
+        })
   }
   export const type = "property-updated"
 } 

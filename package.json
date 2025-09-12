@@ -34,10 +34,13 @@
   "description": "",
   "private": false,
   "devDependencies": {
+    "@types/node": "^22.13.5",
     "semver": "^7.6.0",
-    "typescript": "^5.4.0",
     "ts-node": "^10.9.2",
-    "@types/node": "^22.13.5"
+    "typescript": "^5.4.0"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@aws-sdk/client-eventbridge": "^3.887.0"
+  }
 }

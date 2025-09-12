@@ -1,3 +1,4 @@
+import { PutEventsCommand } from "@aws-sdk/client-eventbridge";
 /**
  * Agency created event
  */
@@ -34,12 +35,13 @@ export type AgencyCreatedEventEnvelope = {
     id: string;
 };
 export declare namespace AgencyCreatedEvent {
-    const build: (data: AgencyCreatedEventData) => {
+    const buildData: (data: AgencyCreatedEventData) => {
         type: string;
         data: AgencyCreatedEventData;
         timestamp: number;
         source: string;
     };
+    const build: (data: AgencyCreatedEventData) => PutEventsCommand;
     const type = "agency-created";
 }
 /**
@@ -59,12 +61,13 @@ export type AgencyDeletedEventEnvelope = {
     id: string;
 };
 export declare namespace AgencyDeletedEvent {
-    const build: (data: AgencyDeletedEventData) => {
+    const buildData: (data: AgencyDeletedEventData) => {
         type: string;
         data: AgencyDeletedEventData;
         timestamp: number;
         source: string;
     };
+    const build: (data: AgencyDeletedEventData) => PutEventsCommand;
     const type = "agency-deleted";
 }
 /**
@@ -103,12 +106,13 @@ export type AgencyUpdatedEventEnvelope = {
     id: string;
 };
 export declare namespace AgencyUpdatedEvent {
-    const build: (data: AgencyUpdatedEventData) => {
+    const buildData: (data: AgencyUpdatedEventData) => {
         type: string;
         data: AgencyUpdatedEventData;
         timestamp: number;
         source: string;
     };
+    const build: (data: AgencyUpdatedEventData) => PutEventsCommand;
     const type = "agency-updated";
 }
 /**
@@ -176,12 +180,13 @@ export type EventExampleEventEnvelope = {
     id: string;
 };
 export declare namespace EventExampleEvent {
-    const build: (data: EventExampleEventData) => {
+    const buildData: (data: EventExampleEventData) => {
         type: string;
         data: EventExampleEventData;
         timestamp: number;
         source: string;
     };
+    const build: (data: EventExampleEventData) => PutEventsCommand;
     const type = "event-example";
 }
 /**
@@ -213,12 +218,13 @@ export type InspectionCreatedEventEnvelope = {
     id: string;
 };
 export declare namespace InspectionCreatedEvent {
-    const build: (data: InspectionCreatedEventData) => {
+    const buildData: (data: InspectionCreatedEventData) => {
         type: string;
         data: InspectionCreatedEventData;
         timestamp: number;
         source: string;
     };
+    const build: (data: InspectionCreatedEventData) => PutEventsCommand;
     const type = "inspection-created";
 }
 /**
@@ -242,12 +248,13 @@ export type InspectionDeletedEventEnvelope = {
     id: string;
 };
 export declare namespace InspectionDeletedEvent {
-    const build: (data: InspectionDeletedEventData) => {
+    const buildData: (data: InspectionDeletedEventData) => {
         type: string;
         data: InspectionDeletedEventData;
         timestamp: number;
         source: string;
     };
+    const build: (data: InspectionDeletedEventData) => PutEventsCommand;
     const type = "inspection-deleted";
 }
 /**
@@ -275,12 +282,13 @@ export type InspectionPdfGeneratedEventEnvelope = {
     id: string;
 };
 export declare namespace InspectionPdfGeneratedEvent {
-    const build: (data: InspectionPdfGeneratedEventData) => {
+    const buildData: (data: InspectionPdfGeneratedEventData) => {
         type: string;
         data: InspectionPdfGeneratedEventData;
         timestamp: number;
         source: string;
     };
+    const build: (data: InspectionPdfGeneratedEventData) => PutEventsCommand;
     const type = "inspection-pdf-generated";
 }
 /**
@@ -312,12 +320,13 @@ export type InspectionUpdatedEventEnvelope = {
     id: string;
 };
 export declare namespace InspectionUpdatedEvent {
-    const build: (data: InspectionUpdatedEventData) => {
+    const buildData: (data: InspectionUpdatedEventData) => {
         type: string;
         data: InspectionUpdatedEventData;
         timestamp: number;
         source: string;
     };
+    const build: (data: InspectionUpdatedEventData) => PutEventsCommand;
     const type = "inspection-updated";
 }
 /**
@@ -363,12 +372,13 @@ export type PropertyCreatedEventEnvelope = {
     id: string;
 };
 export declare namespace PropertyCreatedEvent {
-    const build: (data: PropertyCreatedEventData) => {
+    const buildData: (data: PropertyCreatedEventData) => {
         type: string;
         data: PropertyCreatedEventData;
         timestamp: number;
         source: string;
     };
+    const build: (data: PropertyCreatedEventData) => PutEventsCommand;
     const type = "property-created";
 }
 /**
@@ -390,12 +400,13 @@ export type PropertyDeletedEventEnvelope = {
     id: string;
 };
 export declare namespace PropertyDeletedEvent {
-    const build: (data: PropertyDeletedEventData) => {
+    const buildData: (data: PropertyDeletedEventData) => {
         type: string;
         data: PropertyDeletedEventData;
         timestamp: number;
         source: string;
     };
+    const build: (data: PropertyDeletedEventData) => PutEventsCommand;
     const type = "property-deleted";
 }
 /**
@@ -441,12 +452,13 @@ export type PropertyUpdatedEventEnvelope = {
     id: string;
 };
 export declare namespace PropertyUpdatedEvent {
-    const build: (data: PropertyUpdatedEventData) => {
+    const buildData: (data: PropertyUpdatedEventData) => {
         type: string;
         data: PropertyUpdatedEventData;
         timestamp: number;
         source: string;
     };
+    const build: (data: PropertyUpdatedEventData) => PutEventsCommand;
     const type = "property-updated";
 }
 export declare const DEFINITIONS: ({
