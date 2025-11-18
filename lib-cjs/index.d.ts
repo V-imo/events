@@ -357,7 +357,9 @@ export type PropertyCreatedEventData = {
         /** Property owner last name */
         lastName: string;
         /** Property contact mail */
-        contactMail?: string;
+        mail?: string;
+        /** Property contact phone */
+        phoneNumber?: string;
     };
     /** Rooms, can be created by the inspector */
     rooms: any;
@@ -437,7 +439,9 @@ export type PropertyUpdatedEventData = {
         /** Property owner last name */
         lastName: string;
         /** Property contact mail */
-        contactMail?: string;
+        mail?: string;
+        /** Property contact phone */
+        phoneNumber?: string;
     };
     /** Rooms, can be created by the inspector */
     rooms: any;

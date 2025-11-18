@@ -67,9 +67,14 @@
           "required": true
         },
         {
-          "name": "contactMail",
+          "name": "mail",
           "type": "string",
           "description": "Property contact mail"
+        },
+        {
+          "name": "phoneNumber",
+          "type": "string",
+          "description": "Property contact phone"
         }
       ]
     },
