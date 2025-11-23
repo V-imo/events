@@ -201,8 +201,22 @@ export type InspectionCreatedEventData = {
     agencyId: string;
     /** Inspector ID (uuid) */
     inspectorId: string;
-    /** Rooms, can be created by the inspector */
-    rooms?: any;
+    /** Rooms */
+    rooms: {
+        name: string;
+        /** Room description */
+        description?: string;
+        /** Elements of the room */
+        elements: {
+            name: string;
+            /** Element description */
+            description?: string;
+            /** Element state */
+            state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+            /** Images of the element */
+            images?: string[];
+        }[];
+    }[];
     /** Inspection date, in IsoString format: YYYY-MM-DDTHH:mm:ss.sssZ */
     date: string;
     /** Inspection status, on the created events it should always be TO_DO */
@@ -303,8 +317,22 @@ export type InspectionUpdatedEventData = {
     agencyId: string;
     /** Inspector ID (uuid) */
     inspectorId: string;
-    /** Rooms, can be updated by the inspector */
-    rooms?: any;
+    /** Rooms */
+    rooms: {
+        name: string;
+        /** Room description */
+        description?: string;
+        /** Elements of the room */
+        elements: {
+            name: string;
+            /** Element description */
+            description?: string;
+            /** Element state */
+            state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+            /** Images of the element */
+            images?: string[];
+        }[];
+    }[];
     /** Inspection date, in IsoString format: YYYY-MM-DDTHH:mm:ss.sssZ */
     date: string;
     /** Inspection status */
@@ -330,6 +358,130 @@ export declare namespace InspectionUpdatedEvent {
     const type = "inspection-updated";
 }
 /**
+ * Model created event
+ */
+export type ModelCreatedEventData = {
+    /** Model ID (uuid) */
+    modelId: string;
+    /** Agency ID (uuid) */
+    agencyId: string;
+    /** Model name */
+    name: string;
+    /** Rooms */
+    rooms: {
+        name: string;
+        /** Room description */
+        description?: string;
+        /** Room area in square meters */
+        area?: number;
+        /** Elements of the room */
+        elements: {
+            name: string;
+            /** Element description */
+            description?: string;
+            /** Images of the element */
+            images?: string[];
+            /** Element type */
+            type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+        }[];
+    }[];
+};
+export type ModelCreatedEventEnvelope = {
+    type: "model-created";
+    data: ModelCreatedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
+};
+export declare namespace ModelCreatedEvent {
+    const buildData: (data: ModelCreatedEventData) => {
+        type: string;
+        data: ModelCreatedEventData;
+        timestamp: number;
+        source: string;
+    };
+    const build: (data: ModelCreatedEventData) => PutEventsCommand;
+    const type = "model-created";
+}
+/**
+ * Model deleted event
+ */
+export type ModelDeletedEventData = {
+    /** Model ID (uuid) */
+    modelId: string;
+    /** Agency ID (uuid) */
+    agencyId: string;
+};
+export type ModelDeletedEventEnvelope = {
+    type: "model-deleted";
+    data: ModelDeletedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
+};
+export declare namespace ModelDeletedEvent {
+    const buildData: (data: ModelDeletedEventData) => {
+        type: string;
+        data: ModelDeletedEventData;
+        timestamp: number;
+        source: string;
+    };
+    const build: (data: ModelDeletedEventData) => PutEventsCommand;
+    const type = "model-deleted";
+}
+/**
+ * Model updated event
+ */
+export type ModelUpdatedEventData = {
+    /** Model ID (uuid) */
+    modelId: string;
+    /** Agency ID (uuid) */
+    agencyId: string;
+    /** Model name */
+    name: string;
+    /** Rooms */
+    rooms: {
+        name: string;
+        /** Room description */
+        description?: string;
+        /** Room area in square meters */
+        area?: number;
+        /** Elements of the room */
+        elements: {
+            name: string;
+            /** Element description */
+            description?: string;
+            /** Images of the element */
+            images?: string[];
+            /** Element type */
+            type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+        }[];
+    }[];
+};
+export type ModelUpdatedEventEnvelope = {
+    type: "model-updated";
+    data: ModelUpdatedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
+};
+export declare namespace ModelUpdatedEvent {
+    const buildData: (data: ModelUpdatedEventData) => {
+        type: string;
+        data: ModelUpdatedEventData;
+        timestamp: number;
+        source: string;
+    };
+    const build: (data: ModelUpdatedEventData) => PutEventsCommand;
+    const type = "model-updated";
+}
+/**
  * Property created event
  */
 export type PropertyCreatedEventData = {
@@ -337,6 +489,8 @@ export type PropertyCreatedEventData = {
     propertyId: string;
     /** Agency ID (uuid) */
     agencyId: string;
+    /** Property area in square meters */
+    area?: number;
     /** undefined */
     address: {
         /** Property street */
@@ -361,8 +515,24 @@ export type PropertyCreatedEventData = {
         /** Property contact phone */
         phoneNumber?: string;
     };
-    /** Rooms, can be created by the inspector */
-    rooms: any;
+    /** Rooms */
+    rooms: {
+        name: string;
+        /** Room description */
+        description?: string;
+        /** Room area in square meters */
+        area?: number;
+        /** Elements of the room */
+        elements: {
+            name: string;
+            /** Element description */
+            description?: string;
+            /** Images of the element */
+            images?: string[];
+            /** Element type */
+            type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+        }[];
+    }[];
 };
 export type PropertyCreatedEventEnvelope = {
     type: "property-created";
@@ -419,6 +589,8 @@ export type PropertyUpdatedEventData = {
     propertyId: string;
     /** Agency ID (uuid) */
     agencyId: string;
+    /** Property area in square meters */
+    area?: number;
     /** undefined */
     address: {
         /** Property street */
@@ -443,8 +615,24 @@ export type PropertyUpdatedEventData = {
         /** Property contact phone */
         phoneNumber?: string;
     };
-    /** Rooms, can be created by the inspector */
-    rooms: any;
+    /** Rooms */
+    rooms: {
+        name: string;
+        /** Room description */
+        description?: string;
+        /** Room area in square meters */
+        area?: number;
+        /** Elements of the room */
+        elements: {
+            name: string;
+            /** Element description */
+            description?: string;
+            /** Images of the element */
+            images?: string[];
+            /** Element type */
+            type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+        }[];
+    }[];
 };
 export type PropertyUpdatedEventEnvelope = {
     type: "property-updated";
@@ -622,12 +810,66 @@ export declare const DEFINITIONS: ({
         type: string;
         description: string;
         required: boolean;
+        arrayOf?: undefined;
         enum?: undefined;
     } | {
         name: string;
-        type: string;
         description: string;
-        required?: undefined;
+        required: boolean;
+        arrayOf: {
+            description: string;
+            attributes: ({
+                name: string;
+                type: string;
+                description: string;
+                required: boolean;
+                arrayOf?: undefined;
+            } | {
+                name: string;
+                type: string;
+                description: string;
+                required?: undefined;
+                arrayOf?: undefined;
+            } | {
+                name: string;
+                description: string;
+                required: boolean;
+                arrayOf: {
+                    description: string;
+                    attributes: ({
+                        name: string;
+                        type: string;
+                        description: string;
+                        required: boolean;
+                        enum?: undefined;
+                        arrayOf?: undefined;
+                    } | {
+                        name: string;
+                        type: string;
+                        description: string;
+                        required?: undefined;
+                        enum?: undefined;
+                        arrayOf?: undefined;
+                    } | {
+                        name: string;
+                        enum: string[];
+                        description: string;
+                        required: boolean;
+                        type?: undefined;
+                        arrayOf?: undefined;
+                    } | {
+                        name: string;
+                        description: string;
+                        arrayOf: string;
+                        type?: undefined;
+                        required?: undefined;
+                        enum?: undefined;
+                    })[];
+                };
+                type?: undefined;
+            })[];
+        };
+        type?: undefined;
         enum?: undefined;
     } | {
         name: string;
@@ -635,6 +877,7 @@ export declare const DEFINITIONS: ({
         description: string;
         required: boolean;
         type?: undefined;
+        arrayOf?: undefined;
     })[];
     camelName: string;
 } | {
@@ -646,6 +889,14 @@ export declare const DEFINITIONS: ({
         description: string;
         required: boolean;
         attributes?: undefined;
+        arrayOf?: undefined;
+    } | {
+        name: string;
+        type: string;
+        description: string;
+        required?: undefined;
+        attributes?: undefined;
+        arrayOf?: undefined;
     } | {
         name: string;
         required: boolean;
@@ -657,6 +908,7 @@ export declare const DEFINITIONS: ({
         }[];
         type?: undefined;
         description?: undefined;
+        arrayOf?: undefined;
     } | {
         name: string;
         description: string;
@@ -673,6 +925,66 @@ export declare const DEFINITIONS: ({
         })[];
         type?: undefined;
         required?: undefined;
+        arrayOf?: undefined;
+    } | {
+        name: string;
+        description: string;
+        required: boolean;
+        arrayOf: {
+            description: string;
+            attributes: ({
+                name: string;
+                type: string;
+                description: string;
+                required: boolean;
+                arrayOf?: undefined;
+            } | {
+                name: string;
+                type: string;
+                description: string;
+                required?: undefined;
+                arrayOf?: undefined;
+            } | {
+                name: string;
+                description: string;
+                required: boolean;
+                arrayOf: {
+                    description: string;
+                    attributes: ({
+                        name: string;
+                        type: string;
+                        description: string;
+                        required: boolean;
+                        arrayOf?: undefined;
+                        enum?: undefined;
+                    } | {
+                        name: string;
+                        type: string;
+                        description: string;
+                        required?: undefined;
+                        arrayOf?: undefined;
+                        enum?: undefined;
+                    } | {
+                        name: string;
+                        description: string;
+                        arrayOf: string;
+                        type?: undefined;
+                        required?: undefined;
+                        enum?: undefined;
+                    } | {
+                        name: string;
+                        enum: string[];
+                        description: string;
+                        required: boolean;
+                        type?: undefined;
+                        arrayOf?: undefined;
+                    })[];
+                };
+                type?: undefined;
+            })[];
+        };
+        type?: undefined;
+        attributes?: undefined;
     })[];
     camelName: string;
 })[];

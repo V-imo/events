@@ -15,6 +15,11 @@
       "required": true
     },
     {
+      "name": "area",
+      "type": "number",
+      "description": "Property area in square meters"
+    },
+    {
       "name": "address",
       "required": true,
       "attributes": [
@@ -80,9 +85,69 @@
     },
     {
       "name": "rooms",
-      "type": "any",
-      "description": "Rooms, can be created by the inspector",
-      "required": true
+      "description": "Rooms",
+      "required": true,
+      "arrayOf": {
+        "description": "Room",
+        "attributes": [
+          {
+            "name": "name",
+            "type": "string",
+            "description": "Room name",
+            "required": true
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "description": "Room description"
+          },
+          {
+            "name": "area",
+            "type": "number",
+            "description": "Room area in square meters"
+          },
+          {
+            "name": "elements",
+            "description": "Elements of the room",
+            "required": true,
+            "arrayOf": {
+              "description": "Element",
+              "attributes": [
+                {
+                  "name": "name",
+                  "type": "string",
+                  "description": "Element name",
+                  "required": true
+                },
+                {
+                  "name": "description",
+                  "type": "string",
+                  "description": "Element description"
+                },
+                {
+                  "name": "images",
+                  "description": "Images of the element",
+                  "arrayOf": "string"
+                },
+                {
+                  "name": "type",
+                  "enum": [
+                    "FURNITURE",
+                    "STRUCTURAL",
+                    "ELECTRICAL",
+                    "PLUMBING",
+                    "VENTILATION",
+                    "SURFACE",
+                    "OTHER"
+                  ],
+                  "description": "Element type",
+                  "required": true
+                }
+              ]
+            }
+          }
+        ]
+      }
     }
   ]
 }

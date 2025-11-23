@@ -1,11 +1,11 @@
 {
-  "name": "property-updated",
-  "description": "Property updated event",
+  "name": "model-created",
+  "description": "Model created event",
   "attributes": [
     {
-      "name": "propertyId",
+      "name": "modelId",
       "type": "string",
-      "description": "Property ID (uuid)",
+      "description": "Model ID (uuid)",
       "required": true
     },
     {
@@ -15,73 +15,10 @@
       "required": true
     },
     {
-      "name": "area",
-      "type": "number",
-      "description": "Property area in square meters"
-    },
-    {
-      "name": "address",
-      "required": true,
-      "attributes": [
-        {
-          "name": "street",
-          "type": "string",
-          "description": "Property street",
-          "required": true
-        },
-        {
-          "name": "city",
-          "type": "string",
-          "description": "Property city",
-          "required": true
-        },
-        {
-          "name": "country",
-          "type": "string",
-          "description": "Property country",
-          "required": true
-        },
-        {
-          "name": "zipCode",
-          "type": "string",
-          "description": "Property zip code",
-          "required": true
-        },
-        {
-          "name": "number",
-          "type": "string",
-          "description": "Property number of the street. String because it can countains 'bis', 'ter', 'quater', etc.",
-          "required": true
-        }
-      ]
-    },
-    {
-      "name": "owner",
-      "description": "Property owner",
-      "attributes": [
-        {
-          "name": "firstName",
-          "type": "string",
-          "description": "Property owner first name",
-          "required": true
-        },
-        {
-          "name": "lastName",
-          "type": "string",
-          "description": "Property owner last name",
-          "required": true
-        },
-        {
-          "name": "mail",
-          "type": "string",
-          "description": "Property contact mail"
-        },
-        {
-          "name": "phoneNumber",
-          "type": "string",
-          "description": "Property contact phone"
-        }
-      ]
+      "name": "name",
+      "type": "string",
+      "description": "Model name",
+      "required": true
     },
     {
       "name": "rooms",

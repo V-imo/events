@@ -28,8 +28,56 @@
     },
     {
       "name": "rooms",
-      "type": "any",
-      "description": "Rooms, can be created by the inspector"
+      "description": "Rooms",
+      "required": true,
+      "arrayOf": {
+        "description": "Room",
+        "attributes": [
+          {
+            "name": "name",
+            "type": "string",
+            "description": "Room name",
+            "required": true
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "description": "Room description"
+          },
+          {
+            "name": "elements",
+            "description": "Elements of the room",
+            "required": true,
+            "arrayOf": {
+              "description": "Element",
+              "attributes": [
+                {
+                  "name": "name",
+                  "type": "string",
+                  "description": "Element name",
+                  "required": true
+                },
+                {
+                  "name": "description",
+                  "type": "string",
+                  "description": "Element description"
+                },
+                {
+                  "name": "state",
+                  "enum": ["NEW", "GOOD", "BAD", "BROKEN"],
+                  "description": "Element state",
+                  "required": true
+                },
+                {
+                  "name": "images",
+                  "description": "Images of the element",
+                  "arrayOf": "string"
+                }
+              ]
+            }
+          }
+        ]
+      }
     },
     {
       "name": "date",
