@@ -29,7 +29,6 @@
     {
       "name": "rooms",
       "description": "Rooms",
-      "required": true,
       "arrayOf": {
         "description": "Room",
         "attributes": [
