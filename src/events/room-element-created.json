@@ -1,0 +1,55 @@
+{
+  "name": "room-element-created",
+  "description": "Room element created event",
+  "attributes": [
+    {
+      "name": "agencyId",
+      "type": "string",
+      "description": "Agency ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "propertyId",
+      "type": "string",
+      "description": "Property ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "roomId",
+      "type": "string",
+      "description": "Room ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "elementId",
+      "type": "string",
+      "description": "Element ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Element name",
+      "required": true
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": "Element description"
+    },
+    {
+      "name": "type",
+      "enum": [
+        "FURNITURE",
+        "STRUCTURAL",
+        "ELECTRICAL",
+        "PLUMBING",
+        "VENTILATION",
+        "SURFACE",
+        "OTHER"
+      ],
+      "description": "Element type",
+      "required": true
+    }
+  ]
+}

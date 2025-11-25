@@ -27,53 +27,33 @@
       "required": true
     },
     {
-      "name": "rooms",
-      "description": "Rooms",
+      "name": "elements",
+      "description": "Elements inspected",
       "arrayOf": {
-        "description": "Room",
+        "description": "Element",
         "attributes": [
+          {
+            "name": "elementId",
+            "type": "string",
+            "description": "Element ID (uuid)",
+            "required": true
+          },
           {
             "name": "name",
             "type": "string",
-            "description": "Room name",
+            "description": "Element name",
             "required": true
           },
           {
             "name": "description",
             "type": "string",
-            "description": "Room description"
+            "description": "Element description"
           },
           {
-            "name": "elements",
-            "description": "Elements of the room",
-            "required": true,
-            "arrayOf": {
-              "description": "Element",
-              "attributes": [
-                {
-                  "name": "name",
-                  "type": "string",
-                  "description": "Element name",
-                  "required": true
-                },
-                {
-                  "name": "description",
-                  "type": "string",
-                  "description": "Element description"
-                },
-                {
-                  "name": "state",
-                  "enum": ["NEW", "GOOD", "BAD", "BROKEN"],
-                  "description": "Element state",
-                  "required": true
-                },
-                {
-                  "name": "images",
-                  "description": "Images of the element",
-                  "arrayOf": "string"
-                }
-              ]
-            }
+            "name": "state",
+            "enum": ["NEW", "GOOD", "BAD", "BROKEN", "MISSING"],
+            "description": "Element state",
+            "required": true
           }
         ]
       }
@@ -87,7 +67,7 @@
     {
       "name": "status",
       "enum": ["TO_DO", "IN_PROGRESS", "DONE", "CANCELED"],
-      "description": "Inspection status, on the created events it should always be TO_DO",
+      "description": "Inspection status",
       "required": true
     }
   ]

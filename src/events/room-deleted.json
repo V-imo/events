@@ -1,0 +1,24 @@
+{
+  "name": "room-deleted",
+  "description": "Room deleted event",
+  "attributes": [
+    {
+      "name": "agencyId",
+      "type": "string",
+      "description": "Agency ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "propertyId",
+      "type": "string",
+      "description": "Property ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "roomId",
+      "type": "string",
+      "description": "Room ID (uuid)",
+      "required": true
+    }
+  ]
+}

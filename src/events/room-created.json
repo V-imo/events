@@ -1,0 +1,40 @@
+{
+  "name": "room-created",
+  "description": "Room created event",
+  "attributes": [
+    {
+      "name": "agencyId",
+      "type": "string",
+      "description": "Agency ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "propertyId",
+      "type": "string",
+      "description": "Property ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "roomId",
+      "type": "string",
+      "description": "Room ID (uuid)",
+      "required": true
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Room name",
+      "required": true
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": "Room description"
+    },
+    {
+      "name": "area",
+      "type": "number",
+      "description": "Room area in square meters"
+    }
+  ]
+}
