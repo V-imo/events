@@ -40,6 +40,7 @@ export declare namespace AgencyCreatedEvent {
         data: AgencyCreatedEventData;
         timestamp: number;
         source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
     };
     const build: (data: AgencyCreatedEventData) => PutEventsCommand;
     const type = "agency-created";
@@ -66,6 +67,7 @@ export declare namespace AgencyDeletedEvent {
         data: AgencyDeletedEventData;
         timestamp: number;
         source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
     };
     const build: (data: AgencyDeletedEventData) => PutEventsCommand;
     const type = "agency-deleted";
@@ -111,6 +113,7 @@ export declare namespace AgencyUpdatedEvent {
         data: AgencyUpdatedEventData;
         timestamp: number;
         source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
     };
     const build: (data: AgencyUpdatedEventData) => PutEventsCommand;
     const type = "agency-updated";
@@ -185,6 +188,7 @@ export declare namespace EventExampleEvent {
         data: EventExampleEventData;
         timestamp: number;
         source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
     };
     const build: (data: EventExampleEventData) => PutEventsCommand;
     const type = "event-example";
@@ -202,7 +206,7 @@ export type InspectionCreatedEventData = {
     /** Inspector ID (uuid) */
     inspectorId: string;
     /** Rooms */
-    rooms: {
+    rooms?: {
         name: string;
         /** Room description */
         description?: string;
@@ -237,6 +241,7 @@ export declare namespace InspectionCreatedEvent {
         data: InspectionCreatedEventData;
         timestamp: number;
         source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
     };
     const build: (data: InspectionCreatedEventData) => PutEventsCommand;
     const type = "inspection-created";
@@ -267,6 +272,7 @@ export declare namespace InspectionDeletedEvent {
         data: InspectionDeletedEventData;
         timestamp: number;
         source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
     };
     const build: (data: InspectionDeletedEventData) => PutEventsCommand;
     const type = "inspection-deleted";
@@ -301,6 +307,7 @@ export declare namespace InspectionPdfGeneratedEvent {
         data: InspectionPdfGeneratedEventData;
         timestamp: number;
         source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
     };
     const build: (data: InspectionPdfGeneratedEventData) => PutEventsCommand;
     const type = "inspection-pdf-generated";
@@ -318,7 +325,7 @@ export type InspectionUpdatedEventData = {
     /** Inspector ID (uuid) */
     inspectorId: string;
     /** Rooms */
-    rooms: {
+    rooms?: {
         name: string;
         /** Room description */
         description?: string;
@@ -353,6 +360,7 @@ export declare namespace InspectionUpdatedEvent {
         data: InspectionUpdatedEventData;
         timestamp: number;
         source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
     };
     const build: (data: InspectionUpdatedEventData) => PutEventsCommand;
     const type = "inspection-updated";
@@ -401,6 +409,7 @@ export declare namespace ModelCreatedEvent {
         data: ModelCreatedEventData;
         timestamp: number;
         source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
     };
     const build: (data: ModelCreatedEventData) => PutEventsCommand;
     const type = "model-created";
@@ -429,6 +438,7 @@ export declare namespace ModelDeletedEvent {
         data: ModelDeletedEventData;
         timestamp: number;
         source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
     };
     const build: (data: ModelDeletedEventData) => PutEventsCommand;
     const type = "model-deleted";
@@ -477,6 +487,7 @@ export declare namespace ModelUpdatedEvent {
         data: ModelUpdatedEventData;
         timestamp: number;
         source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
     };
     const build: (data: ModelUpdatedEventData) => PutEventsCommand;
     const type = "model-updated";
@@ -549,6 +560,7 @@ export declare namespace PropertyCreatedEvent {
         data: PropertyCreatedEventData;
         timestamp: number;
         source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
     };
     const build: (data: PropertyCreatedEventData) => PutEventsCommand;
     const type = "property-created";
@@ -577,6 +589,7 @@ export declare namespace PropertyDeletedEvent {
         data: PropertyDeletedEventData;
         timestamp: number;
         source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
     };
     const build: (data: PropertyDeletedEventData) => PutEventsCommand;
     const type = "property-deleted";
@@ -649,6 +662,7 @@ export declare namespace PropertyUpdatedEvent {
         data: PropertyUpdatedEventData;
         timestamp: number;
         source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
     };
     const build: (data: PropertyUpdatedEventData) => PutEventsCommand;
     const type = "property-updated";
@@ -815,7 +829,6 @@ export declare const DEFINITIONS: ({
     } | {
         name: string;
         description: string;
-        required: boolean;
         arrayOf: {
             description: string;
             attributes: ({
@@ -870,6 +883,7 @@ export declare const DEFINITIONS: ({
             })[];
         };
         type?: undefined;
+        required?: undefined;
         enum?: undefined;
     } | {
         name: string;

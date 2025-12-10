@@ -7,7 +7,8 @@ let eventTypes = []
 
 // Initialize generated file with required imports
 let s = ""
-s += "import { PutEventsCommand } from \"@aws-sdk/client-eventbridge\"\n\n"
+s += "import { PutEventsCommand } from \"@aws-sdk/client-eventbridge\"\n"
+s += "import { randomUUID } from \"crypto\"\n\n"
 fs.writeFileSync("generated/index.ts", s, { flag: 'w' })
 
 fs.readdirSync(eventsDir)
@@ -99,24 +100,20 @@ function generateEnumDefinition(attribute) {
 }
 
 function createEvent(jsonType, camelNameEvent) {
-  let str = `export namespace ${camelNameEvent} {
-    \n`
-  str += `  export const buildData = (data: ${camelNameEvent}Data) => {
-      \n`
-  str += `    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
-        return {
+  let str = `export namespace ${camelNameEvent} {`
+  str += `  export const buildData = (data: ${camelNameEvent}Data) => {`
+  str += `    return {
           type: "${jsonType.name}",
           data: data,
           timestamp: Math.floor(Date.now() / 1000),
-          source: process.env.SERVICE,
+          source: "custom",
+          id: randomUUID(),
         }\n`
   str += `  }\n`
 
   // Build AWS EventBridge PutEvents params using the existing envelope
-  str += `  export const build = (data: ${camelNameEvent}Data) => {
-      \n`
-  str += `    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be defined")
-        if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
+  str += `  export const build = (data: ${camelNameEvent}Data) => {\n`
+  str += `    if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
         const envelope = ${camelNameEvent}.buildData(data)
         return new PutEventsCommand({
           Entries: [
@@ -124,7 +121,7 @@ function createEvent(jsonType, camelNameEvent) {
               Detail: JSON.stringify(envelope),
               DetailType: "${jsonType.name}",
               EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: process.env.SERVICE!,
+              Source: "custom",
             },
           ],
         })\n`
