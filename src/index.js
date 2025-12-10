@@ -8,7 +8,8 @@ let eventTypes = []
 // Initialize generated file with required imports
 let s = ''
 s += 'import { PutEventsCommand } from "@aws-sdk/client-eventbridge"\n'
-s += 'import { randomUUID } from "crypto"\n\n'
+s += 'import { randomUUID } from "crypto"\n'
+s += 'import { z } from "zod"\n\n'
 fs.writeFileSync('generated/index.ts', s, { flag: 'w' })
 
 fs.readdirSync(eventsDir)
@@ -115,226 +116,116 @@ function generateEnumDefinition(attribute) {
     .join(' | ')
 }
 
-function generateRequiredValidation(
-  attributes,
-  nest = 1,
-  dataPath = 'data',
-  missingPath = ''
-) {
-  let code = ''
-  const missing = missingPath ? `${missingPath}.` : ''
+function generateZodSchema(attributes, nest = 1) {
+  const schemaFields = []
 
   attributes.forEach((attr) => {
     const propName = attr.name
-    const currentDataPath = `${dataPath}.${propName}`
-    const currentMissingPath = `${missing}${propName}`
-
-    if (attr.required) {
-      if (attr.attributes !== undefined) {
-        // Nested object - validate required properties recursively
-        code += `${indent(nest)}if (!${currentDataPath}) {\n`
-        code += `${indent(
-          nest + 1
-        )}throw new Error("Missing required property: ${currentMissingPath}")\n`
-        code += `${indent(nest)}}\n`
-        code += generateRequiredValidation(
-          attr.attributes,
-          nest,
-          currentDataPath,
-          currentMissingPath
-        )
-      } else if (attr.arrayOf !== undefined) {
-        // Array - validate it exists and is an array
-        code += `${indent(
-          nest
-        )}if (!${currentDataPath} || !Array.isArray(${currentDataPath})) {\n`
-        code += `${indent(
-          nest + 1
-        )}throw new Error("Missing required property: ${currentMissingPath} (must be an array)")\n`
-        code += `${indent(nest)}}\n`
-        if (attr.arrayOf.attributes !== undefined) {
-          // Array of objects - validate each item
-          code += `${indent(
-            nest
-          )}${currentDataPath}.forEach((item: any, index: number) => {\n`
-          code += generateRequiredValidation(
-            attr.arrayOf.attributes,
-            nest + 1,
-            'item',
-            `${currentMissingPath}[index]`
-          )
-          code += `${indent(nest)}})\n`
-        }
-      } else {
-        // Simple required property
-        code += `${indent(nest)}if (!${currentDataPath}) {\n`
-        code += `${indent(
-          nest + 1
-        )}throw new Error("Missing required property: ${currentMissingPath}")\n`
-        code += `${indent(nest)}}\n`
-      }
-    } else if (attr.attributes !== undefined) {
-      // Optional nested object - validate recursively if it exists
-      code += `${indent(nest)}if (${currentDataPath}) {\n`
-      code += generateRequiredValidation(
-        attr.attributes,
-        nest + 1,
-        currentDataPath,
-        currentMissingPath
-      )
-      code += `${indent(nest)}}\n`
-    } else if (
-      attr.arrayOf !== undefined &&
-      attr.arrayOf.attributes !== undefined
-    ) {
-      // Optional array of objects - validate items if array exists
-      code += `${indent(
-        nest
-      )}if (${currentDataPath} && Array.isArray(${currentDataPath})) {\n`
-      code += `${indent(
-        nest + 1
-      )}${currentDataPath}.forEach((item: any, index: number) => {\n`
-      code += generateRequiredValidation(
-        attr.arrayOf.attributes,
-        nest + 2,
-        'item',
-        `${currentMissingPath}[index]`
-      )
-      code += `${indent(nest + 1)}})\n`
-      code += `${indent(nest)}}\n`
-    }
-  })
-
-  return code
-}
-
-function generateSanitizeCode(
-  attributes,
-  nest = 1,
-  dataPath = 'data',
-  resultPath = 'result'
-) {
-  let code = ''
-
-  attributes.forEach((attr) => {
-    const propName = attr.name
-    const currentDataPath = `${dataPath}.${propName}`
+    let zodType = ''
 
     if (attr.attributes !== undefined) {
-      // Nested object - recursive sanitization
-      if (attr.required) {
-        code += `${indent(nest)}${resultPath}.${propName} = {}\n`
-        code += generateSanitizeCode(
-          attr.attributes,
-          nest,
-          currentDataPath,
-          `${resultPath}.${propName}`
-        )
+      // Nested object
+      zodType = `z.object({\n${generateZodSchema(
+        attr.attributes,
+        nest + 1
+      )}\n${indent(nest)}})`
+    } else if (attr.enum !== undefined) {
+      // Enum
+      const isStringEnum = attr.enum.every((e) => typeof e === 'string')
+      if (isStringEnum) {
+        const enumValues = attr.enum.map((e) => `"${e}"`).join(', ')
+        zodType = `z.enum([${enumValues}])`
       } else {
-        // Optional nested object - only include if it exists
-        code += `${indent(nest)}if (${currentDataPath}) {\n`
-        code += `${indent(nest + 1)}${resultPath}.${propName} = {}\n`
-        code += generateSanitizeCode(
-          attr.attributes,
-          nest + 1,
-          currentDataPath,
-          `${resultPath}.${propName}`
-        )
-        code += `${indent(nest)}}\n`
+        // Number enum or mixed - use union of literals
+        const literalValues = attr.enum
+          .map((e) => {
+            if (typeof e === 'string') return `z.literal("${e}")`
+            return `z.literal(${e})`
+          })
+          .join(', ')
+        zodType = `z.union([${literalValues}])`
       }
+    } else if (attr.oneOf !== undefined) {
+      // Union (oneOf)
+      const unionTypes = attr.oneOf
+        .map((item) => {
+          if (typeof item === 'string') {
+            // Primitive type
+            if (item === 'string') return 'z.string()'
+            if (item === 'number') return 'z.number()'
+            if (item === 'boolean') return 'z.boolean()'
+            return `z.${item}()`
+          } else if (item.attributes !== undefined) {
+            // Object type
+            return `z.object({\n${generateZodSchema(
+              item.attributes,
+              nest + 1
+            )}\n${indent(nest)}})`
+          }
+          return 'z.unknown()'
+        })
+        .join(', ')
+      zodType = `z.union([${unionTypes}])`
     } else if (attr.arrayOf !== undefined) {
-      if (attr.required) {
-        // Required array - assign directly
-        if (typeof attr.arrayOf === 'string') {
-          code += `${indent(
-            nest
-          )}${resultPath}.${propName} = ${currentDataPath}\n`
-        } else if (attr.arrayOf.attributes !== undefined) {
-          code += `${indent(
-            nest
-          )}${resultPath}.${propName} = ${currentDataPath}.map((item: any) => {\n`
-          code += `${indent(nest + 1)}const sanitized: any = {}\n`
-          code += generateSanitizeCode(
-            attr.arrayOf.attributes,
-            nest + 1,
-            'item',
-            'sanitized'
-          )
-          code += `${indent(nest + 1)}return sanitized\n`
-          code += `${indent(nest)}})\n`
-        } else if (Array.isArray(attr.arrayOf)) {
-          code += `${indent(
-            nest
-          )}${resultPath}.${propName} = ${currentDataPath}\n`
-        }
-      } else {
-        // Optional array - only include if it exists
-        code += `${indent(
-          nest
-        )}if (${currentDataPath} && Array.isArray(${currentDataPath})) {\n`
-        if (typeof attr.arrayOf === 'string') {
-          code += `${indent(
-            nest + 1
-          )}${resultPath}.${propName} = ${currentDataPath}\n`
-        } else if (attr.arrayOf.attributes !== undefined) {
-          code += `${indent(
-            nest + 1
-          )}${resultPath}.${propName} = ${currentDataPath}.map((item: any) => {\n`
-          code += `${indent(nest + 2)}const sanitized: any = {}\n`
-          code += generateSanitizeCode(
-            attr.arrayOf.attributes,
-            nest + 2,
-            'item',
-            'sanitized'
-          )
-          code += `${indent(nest + 2)}return sanitized\n`
-          code += `${indent(nest + 1)}})\n`
-        } else if (Array.isArray(attr.arrayOf)) {
-          code += `${indent(
-            nest + 1
-          )}${resultPath}.${propName} = ${currentDataPath}\n`
-        }
-        code += `${indent(nest)}}\n`
-      }
-    } else {
-      // Simple property
-      if (attr.required) {
-        // Required property - assign directly
-        code += `${indent(
-          nest
-        )}${resultPath}.${propName} = ${currentDataPath}\n`
-      } else {
-        // Optional property - only include if it exists
-        code += `${indent(nest)}if (${currentDataPath}) {\n`
-        code += `${indent(
+      // Array
+      if (typeof attr.arrayOf === 'string') {
+        // Array of primitives
+        if (attr.arrayOf === 'string') zodType = 'z.array(z.string())'
+        else if (attr.arrayOf === 'number') zodType = 'z.array(z.number())'
+        else if (attr.arrayOf === 'boolean') zodType = 'z.array(z.boolean())'
+        else zodType = `z.array(z.${attr.arrayOf}())`
+      } else if (attr.arrayOf.attributes !== undefined) {
+        // Array of objects
+        zodType = `z.array(z.object({\n${generateZodSchema(
+          attr.arrayOf.attributes,
           nest + 1
-        )}${resultPath}.${propName} = ${currentDataPath}\n`
-        code += `${indent(nest)}}\n`
+        )}\n${indent(nest)}}))`
+      } else if (Array.isArray(attr.arrayOf)) {
+        // Array of union types
+        const unionTypes = attr.arrayOf
+          .map((item) => {
+            if (item === 'string') return 'z.string()'
+            if (item === 'number') return 'z.number()'
+            if (item === 'boolean') return 'z.boolean()'
+            return `z.${item}()`
+          })
+          .join(', ')
+        zodType = `z.array(z.union([${unionTypes}]))`
       }
+    } else if (typeof attr.type === 'string') {
+      // Primitive type
+      if (attr.type === 'string') zodType = 'z.string()'
+      else if (attr.type === 'number') zodType = 'z.number()'
+      else if (attr.type === 'boolean') zodType = 'z.boolean()'
+      else zodType = `z.${attr.type}()`
+    }
+
+    // Make optional if not required
+    if (!attr.required && zodType) {
+      zodType = `${zodType}.optional()`
+    }
+
+    if (zodType) {
+      schemaFields.push(`${indent(nest)}${propName}: ${zodType}`)
     }
   })
 
-  return code
+  return schemaFields.join(',\n')
 }
 
 function createEvent(jsonType, camelNameEvent) {
   let str = `export namespace ${camelNameEvent} {\n`
 
-  // Add sanitize function
-  str += `  const sanitize = (data: any): ${camelNameEvent}Data => {\n`
-  str += `    if (!data || typeof data !== 'object') {\n`
-  str += `      throw new Error("Data must be an object")\n`
-  str += `    }\n`
-  str += `    // Validate required properties\n`
-  str += generateRequiredValidation(jsonType.attributes, 2)
-  str += `    // Create sanitized object with only schema properties\n`
-  str += `    const result: any = {}\n`
-  str += generateSanitizeCode(jsonType.attributes, 2)
-  str += `    return result as ${camelNameEvent}Data\n`
-  str += `  }\n\n`
+  // Generate Zod schema
+  str += `  const schema = z.object({\n`
+  str += generateZodSchema(jsonType.attributes, 2)
+  str += `\n  })\n\n`
 
-  str += `  export const buildData = (data: any) => {\n`
-  str += `    const sanitized = sanitize(data)\n`
+  // Type inference from schema
+  str += `  export type ${camelNameEvent}Data = z.infer<typeof schema>\n\n`
+
+  str += `  export const buildData = (data: unknown) => {\n`
+  str += `    const sanitized = schema.parse(data)\n`
   str += `    return {
       type: "${jsonType.name}",
       data: sanitized,
@@ -342,10 +233,10 @@ function createEvent(jsonType, camelNameEvent) {
       source: "custom",
       id: randomUUID(),
     }\n`
-  str += `  }\n`
+  str += `  }\n\n`
 
   // Build AWS EventBridge PutEvents params using the existing envelope
-  str += `  export const build = (data: any) => {\n`
+  str += `  export const build = (data: unknown) => {\n`
   str += `    if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
       const envelope = ${camelNameEvent}.buildData(data)
       return new PutEventsCommand({
@@ -358,11 +249,11 @@ function createEvent(jsonType, camelNameEvent) {
           },
         ],
       })\n`
-  str += `  }\n`
+  str += `  }\n\n`
 
   str += `  export const type = "${jsonType.name}"\n`
 
-  str += `} \n`
+  str += `}\n`
   return str
 }
 

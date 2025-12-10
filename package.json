@@ -41,6 +41,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@aws-sdk/client-eventbridge": "^3.887.0"
+    "@aws-sdk/client-eventbridge": "^3.887.0",
+    "zod": "^3.25.76"
   }
 }
