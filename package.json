@@ -41,7 +41,6 @@
   },
   "type": "module",
   "dependencies": {
-    "@aws-sdk/client-eventbridge": "^3.887.0",
-    "crypto": "^1.0.1"
+    "@aws-sdk/client-eventbridge": "^3.887.0"
   }
 }

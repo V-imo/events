@@ -100,31 +100,31 @@ function generateEnumDefinition(attribute) {
 }
 
 function createEvent(jsonType, camelNameEvent) {
-  let str = `export namespace ${camelNameEvent} {`
-  str += `  export const buildData = (data: ${camelNameEvent}Data) => {`
+  let str = `export namespace ${camelNameEvent} {\n`
+  str += `  export const buildData = (data: ${camelNameEvent}Data) => {\n`
   str += `    return {
-          type: "${jsonType.name}",
-          data: data,
-          timestamp: Math.floor(Date.now() / 1000),
-          source: "custom",
-          id: randomUUID(),
-        }\n`
+      type: "${jsonType.name}",
+      data: data,
+      timestamp: Math.floor(Date.now() / 1000),
+      source: "custom",
+      id: randomUUID(),
+    }\n`
   str += `  }\n`
 
   // Build AWS EventBridge PutEvents params using the existing envelope
   str += `  export const build = (data: ${camelNameEvent}Data) => {\n`
   str += `    if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
-        const envelope = ${camelNameEvent}.buildData(data)
-        return new PutEventsCommand({
-          Entries: [
-            {
-              Detail: JSON.stringify(envelope),
-              DetailType: "${jsonType.name}",
-              EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: "custom",
-            },
-          ],
-        })\n`
+      const envelope = ${camelNameEvent}.buildData(data)
+      return new PutEventsCommand({
+        Entries: [
+          {
+            Detail: JSON.stringify(envelope),
+            DetailType: "${jsonType.name}",
+            EventBusName: process.env.EVENT_BUS_NAME!,
+            Source: "custom",
+          },
+        ],
+      })\n`
   str += `  }\n`
 
   str += `  export const type = "${jsonType.name}"\n`

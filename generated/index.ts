@@ -36,27 +36,29 @@ export type AgencyCreatedEventEnvelope = {
   version: string,
   id: string,
 }
-export namespace AgencyCreatedEvent {  export const buildData = (data: AgencyCreatedEventData) => {    return {
-          type: "agency-created",
-          data: data,
-          timestamp: Math.floor(Date.now() / 1000),
-          source: "custom",
-          id: randomUUID(),
-        }
+export namespace AgencyCreatedEvent {
+  export const buildData = (data: AgencyCreatedEventData) => {
+    return {
+      type: "agency-created",
+      data: data,
+      timestamp: Math.floor(Date.now() / 1000),
+      source: "custom",
+      id: randomUUID(),
+    }
   }
   export const build = (data: AgencyCreatedEventData) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
-        const envelope = AgencyCreatedEvent.buildData(data)
-        return new PutEventsCommand({
-          Entries: [
-            {
-              Detail: JSON.stringify(envelope),
-              DetailType: "agency-created",
-              EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: "custom",
-            },
-          ],
-        })
+      const envelope = AgencyCreatedEvent.buildData(data)
+      return new PutEventsCommand({
+        Entries: [
+          {
+            Detail: JSON.stringify(envelope),
+            DetailType: "agency-created",
+            EventBusName: process.env.EVENT_BUS_NAME!,
+            Source: "custom",
+          },
+        ],
+      })
   }
   export const type = "agency-created"
 } 
@@ -78,27 +80,29 @@ export type AgencyDeletedEventEnvelope = {
   version: string,
   id: string,
 }
-export namespace AgencyDeletedEvent {  export const buildData = (data: AgencyDeletedEventData) => {    return {
-          type: "agency-deleted",
-          data: data,
-          timestamp: Math.floor(Date.now() / 1000),
-          source: "custom",
-          id: randomUUID(),
-        }
+export namespace AgencyDeletedEvent {
+  export const buildData = (data: AgencyDeletedEventData) => {
+    return {
+      type: "agency-deleted",
+      data: data,
+      timestamp: Math.floor(Date.now() / 1000),
+      source: "custom",
+      id: randomUUID(),
+    }
   }
   export const build = (data: AgencyDeletedEventData) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
-        const envelope = AgencyDeletedEvent.buildData(data)
-        return new PutEventsCommand({
-          Entries: [
-            {
-              Detail: JSON.stringify(envelope),
-              DetailType: "agency-deleted",
-              EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: "custom",
-            },
-          ],
-        })
+      const envelope = AgencyDeletedEvent.buildData(data)
+      return new PutEventsCommand({
+        Entries: [
+          {
+            Detail: JSON.stringify(envelope),
+            DetailType: "agency-deleted",
+            EventBusName: process.env.EVENT_BUS_NAME!,
+            Source: "custom",
+          },
+        ],
+      })
   }
   export const type = "agency-deleted"
 } 
@@ -139,27 +143,29 @@ export type AgencyUpdatedEventEnvelope = {
   version: string,
   id: string,
 }
-export namespace AgencyUpdatedEvent {  export const buildData = (data: AgencyUpdatedEventData) => {    return {
-          type: "agency-updated",
-          data: data,
-          timestamp: Math.floor(Date.now() / 1000),
-          source: "custom",
-          id: randomUUID(),
-        }
+export namespace AgencyUpdatedEvent {
+  export const buildData = (data: AgencyUpdatedEventData) => {
+    return {
+      type: "agency-updated",
+      data: data,
+      timestamp: Math.floor(Date.now() / 1000),
+      source: "custom",
+      id: randomUUID(),
+    }
   }
   export const build = (data: AgencyUpdatedEventData) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
-        const envelope = AgencyUpdatedEvent.buildData(data)
-        return new PutEventsCommand({
-          Entries: [
-            {
-              Detail: JSON.stringify(envelope),
-              DetailType: "agency-updated",
-              EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: "custom",
-            },
-          ],
-        })
+      const envelope = AgencyUpdatedEvent.buildData(data)
+      return new PutEventsCommand({
+        Entries: [
+          {
+            Detail: JSON.stringify(envelope),
+            DetailType: "agency-updated",
+            EventBusName: process.env.EVENT_BUS_NAME!,
+            Source: "custom",
+          },
+        ],
+      })
   }
   export const type = "agency-updated"
 } 
@@ -231,27 +237,29 @@ export type EventExampleEventEnvelope = {
   version: string,
   id: string,
 }
-export namespace EventExampleEvent {  export const buildData = (data: EventExampleEventData) => {    return {
-          type: "event-example",
-          data: data,
-          timestamp: Math.floor(Date.now() / 1000),
-          source: "custom",
-          id: randomUUID(),
-        }
+export namespace EventExampleEvent {
+  export const buildData = (data: EventExampleEventData) => {
+    return {
+      type: "event-example",
+      data: data,
+      timestamp: Math.floor(Date.now() / 1000),
+      source: "custom",
+      id: randomUUID(),
+    }
   }
   export const build = (data: EventExampleEventData) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
-        const envelope = EventExampleEvent.buildData(data)
-        return new PutEventsCommand({
-          Entries: [
-            {
-              Detail: JSON.stringify(envelope),
-              DetailType: "event-example",
-              EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: "custom",
-            },
-          ],
-        })
+      const envelope = EventExampleEvent.buildData(data)
+      return new PutEventsCommand({
+        Entries: [
+          {
+            Detail: JSON.stringify(envelope),
+            DetailType: "event-example",
+            EventBusName: process.env.EVENT_BUS_NAME!,
+            Source: "custom",
+          },
+        ],
+      })
   }
   export const type = "event-example"
 } 
@@ -299,27 +307,29 @@ export type InspectionCreatedEventEnvelope = {
   version: string,
   id: string,
 }
-export namespace InspectionCreatedEvent {  export const buildData = (data: InspectionCreatedEventData) => {    return {
-          type: "inspection-created",
-          data: data,
-          timestamp: Math.floor(Date.now() / 1000),
-          source: "custom",
-          id: randomUUID(),
-        }
+export namespace InspectionCreatedEvent {
+  export const buildData = (data: InspectionCreatedEventData) => {
+    return {
+      type: "inspection-created",
+      data: data,
+      timestamp: Math.floor(Date.now() / 1000),
+      source: "custom",
+      id: randomUUID(),
+    }
   }
   export const build = (data: InspectionCreatedEventData) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
-        const envelope = InspectionCreatedEvent.buildData(data)
-        return new PutEventsCommand({
-          Entries: [
-            {
-              Detail: JSON.stringify(envelope),
-              DetailType: "inspection-created",
-              EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: "custom",
-            },
-          ],
-        })
+      const envelope = InspectionCreatedEvent.buildData(data)
+      return new PutEventsCommand({
+        Entries: [
+          {
+            Detail: JSON.stringify(envelope),
+            DetailType: "inspection-created",
+            EventBusName: process.env.EVENT_BUS_NAME!,
+            Source: "custom",
+          },
+        ],
+      })
   }
   export const type = "inspection-created"
 } 
@@ -345,27 +355,29 @@ export type InspectionDeletedEventEnvelope = {
   version: string,
   id: string,
 }
-export namespace InspectionDeletedEvent {  export const buildData = (data: InspectionDeletedEventData) => {    return {
-          type: "inspection-deleted",
-          data: data,
-          timestamp: Math.floor(Date.now() / 1000),
-          source: "custom",
-          id: randomUUID(),
-        }
+export namespace InspectionDeletedEvent {
+  export const buildData = (data: InspectionDeletedEventData) => {
+    return {
+      type: "inspection-deleted",
+      data: data,
+      timestamp: Math.floor(Date.now() / 1000),
+      source: "custom",
+      id: randomUUID(),
+    }
   }
   export const build = (data: InspectionDeletedEventData) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
-        const envelope = InspectionDeletedEvent.buildData(data)
-        return new PutEventsCommand({
-          Entries: [
-            {
-              Detail: JSON.stringify(envelope),
-              DetailType: "inspection-deleted",
-              EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: "custom",
-            },
-          ],
-        })
+      const envelope = InspectionDeletedEvent.buildData(data)
+      return new PutEventsCommand({
+        Entries: [
+          {
+            Detail: JSON.stringify(envelope),
+            DetailType: "inspection-deleted",
+            EventBusName: process.env.EVENT_BUS_NAME!,
+            Source: "custom",
+          },
+        ],
+      })
   }
   export const type = "inspection-deleted"
 } 
@@ -395,27 +407,29 @@ export type InspectionPdfGeneratedEventEnvelope = {
   version: string,
   id: string,
 }
-export namespace InspectionPdfGeneratedEvent {  export const buildData = (data: InspectionPdfGeneratedEventData) => {    return {
-          type: "inspection-pdf-generated",
-          data: data,
-          timestamp: Math.floor(Date.now() / 1000),
-          source: "custom",
-          id: randomUUID(),
-        }
+export namespace InspectionPdfGeneratedEvent {
+  export const buildData = (data: InspectionPdfGeneratedEventData) => {
+    return {
+      type: "inspection-pdf-generated",
+      data: data,
+      timestamp: Math.floor(Date.now() / 1000),
+      source: "custom",
+      id: randomUUID(),
+    }
   }
   export const build = (data: InspectionPdfGeneratedEventData) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
-        const envelope = InspectionPdfGeneratedEvent.buildData(data)
-        return new PutEventsCommand({
-          Entries: [
-            {
-              Detail: JSON.stringify(envelope),
-              DetailType: "inspection-pdf-generated",
-              EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: "custom",
-            },
-          ],
-        })
+      const envelope = InspectionPdfGeneratedEvent.buildData(data)
+      return new PutEventsCommand({
+        Entries: [
+          {
+            Detail: JSON.stringify(envelope),
+            DetailType: "inspection-pdf-generated",
+            EventBusName: process.env.EVENT_BUS_NAME!,
+            Source: "custom",
+          },
+        ],
+      })
   }
   export const type = "inspection-pdf-generated"
 } 
@@ -463,27 +477,29 @@ export type InspectionUpdatedEventEnvelope = {
   version: string,
   id: string,
 }
-export namespace InspectionUpdatedEvent {  export const buildData = (data: InspectionUpdatedEventData) => {    return {
-          type: "inspection-updated",
-          data: data,
-          timestamp: Math.floor(Date.now() / 1000),
-          source: "custom",
-          id: randomUUID(),
-        }
+export namespace InspectionUpdatedEvent {
+  export const buildData = (data: InspectionUpdatedEventData) => {
+    return {
+      type: "inspection-updated",
+      data: data,
+      timestamp: Math.floor(Date.now() / 1000),
+      source: "custom",
+      id: randomUUID(),
+    }
   }
   export const build = (data: InspectionUpdatedEventData) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
-        const envelope = InspectionUpdatedEvent.buildData(data)
-        return new PutEventsCommand({
-          Entries: [
-            {
-              Detail: JSON.stringify(envelope),
-              DetailType: "inspection-updated",
-              EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: "custom",
-            },
-          ],
-        })
+      const envelope = InspectionUpdatedEvent.buildData(data)
+      return new PutEventsCommand({
+        Entries: [
+          {
+            Detail: JSON.stringify(envelope),
+            DetailType: "inspection-updated",
+            EventBusName: process.env.EVENT_BUS_NAME!,
+            Source: "custom",
+          },
+        ],
+      })
   }
   export const type = "inspection-updated"
 } 
@@ -527,27 +543,29 @@ export type ModelCreatedEventEnvelope = {
   version: string,
   id: string,
 }
-export namespace ModelCreatedEvent {  export const buildData = (data: ModelCreatedEventData) => {    return {
-          type: "model-created",
-          data: data,
-          timestamp: Math.floor(Date.now() / 1000),
-          source: "custom",
-          id: randomUUID(),
-        }
+export namespace ModelCreatedEvent {
+  export const buildData = (data: ModelCreatedEventData) => {
+    return {
+      type: "model-created",
+      data: data,
+      timestamp: Math.floor(Date.now() / 1000),
+      source: "custom",
+      id: randomUUID(),
+    }
   }
   export const build = (data: ModelCreatedEventData) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
-        const envelope = ModelCreatedEvent.buildData(data)
-        return new PutEventsCommand({
-          Entries: [
-            {
-              Detail: JSON.stringify(envelope),
-              DetailType: "model-created",
-              EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: "custom",
-            },
-          ],
-        })
+      const envelope = ModelCreatedEvent.buildData(data)
+      return new PutEventsCommand({
+        Entries: [
+          {
+            Detail: JSON.stringify(envelope),
+            DetailType: "model-created",
+            EventBusName: process.env.EVENT_BUS_NAME!,
+            Source: "custom",
+          },
+        ],
+      })
   }
   export const type = "model-created"
 } 
@@ -571,27 +589,29 @@ export type ModelDeletedEventEnvelope = {
   version: string,
   id: string,
 }
-export namespace ModelDeletedEvent {  export const buildData = (data: ModelDeletedEventData) => {    return {
-          type: "model-deleted",
-          data: data,
-          timestamp: Math.floor(Date.now() / 1000),
-          source: "custom",
-          id: randomUUID(),
-        }
+export namespace ModelDeletedEvent {
+  export const buildData = (data: ModelDeletedEventData) => {
+    return {
+      type: "model-deleted",
+      data: data,
+      timestamp: Math.floor(Date.now() / 1000),
+      source: "custom",
+      id: randomUUID(),
+    }
   }
   export const build = (data: ModelDeletedEventData) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
-        const envelope = ModelDeletedEvent.buildData(data)
-        return new PutEventsCommand({
-          Entries: [
-            {
-              Detail: JSON.stringify(envelope),
-              DetailType: "model-deleted",
-              EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: "custom",
-            },
-          ],
-        })
+      const envelope = ModelDeletedEvent.buildData(data)
+      return new PutEventsCommand({
+        Entries: [
+          {
+            Detail: JSON.stringify(envelope),
+            DetailType: "model-deleted",
+            EventBusName: process.env.EVENT_BUS_NAME!,
+            Source: "custom",
+          },
+        ],
+      })
   }
   export const type = "model-deleted"
 } 
@@ -635,27 +655,29 @@ export type ModelUpdatedEventEnvelope = {
   version: string,
   id: string,
 }
-export namespace ModelUpdatedEvent {  export const buildData = (data: ModelUpdatedEventData) => {    return {
-          type: "model-updated",
-          data: data,
-          timestamp: Math.floor(Date.now() / 1000),
-          source: "custom",
-          id: randomUUID(),
-        }
+export namespace ModelUpdatedEvent {
+  export const buildData = (data: ModelUpdatedEventData) => {
+    return {
+      type: "model-updated",
+      data: data,
+      timestamp: Math.floor(Date.now() / 1000),
+      source: "custom",
+      id: randomUUID(),
+    }
   }
   export const build = (data: ModelUpdatedEventData) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
-        const envelope = ModelUpdatedEvent.buildData(data)
-        return new PutEventsCommand({
-          Entries: [
-            {
-              Detail: JSON.stringify(envelope),
-              DetailType: "model-updated",
-              EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: "custom",
-            },
-          ],
-        })
+      const envelope = ModelUpdatedEvent.buildData(data)
+      return new PutEventsCommand({
+        Entries: [
+          {
+            Detail: JSON.stringify(envelope),
+            DetailType: "model-updated",
+            EventBusName: process.env.EVENT_BUS_NAME!,
+            Source: "custom",
+          },
+        ],
+      })
   }
   export const type = "model-updated"
 } 
@@ -723,27 +745,29 @@ export type PropertyCreatedEventEnvelope = {
   version: string,
   id: string,
 }
-export namespace PropertyCreatedEvent {  export const buildData = (data: PropertyCreatedEventData) => {    return {
-          type: "property-created",
-          data: data,
-          timestamp: Math.floor(Date.now() / 1000),
-          source: "custom",
-          id: randomUUID(),
-        }
+export namespace PropertyCreatedEvent {
+  export const buildData = (data: PropertyCreatedEventData) => {
+    return {
+      type: "property-created",
+      data: data,
+      timestamp: Math.floor(Date.now() / 1000),
+      source: "custom",
+      id: randomUUID(),
+    }
   }
   export const build = (data: PropertyCreatedEventData) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
-        const envelope = PropertyCreatedEvent.buildData(data)
-        return new PutEventsCommand({
-          Entries: [
-            {
-              Detail: JSON.stringify(envelope),
-              DetailType: "property-created",
-              EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: "custom",
-            },
-          ],
-        })
+      const envelope = PropertyCreatedEvent.buildData(data)
+      return new PutEventsCommand({
+        Entries: [
+          {
+            Detail: JSON.stringify(envelope),
+            DetailType: "property-created",
+            EventBusName: process.env.EVENT_BUS_NAME!,
+            Source: "custom",
+          },
+        ],
+      })
   }
   export const type = "property-created"
 } 
@@ -767,27 +791,29 @@ export type PropertyDeletedEventEnvelope = {
   version: string,
   id: string,
 }
-export namespace PropertyDeletedEvent {  export const buildData = (data: PropertyDeletedEventData) => {    return {
-          type: "property-deleted",
-          data: data,
-          timestamp: Math.floor(Date.now() / 1000),
-          source: "custom",
-          id: randomUUID(),
-        }
+export namespace PropertyDeletedEvent {
+  export const buildData = (data: PropertyDeletedEventData) => {
+    return {
+      type: "property-deleted",
+      data: data,
+      timestamp: Math.floor(Date.now() / 1000),
+      source: "custom",
+      id: randomUUID(),
+    }
   }
   export const build = (data: PropertyDeletedEventData) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
-        const envelope = PropertyDeletedEvent.buildData(data)
-        return new PutEventsCommand({
-          Entries: [
-            {
-              Detail: JSON.stringify(envelope),
-              DetailType: "property-deleted",
-              EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: "custom",
-            },
-          ],
-        })
+      const envelope = PropertyDeletedEvent.buildData(data)
+      return new PutEventsCommand({
+        Entries: [
+          {
+            Detail: JSON.stringify(envelope),
+            DetailType: "property-deleted",
+            EventBusName: process.env.EVENT_BUS_NAME!,
+            Source: "custom",
+          },
+        ],
+      })
   }
   export const type = "property-deleted"
 } 
@@ -855,27 +881,29 @@ export type PropertyUpdatedEventEnvelope = {
   version: string,
   id: string,
 }
-export namespace PropertyUpdatedEvent {  export const buildData = (data: PropertyUpdatedEventData) => {    return {
-          type: "property-updated",
-          data: data,
-          timestamp: Math.floor(Date.now() / 1000),
-          source: "custom",
-          id: randomUUID(),
-        }
+export namespace PropertyUpdatedEvent {
+  export const buildData = (data: PropertyUpdatedEventData) => {
+    return {
+      type: "property-updated",
+      data: data,
+      timestamp: Math.floor(Date.now() / 1000),
+      source: "custom",
+      id: randomUUID(),
+    }
   }
   export const build = (data: PropertyUpdatedEventData) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
-        const envelope = PropertyUpdatedEvent.buildData(data)
-        return new PutEventsCommand({
-          Entries: [
-            {
-              Detail: JSON.stringify(envelope),
-              DetailType: "property-updated",
-              EventBusName: process.env.EVENT_BUS_NAME!,
-              Source: "custom",
-            },
-          ],
-        })
+      const envelope = PropertyUpdatedEvent.buildData(data)
+      return new PutEventsCommand({
+        Entries: [
+          {
+            Detail: JSON.stringify(envelope),
+            DetailType: "property-updated",
+            EventBusName: process.env.EVENT_BUS_NAME!,
+            Source: "custom",
+          },
+        ],
+      })
   }
   export const type = "property-updated"
 } 
