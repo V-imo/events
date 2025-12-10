@@ -37,16 +37,66 @@ export type AgencyCreatedEventEnvelope = {
   id: string,
 }
 export namespace AgencyCreatedEvent {
-  export const buildData = (data: AgencyCreatedEventData) => {
+  const sanitize = (data: any): AgencyCreatedEventData => {
+    if (!data || typeof data !== 'object') {
+      throw new Error("Data must be an object")
+    }
+    // Validate required properties
+    if (!data.agencyId) {
+      throw new Error("Missing required property: agencyId")
+    }
+    if (!data.name) {
+      throw new Error("Missing required property: name")
+    }
+    if (!data.address) {
+      throw new Error("Missing required property: address")
+    }
+    if (!data.address.street) {
+      throw new Error("Missing required property: address.street")
+    }
+    if (!data.address.city) {
+      throw new Error("Missing required property: address.city")
+    }
+    if (!data.address.country) {
+      throw new Error("Missing required property: address.country")
+    }
+    if (!data.address.zipCode) {
+      throw new Error("Missing required property: address.zipCode")
+    }
+    if (!data.address.number) {
+      throw new Error("Missing required property: address.number")
+    }
+    if (!data.contactMail) {
+      throw new Error("Missing required property: contactMail")
+    }
+    // Create sanitized object with only schema properties
+    const result: any = {}
+    result.agencyId = data.agencyId
+    result.name = data.name
+    result.address = {}
+    result.address.street = data.address.street
+    result.address.city = data.address.city
+    result.address.country = data.address.country
+    result.address.zipCode = data.address.zipCode
+    result.address.number = data.address.number
+    result.contactMail = data.contactMail
+    if (data.contactPhone) {
+      result.contactPhone = data.contactPhone
+    }
+    return result as AgencyCreatedEventData
+  }
+
+  export const buildData = (data: any) => {
+    const sanitized = sanitize(data)
     return {
       type: "agency-created",
-      data: data,
+      data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
       source: "custom",
       id: randomUUID(),
     }
   }
-  export const build = (data: AgencyCreatedEventData) => {
+  export const build = (data: any) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
       const envelope = AgencyCreatedEvent.buildData(data)
       return new PutEventsCommand({
@@ -81,16 +131,31 @@ export type AgencyDeletedEventEnvelope = {
   id: string,
 }
 export namespace AgencyDeletedEvent {
-  export const buildData = (data: AgencyDeletedEventData) => {
+  const sanitize = (data: any): AgencyDeletedEventData => {
+    if (!data || typeof data !== 'object') {
+      throw new Error("Data must be an object")
+    }
+    // Validate required properties
+    if (!data.agencyId) {
+      throw new Error("Missing required property: agencyId")
+    }
+    // Create sanitized object with only schema properties
+    const result: any = {}
+    result.agencyId = data.agencyId
+    return result as AgencyDeletedEventData
+  }
+
+  export const buildData = (data: any) => {
+    const sanitized = sanitize(data)
     return {
       type: "agency-deleted",
-      data: data,
+      data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
       source: "custom",
       id: randomUUID(),
     }
   }
-  export const build = (data: AgencyDeletedEventData) => {
+  export const build = (data: any) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
       const envelope = AgencyDeletedEvent.buildData(data)
       return new PutEventsCommand({
@@ -144,16 +209,66 @@ export type AgencyUpdatedEventEnvelope = {
   id: string,
 }
 export namespace AgencyUpdatedEvent {
-  export const buildData = (data: AgencyUpdatedEventData) => {
+  const sanitize = (data: any): AgencyUpdatedEventData => {
+    if (!data || typeof data !== 'object') {
+      throw new Error("Data must be an object")
+    }
+    // Validate required properties
+    if (!data.agencyId) {
+      throw new Error("Missing required property: agencyId")
+    }
+    if (!data.name) {
+      throw new Error("Missing required property: name")
+    }
+    if (!data.address) {
+      throw new Error("Missing required property: address")
+    }
+    if (!data.address.street) {
+      throw new Error("Missing required property: address.street")
+    }
+    if (!data.address.city) {
+      throw new Error("Missing required property: address.city")
+    }
+    if (!data.address.country) {
+      throw new Error("Missing required property: address.country")
+    }
+    if (!data.address.zipCode) {
+      throw new Error("Missing required property: address.zipCode")
+    }
+    if (!data.address.number) {
+      throw new Error("Missing required property: address.number")
+    }
+    if (!data.contactMail) {
+      throw new Error("Missing required property: contactMail")
+    }
+    // Create sanitized object with only schema properties
+    const result: any = {}
+    result.agencyId = data.agencyId
+    result.name = data.name
+    result.address = {}
+    result.address.street = data.address.street
+    result.address.city = data.address.city
+    result.address.country = data.address.country
+    result.address.zipCode = data.address.zipCode
+    result.address.number = data.address.number
+    result.contactMail = data.contactMail
+    if (data.contactPhone) {
+      result.contactPhone = data.contactPhone
+    }
+    return result as AgencyUpdatedEventData
+  }
+
+  export const buildData = (data: any) => {
+    const sanitized = sanitize(data)
     return {
       type: "agency-updated",
-      data: data,
+      data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
       source: "custom",
       id: randomUUID(),
     }
   }
-  export const build = (data: AgencyUpdatedEventData) => {
+  export const build = (data: any) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
       const envelope = AgencyUpdatedEvent.buildData(data)
       return new PutEventsCommand({
@@ -238,16 +353,98 @@ export type EventExampleEventEnvelope = {
   id: string,
 }
 export namespace EventExampleEvent {
-  export const buildData = (data: EventExampleEventData) => {
+  const sanitize = (data: any): EventExampleEventData => {
+    if (!data || typeof data !== 'object') {
+      throw new Error("Data must be an object")
+    }
+    // Validate required properties
+    if (!data.simpleNumber) {
+      throw new Error("Missing required property: simpleNumber")
+    }
+    if (!data.objectAttribute) {
+      throw new Error("Missing required property: objectAttribute")
+    }
+    if (!data.objectAttribute.id) {
+      throw new Error("Missing required property: objectAttribute.id")
+    }
+    if (!data.objectAttribute.nested) {
+      throw new Error("Missing required property: objectAttribute.nested")
+    }
+    if (!data.objectAttribute.nested.label) {
+      throw new Error("Missing required property: objectAttribute.nested.label")
+    }
+    if (data.objectArray && Array.isArray(data.objectArray)) {
+      data.objectArray.forEach((item: any, index: number) => {
+      })
+    }
+    if (!data.unionWithObject) {
+      throw new Error("Missing required property: unionWithObject")
+    }
+    if (!data.unionArray || !Array.isArray(data.unionArray)) {
+      throw new Error("Missing required property: unionArray (must be an array)")
+    }
+    // Create sanitized object with only schema properties
+    const result: any = {}
+    if (data.simpleString) {
+      result.simpleString = data.simpleString
+    }
+    result.simpleNumber = data.simpleNumber
+    if (data.simpleBoolean) {
+      result.simpleBoolean = data.simpleBoolean
+    }
+    result.objectAttribute = {}
+    result.objectAttribute.id = data.objectAttribute.id
+    if (data.objectAttribute.count) {
+      result.objectAttribute.count = data.objectAttribute.count
+    }
+    result.objectAttribute.nested = {}
+    if (data.objectAttribute.nested.enabled) {
+      result.objectAttribute.nested.enabled = data.objectAttribute.nested.enabled
+    }
+    result.objectAttribute.nested.label = data.objectAttribute.nested.label
+    if (data.stringArray && Array.isArray(data.stringArray)) {
+      result.stringArray = data.stringArray
+    }
+    if (data.numberArray && Array.isArray(data.numberArray)) {
+      result.numberArray = data.numberArray
+    }
+    if (data.objectArray && Array.isArray(data.objectArray)) {
+      result.objectArray = data.objectArray.map((item: any) => {
+        const sanitized: any = {}
+        if (item.title) {
+          sanitized.title = item.title
+        }
+        if (item.quantity) {
+          sanitized.quantity = item.quantity
+        }
+        return sanitized
+      })
+    }
+    if (data.stringEnum) {
+      result.stringEnum = data.stringEnum
+    }
+    if (data.numberEnum) {
+      result.numberEnum = data.numberEnum
+    }
+    if (data.unionPrimitive) {
+      result.unionPrimitive = data.unionPrimitive
+    }
+    result.unionWithObject = data.unionWithObject
+    result.unionArray = data.unionArray
+    return result as EventExampleEventData
+  }
+
+  export const buildData = (data: any) => {
+    const sanitized = sanitize(data)
     return {
       type: "event-example",
-      data: data,
+      data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
       source: "custom",
       id: randomUUID(),
     }
   }
-  export const build = (data: EventExampleEventData) => {
+  export const build = (data: any) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
       const envelope = EventExampleEvent.buildData(data)
       return new PutEventsCommand({
@@ -308,16 +505,91 @@ export type InspectionCreatedEventEnvelope = {
   id: string,
 }
 export namespace InspectionCreatedEvent {
-  export const buildData = (data: InspectionCreatedEventData) => {
+  const sanitize = (data: any): InspectionCreatedEventData => {
+    if (!data || typeof data !== 'object') {
+      throw new Error("Data must be an object")
+    }
+    // Validate required properties
+    if (!data.inspectionId) {
+      throw new Error("Missing required property: inspectionId")
+    }
+    if (!data.propertyId) {
+      throw new Error("Missing required property: propertyId")
+    }
+    if (!data.agencyId) {
+      throw new Error("Missing required property: agencyId")
+    }
+    if (!data.inspectorId) {
+      throw new Error("Missing required property: inspectorId")
+    }
+    if (data.rooms && Array.isArray(data.rooms)) {
+      data.rooms.forEach((item: any, index: number) => {
+        if (!item.name) {
+          throw new Error("Missing required property: rooms[index].name")
+        }
+        if (!item.elements || !Array.isArray(item.elements)) {
+          throw new Error("Missing required property: rooms[index].elements (must be an array)")
+        }
+        item.elements.forEach((item: any, index: number) => {
+          if (!item.name) {
+            throw new Error("Missing required property: rooms[index].elements[index].name")
+          }
+          if (!item.state) {
+            throw new Error("Missing required property: rooms[index].elements[index].state")
+          }
+        })
+      })
+    }
+    if (!data.date) {
+      throw new Error("Missing required property: date")
+    }
+    if (!data.status) {
+      throw new Error("Missing required property: status")
+    }
+    // Create sanitized object with only schema properties
+    const result: any = {}
+    result.inspectionId = data.inspectionId
+    result.propertyId = data.propertyId
+    result.agencyId = data.agencyId
+    result.inspectorId = data.inspectorId
+    if (data.rooms && Array.isArray(data.rooms)) {
+      result.rooms = data.rooms.map((item: any) => {
+        const sanitized: any = {}
+        sanitized.name = item.name
+        if (item.description) {
+          sanitized.description = item.description
+        }
+        sanitized.elements = item.elements.map((item: any) => {
+          const sanitized: any = {}
+          sanitized.name = item.name
+          if (item.description) {
+            sanitized.description = item.description
+          }
+          sanitized.state = item.state
+          if (item.images && Array.isArray(item.images)) {
+            sanitized.images = item.images
+          }
+          return sanitized
+        })
+        return sanitized
+      })
+    }
+    result.date = data.date
+    result.status = data.status
+    return result as InspectionCreatedEventData
+  }
+
+  export const buildData = (data: any) => {
+    const sanitized = sanitize(data)
     return {
       type: "inspection-created",
-      data: data,
+      data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
       source: "custom",
       id: randomUUID(),
     }
   }
-  export const build = (data: InspectionCreatedEventData) => {
+  export const build = (data: any) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
       const envelope = InspectionCreatedEvent.buildData(data)
       return new PutEventsCommand({
@@ -356,16 +628,39 @@ export type InspectionDeletedEventEnvelope = {
   id: string,
 }
 export namespace InspectionDeletedEvent {
-  export const buildData = (data: InspectionDeletedEventData) => {
+  const sanitize = (data: any): InspectionDeletedEventData => {
+    if (!data || typeof data !== 'object') {
+      throw new Error("Data must be an object")
+    }
+    // Validate required properties
+    if (!data.inspectionId) {
+      throw new Error("Missing required property: inspectionId")
+    }
+    if (!data.propertyId) {
+      throw new Error("Missing required property: propertyId")
+    }
+    if (!data.agencyId) {
+      throw new Error("Missing required property: agencyId")
+    }
+    // Create sanitized object with only schema properties
+    const result: any = {}
+    result.inspectionId = data.inspectionId
+    result.propertyId = data.propertyId
+    result.agencyId = data.agencyId
+    return result as InspectionDeletedEventData
+  }
+
+  export const buildData = (data: any) => {
+    const sanitized = sanitize(data)
     return {
       type: "inspection-deleted",
-      data: data,
+      data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
       source: "custom",
       id: randomUUID(),
     }
   }
-  export const build = (data: InspectionDeletedEventData) => {
+  export const build = (data: any) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
       const envelope = InspectionDeletedEvent.buildData(data)
       return new PutEventsCommand({
@@ -408,16 +703,47 @@ export type InspectionPdfGeneratedEventEnvelope = {
   id: string,
 }
 export namespace InspectionPdfGeneratedEvent {
-  export const buildData = (data: InspectionPdfGeneratedEventData) => {
+  const sanitize = (data: any): InspectionPdfGeneratedEventData => {
+    if (!data || typeof data !== 'object') {
+      throw new Error("Data must be an object")
+    }
+    // Validate required properties
+    if (!data.inspectionId) {
+      throw new Error("Missing required property: inspectionId")
+    }
+    if (!data.propertyId) {
+      throw new Error("Missing required property: propertyId")
+    }
+    if (!data.agencyId) {
+      throw new Error("Missing required property: agencyId")
+    }
+    if (!data.key) {
+      throw new Error("Missing required property: key")
+    }
+    if (!data.bucketName) {
+      throw new Error("Missing required property: bucketName")
+    }
+    // Create sanitized object with only schema properties
+    const result: any = {}
+    result.inspectionId = data.inspectionId
+    result.propertyId = data.propertyId
+    result.agencyId = data.agencyId
+    result.key = data.key
+    result.bucketName = data.bucketName
+    return result as InspectionPdfGeneratedEventData
+  }
+
+  export const buildData = (data: any) => {
+    const sanitized = sanitize(data)
     return {
       type: "inspection-pdf-generated",
-      data: data,
+      data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
       source: "custom",
       id: randomUUID(),
     }
   }
-  export const build = (data: InspectionPdfGeneratedEventData) => {
+  export const build = (data: any) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
       const envelope = InspectionPdfGeneratedEvent.buildData(data)
       return new PutEventsCommand({
@@ -478,16 +804,91 @@ export type InspectionUpdatedEventEnvelope = {
   id: string,
 }
 export namespace InspectionUpdatedEvent {
-  export const buildData = (data: InspectionUpdatedEventData) => {
+  const sanitize = (data: any): InspectionUpdatedEventData => {
+    if (!data || typeof data !== 'object') {
+      throw new Error("Data must be an object")
+    }
+    // Validate required properties
+    if (!data.inspectionId) {
+      throw new Error("Missing required property: inspectionId")
+    }
+    if (!data.propertyId) {
+      throw new Error("Missing required property: propertyId")
+    }
+    if (!data.agencyId) {
+      throw new Error("Missing required property: agencyId")
+    }
+    if (!data.inspectorId) {
+      throw new Error("Missing required property: inspectorId")
+    }
+    if (data.rooms && Array.isArray(data.rooms)) {
+      data.rooms.forEach((item: any, index: number) => {
+        if (!item.name) {
+          throw new Error("Missing required property: rooms[index].name")
+        }
+        if (!item.elements || !Array.isArray(item.elements)) {
+          throw new Error("Missing required property: rooms[index].elements (must be an array)")
+        }
+        item.elements.forEach((item: any, index: number) => {
+          if (!item.name) {
+            throw new Error("Missing required property: rooms[index].elements[index].name")
+          }
+          if (!item.state) {
+            throw new Error("Missing required property: rooms[index].elements[index].state")
+          }
+        })
+      })
+    }
+    if (!data.date) {
+      throw new Error("Missing required property: date")
+    }
+    if (!data.status) {
+      throw new Error("Missing required property: status")
+    }
+    // Create sanitized object with only schema properties
+    const result: any = {}
+    result.inspectionId = data.inspectionId
+    result.propertyId = data.propertyId
+    result.agencyId = data.agencyId
+    result.inspectorId = data.inspectorId
+    if (data.rooms && Array.isArray(data.rooms)) {
+      result.rooms = data.rooms.map((item: any) => {
+        const sanitized: any = {}
+        sanitized.name = item.name
+        if (item.description) {
+          sanitized.description = item.description
+        }
+        sanitized.elements = item.elements.map((item: any) => {
+          const sanitized: any = {}
+          sanitized.name = item.name
+          if (item.description) {
+            sanitized.description = item.description
+          }
+          sanitized.state = item.state
+          if (item.images && Array.isArray(item.images)) {
+            sanitized.images = item.images
+          }
+          return sanitized
+        })
+        return sanitized
+      })
+    }
+    result.date = data.date
+    result.status = data.status
+    return result as InspectionUpdatedEventData
+  }
+
+  export const buildData = (data: any) => {
+    const sanitized = sanitize(data)
     return {
       type: "inspection-updated",
-      data: data,
+      data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
       source: "custom",
       id: randomUUID(),
     }
   }
-  export const build = (data: InspectionUpdatedEventData) => {
+  export const build = (data: any) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
       const envelope = InspectionUpdatedEvent.buildData(data)
       return new PutEventsCommand({
@@ -544,16 +945,81 @@ export type ModelCreatedEventEnvelope = {
   id: string,
 }
 export namespace ModelCreatedEvent {
-  export const buildData = (data: ModelCreatedEventData) => {
+  const sanitize = (data: any): ModelCreatedEventData => {
+    if (!data || typeof data !== 'object') {
+      throw new Error("Data must be an object")
+    }
+    // Validate required properties
+    if (!data.modelId) {
+      throw new Error("Missing required property: modelId")
+    }
+    if (!data.agencyId) {
+      throw new Error("Missing required property: agencyId")
+    }
+    if (!data.name) {
+      throw new Error("Missing required property: name")
+    }
+    if (!data.rooms || !Array.isArray(data.rooms)) {
+      throw new Error("Missing required property: rooms (must be an array)")
+    }
+    data.rooms.forEach((item: any, index: number) => {
+      if (!item.name) {
+        throw new Error("Missing required property: rooms[index].name")
+      }
+      if (!item.elements || !Array.isArray(item.elements)) {
+        throw new Error("Missing required property: rooms[index].elements (must be an array)")
+      }
+      item.elements.forEach((item: any, index: number) => {
+        if (!item.name) {
+          throw new Error("Missing required property: rooms[index].elements[index].name")
+        }
+        if (!item.type) {
+          throw new Error("Missing required property: rooms[index].elements[index].type")
+        }
+      })
+    })
+    // Create sanitized object with only schema properties
+    const result: any = {}
+    result.modelId = data.modelId
+    result.agencyId = data.agencyId
+    result.name = data.name
+    result.rooms = data.rooms.map((item: any) => {
+      const sanitized: any = {}
+      sanitized.name = item.name
+      if (item.description) {
+        sanitized.description = item.description
+      }
+      if (item.area) {
+        sanitized.area = item.area
+      }
+      sanitized.elements = item.elements.map((item: any) => {
+        const sanitized: any = {}
+        sanitized.name = item.name
+        if (item.description) {
+          sanitized.description = item.description
+        }
+        if (item.images && Array.isArray(item.images)) {
+          sanitized.images = item.images
+        }
+        sanitized.type = item.type
+        return sanitized
+      })
+      return sanitized
+    })
+    return result as ModelCreatedEventData
+  }
+
+  export const buildData = (data: any) => {
+    const sanitized = sanitize(data)
     return {
       type: "model-created",
-      data: data,
+      data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
       source: "custom",
       id: randomUUID(),
     }
   }
-  export const build = (data: ModelCreatedEventData) => {
+  export const build = (data: any) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
       const envelope = ModelCreatedEvent.buildData(data)
       return new PutEventsCommand({
@@ -590,16 +1056,35 @@ export type ModelDeletedEventEnvelope = {
   id: string,
 }
 export namespace ModelDeletedEvent {
-  export const buildData = (data: ModelDeletedEventData) => {
+  const sanitize = (data: any): ModelDeletedEventData => {
+    if (!data || typeof data !== 'object') {
+      throw new Error("Data must be an object")
+    }
+    // Validate required properties
+    if (!data.modelId) {
+      throw new Error("Missing required property: modelId")
+    }
+    if (!data.agencyId) {
+      throw new Error("Missing required property: agencyId")
+    }
+    // Create sanitized object with only schema properties
+    const result: any = {}
+    result.modelId = data.modelId
+    result.agencyId = data.agencyId
+    return result as ModelDeletedEventData
+  }
+
+  export const buildData = (data: any) => {
+    const sanitized = sanitize(data)
     return {
       type: "model-deleted",
-      data: data,
+      data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
       source: "custom",
       id: randomUUID(),
     }
   }
-  export const build = (data: ModelDeletedEventData) => {
+  export const build = (data: any) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
       const envelope = ModelDeletedEvent.buildData(data)
       return new PutEventsCommand({
@@ -656,16 +1141,81 @@ export type ModelUpdatedEventEnvelope = {
   id: string,
 }
 export namespace ModelUpdatedEvent {
-  export const buildData = (data: ModelUpdatedEventData) => {
+  const sanitize = (data: any): ModelUpdatedEventData => {
+    if (!data || typeof data !== 'object') {
+      throw new Error("Data must be an object")
+    }
+    // Validate required properties
+    if (!data.modelId) {
+      throw new Error("Missing required property: modelId")
+    }
+    if (!data.agencyId) {
+      throw new Error("Missing required property: agencyId")
+    }
+    if (!data.name) {
+      throw new Error("Missing required property: name")
+    }
+    if (!data.rooms || !Array.isArray(data.rooms)) {
+      throw new Error("Missing required property: rooms (must be an array)")
+    }
+    data.rooms.forEach((item: any, index: number) => {
+      if (!item.name) {
+        throw new Error("Missing required property: rooms[index].name")
+      }
+      if (!item.elements || !Array.isArray(item.elements)) {
+        throw new Error("Missing required property: rooms[index].elements (must be an array)")
+      }
+      item.elements.forEach((item: any, index: number) => {
+        if (!item.name) {
+          throw new Error("Missing required property: rooms[index].elements[index].name")
+        }
+        if (!item.type) {
+          throw new Error("Missing required property: rooms[index].elements[index].type")
+        }
+      })
+    })
+    // Create sanitized object with only schema properties
+    const result: any = {}
+    result.modelId = data.modelId
+    result.agencyId = data.agencyId
+    result.name = data.name
+    result.rooms = data.rooms.map((item: any) => {
+      const sanitized: any = {}
+      sanitized.name = item.name
+      if (item.description) {
+        sanitized.description = item.description
+      }
+      if (item.area) {
+        sanitized.area = item.area
+      }
+      sanitized.elements = item.elements.map((item: any) => {
+        const sanitized: any = {}
+        sanitized.name = item.name
+        if (item.description) {
+          sanitized.description = item.description
+        }
+        if (item.images && Array.isArray(item.images)) {
+          sanitized.images = item.images
+        }
+        sanitized.type = item.type
+        return sanitized
+      })
+      return sanitized
+    })
+    return result as ModelUpdatedEventData
+  }
+
+  export const buildData = (data: any) => {
+    const sanitized = sanitize(data)
     return {
       type: "model-updated",
-      data: data,
+      data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
       source: "custom",
       id: randomUUID(),
     }
   }
-  export const build = (data: ModelUpdatedEventData) => {
+  export const build = (data: any) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
       const envelope = ModelUpdatedEvent.buildData(data)
       return new PutEventsCommand({
@@ -746,16 +1296,123 @@ export type PropertyCreatedEventEnvelope = {
   id: string,
 }
 export namespace PropertyCreatedEvent {
-  export const buildData = (data: PropertyCreatedEventData) => {
+  const sanitize = (data: any): PropertyCreatedEventData => {
+    if (!data || typeof data !== 'object') {
+      throw new Error("Data must be an object")
+    }
+    // Validate required properties
+    if (!data.propertyId) {
+      throw new Error("Missing required property: propertyId")
+    }
+    if (!data.agencyId) {
+      throw new Error("Missing required property: agencyId")
+    }
+    if (!data.address) {
+      throw new Error("Missing required property: address")
+    }
+    if (!data.address.street) {
+      throw new Error("Missing required property: address.street")
+    }
+    if (!data.address.city) {
+      throw new Error("Missing required property: address.city")
+    }
+    if (!data.address.country) {
+      throw new Error("Missing required property: address.country")
+    }
+    if (!data.address.zipCode) {
+      throw new Error("Missing required property: address.zipCode")
+    }
+    if (!data.address.number) {
+      throw new Error("Missing required property: address.number")
+    }
+    if (data.owner) {
+      if (!data.owner.firstName) {
+        throw new Error("Missing required property: owner.firstName")
+      }
+      if (!data.owner.lastName) {
+        throw new Error("Missing required property: owner.lastName")
+      }
+    }
+    if (!data.rooms || !Array.isArray(data.rooms)) {
+      throw new Error("Missing required property: rooms (must be an array)")
+    }
+    data.rooms.forEach((item: any, index: number) => {
+      if (!item.name) {
+        throw new Error("Missing required property: rooms[index].name")
+      }
+      if (!item.elements || !Array.isArray(item.elements)) {
+        throw new Error("Missing required property: rooms[index].elements (must be an array)")
+      }
+      item.elements.forEach((item: any, index: number) => {
+        if (!item.name) {
+          throw new Error("Missing required property: rooms[index].elements[index].name")
+        }
+        if (!item.type) {
+          throw new Error("Missing required property: rooms[index].elements[index].type")
+        }
+      })
+    })
+    // Create sanitized object with only schema properties
+    const result: any = {}
+    result.propertyId = data.propertyId
+    result.agencyId = data.agencyId
+    if (data.area) {
+      result.area = data.area
+    }
+    result.address = {}
+    result.address.street = data.address.street
+    result.address.city = data.address.city
+    result.address.country = data.address.country
+    result.address.zipCode = data.address.zipCode
+    result.address.number = data.address.number
+    if (data.owner) {
+      result.owner = {}
+      result.owner.firstName = data.owner.firstName
+      result.owner.lastName = data.owner.lastName
+      if (data.owner.mail) {
+        result.owner.mail = data.owner.mail
+      }
+      if (data.owner.phoneNumber) {
+        result.owner.phoneNumber = data.owner.phoneNumber
+      }
+    }
+    result.rooms = data.rooms.map((item: any) => {
+      const sanitized: any = {}
+      sanitized.name = item.name
+      if (item.description) {
+        sanitized.description = item.description
+      }
+      if (item.area) {
+        sanitized.area = item.area
+      }
+      sanitized.elements = item.elements.map((item: any) => {
+        const sanitized: any = {}
+        sanitized.name = item.name
+        if (item.description) {
+          sanitized.description = item.description
+        }
+        if (item.images && Array.isArray(item.images)) {
+          sanitized.images = item.images
+        }
+        sanitized.type = item.type
+        return sanitized
+      })
+      return sanitized
+    })
+    return result as PropertyCreatedEventData
+  }
+
+  export const buildData = (data: any) => {
+    const sanitized = sanitize(data)
     return {
       type: "property-created",
-      data: data,
+      data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
       source: "custom",
       id: randomUUID(),
     }
   }
-  export const build = (data: PropertyCreatedEventData) => {
+  export const build = (data: any) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
       const envelope = PropertyCreatedEvent.buildData(data)
       return new PutEventsCommand({
@@ -792,16 +1449,35 @@ export type PropertyDeletedEventEnvelope = {
   id: string,
 }
 export namespace PropertyDeletedEvent {
-  export const buildData = (data: PropertyDeletedEventData) => {
+  const sanitize = (data: any): PropertyDeletedEventData => {
+    if (!data || typeof data !== 'object') {
+      throw new Error("Data must be an object")
+    }
+    // Validate required properties
+    if (!data.propertyId) {
+      throw new Error("Missing required property: propertyId")
+    }
+    if (!data.agencyId) {
+      throw new Error("Missing required property: agencyId")
+    }
+    // Create sanitized object with only schema properties
+    const result: any = {}
+    result.propertyId = data.propertyId
+    result.agencyId = data.agencyId
+    return result as PropertyDeletedEventData
+  }
+
+  export const buildData = (data: any) => {
+    const sanitized = sanitize(data)
     return {
       type: "property-deleted",
-      data: data,
+      data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
       source: "custom",
       id: randomUUID(),
     }
   }
-  export const build = (data: PropertyDeletedEventData) => {
+  export const build = (data: any) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
       const envelope = PropertyDeletedEvent.buildData(data)
       return new PutEventsCommand({
@@ -882,16 +1558,123 @@ export type PropertyUpdatedEventEnvelope = {
   id: string,
 }
 export namespace PropertyUpdatedEvent {
-  export const buildData = (data: PropertyUpdatedEventData) => {
+  const sanitize = (data: any): PropertyUpdatedEventData => {
+    if (!data || typeof data !== 'object') {
+      throw new Error("Data must be an object")
+    }
+    // Validate required properties
+    if (!data.propertyId) {
+      throw new Error("Missing required property: propertyId")
+    }
+    if (!data.agencyId) {
+      throw new Error("Missing required property: agencyId")
+    }
+    if (!data.address) {
+      throw new Error("Missing required property: address")
+    }
+    if (!data.address.street) {
+      throw new Error("Missing required property: address.street")
+    }
+    if (!data.address.city) {
+      throw new Error("Missing required property: address.city")
+    }
+    if (!data.address.country) {
+      throw new Error("Missing required property: address.country")
+    }
+    if (!data.address.zipCode) {
+      throw new Error("Missing required property: address.zipCode")
+    }
+    if (!data.address.number) {
+      throw new Error("Missing required property: address.number")
+    }
+    if (data.owner) {
+      if (!data.owner.firstName) {
+        throw new Error("Missing required property: owner.firstName")
+      }
+      if (!data.owner.lastName) {
+        throw new Error("Missing required property: owner.lastName")
+      }
+    }
+    if (!data.rooms || !Array.isArray(data.rooms)) {
+      throw new Error("Missing required property: rooms (must be an array)")
+    }
+    data.rooms.forEach((item: any, index: number) => {
+      if (!item.name) {
+        throw new Error("Missing required property: rooms[index].name")
+      }
+      if (!item.elements || !Array.isArray(item.elements)) {
+        throw new Error("Missing required property: rooms[index].elements (must be an array)")
+      }
+      item.elements.forEach((item: any, index: number) => {
+        if (!item.name) {
+          throw new Error("Missing required property: rooms[index].elements[index].name")
+        }
+        if (!item.type) {
+          throw new Error("Missing required property: rooms[index].elements[index].type")
+        }
+      })
+    })
+    // Create sanitized object with only schema properties
+    const result: any = {}
+    result.propertyId = data.propertyId
+    result.agencyId = data.agencyId
+    if (data.area) {
+      result.area = data.area
+    }
+    result.address = {}
+    result.address.street = data.address.street
+    result.address.city = data.address.city
+    result.address.country = data.address.country
+    result.address.zipCode = data.address.zipCode
+    result.address.number = data.address.number
+    if (data.owner) {
+      result.owner = {}
+      result.owner.firstName = data.owner.firstName
+      result.owner.lastName = data.owner.lastName
+      if (data.owner.mail) {
+        result.owner.mail = data.owner.mail
+      }
+      if (data.owner.phoneNumber) {
+        result.owner.phoneNumber = data.owner.phoneNumber
+      }
+    }
+    result.rooms = data.rooms.map((item: any) => {
+      const sanitized: any = {}
+      sanitized.name = item.name
+      if (item.description) {
+        sanitized.description = item.description
+      }
+      if (item.area) {
+        sanitized.area = item.area
+      }
+      sanitized.elements = item.elements.map((item: any) => {
+        const sanitized: any = {}
+        sanitized.name = item.name
+        if (item.description) {
+          sanitized.description = item.description
+        }
+        if (item.images && Array.isArray(item.images)) {
+          sanitized.images = item.images
+        }
+        sanitized.type = item.type
+        return sanitized
+      })
+      return sanitized
+    })
+    return result as PropertyUpdatedEventData
+  }
+
+  export const buildData = (data: any) => {
+    const sanitized = sanitize(data)
     return {
       type: "property-updated",
-      data: data,
+      data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
       source: "custom",
       id: randomUUID(),
     }
   }
-  export const build = (data: PropertyUpdatedEventData) => {
+  export const build = (data: any) => {
     if (!process.env.EVENT_BUS_NAME) throw new Error("process.env.EVENT_BUS_NAME must be provided")
       const envelope = PropertyUpdatedEvent.buildData(data)
       return new PutEventsCommand({

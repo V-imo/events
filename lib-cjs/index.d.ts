@@ -35,14 +35,14 @@ export type AgencyCreatedEventEnvelope = {
     id: string;
 };
 export declare namespace AgencyCreatedEvent {
-    const buildData: (data: AgencyCreatedEventData) => {
+    const buildData: (data: any) => {
         type: string;
         data: AgencyCreatedEventData;
         timestamp: number;
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
-    const build: (data: AgencyCreatedEventData) => PutEventsCommand;
+    const build: (data: any) => PutEventsCommand;
     const type = "agency-created";
 }
 /**
@@ -62,14 +62,14 @@ export type AgencyDeletedEventEnvelope = {
     id: string;
 };
 export declare namespace AgencyDeletedEvent {
-    const buildData: (data: AgencyDeletedEventData) => {
+    const buildData: (data: any) => {
         type: string;
         data: AgencyDeletedEventData;
         timestamp: number;
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
-    const build: (data: AgencyDeletedEventData) => PutEventsCommand;
+    const build: (data: any) => PutEventsCommand;
     const type = "agency-deleted";
 }
 /**
@@ -108,14 +108,14 @@ export type AgencyUpdatedEventEnvelope = {
     id: string;
 };
 export declare namespace AgencyUpdatedEvent {
-    const buildData: (data: AgencyUpdatedEventData) => {
+    const buildData: (data: any) => {
         type: string;
         data: AgencyUpdatedEventData;
         timestamp: number;
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
-    const build: (data: AgencyUpdatedEventData) => PutEventsCommand;
+    const build: (data: any) => PutEventsCommand;
     const type = "agency-updated";
 }
 /**
@@ -183,14 +183,14 @@ export type EventExampleEventEnvelope = {
     id: string;
 };
 export declare namespace EventExampleEvent {
-    const buildData: (data: EventExampleEventData) => {
+    const buildData: (data: any) => {
         type: string;
         data: EventExampleEventData;
         timestamp: number;
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
-    const build: (data: EventExampleEventData) => PutEventsCommand;
+    const build: (data: any) => PutEventsCommand;
     const type = "event-example";
 }
 /**
@@ -236,14 +236,14 @@ export type InspectionCreatedEventEnvelope = {
     id: string;
 };
 export declare namespace InspectionCreatedEvent {
-    const buildData: (data: InspectionCreatedEventData) => {
+    const buildData: (data: any) => {
         type: string;
         data: InspectionCreatedEventData;
         timestamp: number;
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
-    const build: (data: InspectionCreatedEventData) => PutEventsCommand;
+    const build: (data: any) => PutEventsCommand;
     const type = "inspection-created";
 }
 /**
@@ -267,14 +267,14 @@ export type InspectionDeletedEventEnvelope = {
     id: string;
 };
 export declare namespace InspectionDeletedEvent {
-    const buildData: (data: InspectionDeletedEventData) => {
+    const buildData: (data: any) => {
         type: string;
         data: InspectionDeletedEventData;
         timestamp: number;
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
-    const build: (data: InspectionDeletedEventData) => PutEventsCommand;
+    const build: (data: any) => PutEventsCommand;
     const type = "inspection-deleted";
 }
 /**
@@ -302,14 +302,14 @@ export type InspectionPdfGeneratedEventEnvelope = {
     id: string;
 };
 export declare namespace InspectionPdfGeneratedEvent {
-    const buildData: (data: InspectionPdfGeneratedEventData) => {
+    const buildData: (data: any) => {
         type: string;
         data: InspectionPdfGeneratedEventData;
         timestamp: number;
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
-    const build: (data: InspectionPdfGeneratedEventData) => PutEventsCommand;
+    const build: (data: any) => PutEventsCommand;
     const type = "inspection-pdf-generated";
 }
 /**
@@ -355,14 +355,14 @@ export type InspectionUpdatedEventEnvelope = {
     id: string;
 };
 export declare namespace InspectionUpdatedEvent {
-    const buildData: (data: InspectionUpdatedEventData) => {
+    const buildData: (data: any) => {
         type: string;
         data: InspectionUpdatedEventData;
         timestamp: number;
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
-    const build: (data: InspectionUpdatedEventData) => PutEventsCommand;
+    const build: (data: any) => PutEventsCommand;
     const type = "inspection-updated";
 }
 /**
@@ -404,14 +404,14 @@ export type ModelCreatedEventEnvelope = {
     id: string;
 };
 export declare namespace ModelCreatedEvent {
-    const buildData: (data: ModelCreatedEventData) => {
+    const buildData: (data: any) => {
         type: string;
         data: ModelCreatedEventData;
         timestamp: number;
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
-    const build: (data: ModelCreatedEventData) => PutEventsCommand;
+    const build: (data: any) => PutEventsCommand;
     const type = "model-created";
 }
 /**
@@ -433,14 +433,14 @@ export type ModelDeletedEventEnvelope = {
     id: string;
 };
 export declare namespace ModelDeletedEvent {
-    const buildData: (data: ModelDeletedEventData) => {
+    const buildData: (data: any) => {
         type: string;
         data: ModelDeletedEventData;
         timestamp: number;
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
-    const build: (data: ModelDeletedEventData) => PutEventsCommand;
+    const build: (data: any) => PutEventsCommand;
     const type = "model-deleted";
 }
 /**
@@ -482,14 +482,14 @@ export type ModelUpdatedEventEnvelope = {
     id: string;
 };
 export declare namespace ModelUpdatedEvent {
-    const buildData: (data: ModelUpdatedEventData) => {
+    const buildData: (data: any) => {
         type: string;
         data: ModelUpdatedEventData;
         timestamp: number;
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
-    const build: (data: ModelUpdatedEventData) => PutEventsCommand;
+    const build: (data: any) => PutEventsCommand;
     const type = "model-updated";
 }
 /**
@@ -555,14 +555,14 @@ export type PropertyCreatedEventEnvelope = {
     id: string;
 };
 export declare namespace PropertyCreatedEvent {
-    const buildData: (data: PropertyCreatedEventData) => {
+    const buildData: (data: any) => {
         type: string;
         data: PropertyCreatedEventData;
         timestamp: number;
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
-    const build: (data: PropertyCreatedEventData) => PutEventsCommand;
+    const build: (data: any) => PutEventsCommand;
     const type = "property-created";
 }
 /**
@@ -584,14 +584,14 @@ export type PropertyDeletedEventEnvelope = {
     id: string;
 };
 export declare namespace PropertyDeletedEvent {
-    const buildData: (data: PropertyDeletedEventData) => {
+    const buildData: (data: any) => {
         type: string;
         data: PropertyDeletedEventData;
         timestamp: number;
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
-    const build: (data: PropertyDeletedEventData) => PutEventsCommand;
+    const build: (data: any) => PutEventsCommand;
     const type = "property-deleted";
 }
 /**
@@ -657,14 +657,14 @@ export type PropertyUpdatedEventEnvelope = {
     id: string;
 };
 export declare namespace PropertyUpdatedEvent {
-    const buildData: (data: PropertyUpdatedEventData) => {
+    const buildData: (data: any) => {
         type: string;
         data: PropertyUpdatedEventData;
         timestamp: number;
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
-    const build: (data: PropertyUpdatedEventData) => PutEventsCommand;
+    const build: (data: any) => PutEventsCommand;
     const type = "property-updated";
 }
 export declare const DEFINITIONS: ({
