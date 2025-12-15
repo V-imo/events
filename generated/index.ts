@@ -52,7 +52,16 @@ export namespace AgencyCreatedEvent {
     contactPhone: z.string().optional()
   })
 
+  const envelopeSchema = z.object({
+    type: z.literal("agency-created"),
+    data: schema,
+    timestamp: z.number(),
+    source: z.string(),
+    id: z.string(),
+  })
+
   export type AgencyCreatedEventData = z.infer<typeof schema>
+  export type AgencyCreatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
     const sanitized = schema.parse(data)
@@ -63,6 +72,20 @@ export namespace AgencyCreatedEvent {
       source: "custom",
       id: randomUUID(),
     }
+  }
+
+  export const parse = (input: unknown): AgencyCreatedEventEnvelope => {
+    // Handle EventBridge entry format (Detail is a JSON string)
+    if (typeof input === 'object' && input !== null && 'Detail' in input) {
+      const entry = input as { Detail: string; DetailType?: string }
+      if (entry.DetailType && entry.DetailType !== "agency-created") {
+        throw new Error(`Expected event type "agency-created", got ${entry.DetailType}`)
+      }
+      const parsed = JSON.parse(entry.Detail)
+      return envelopeSchema.parse(parsed)
+    }
+    // Handle direct envelope object
+    return envelopeSchema.parse(input)
   }
 
   export const build = (data: unknown) => {
@@ -105,7 +128,16 @@ export namespace AgencyDeletedEvent {
     agencyId: z.string()
   })
 
+  const envelopeSchema = z.object({
+    type: z.literal("agency-deleted"),
+    data: schema,
+    timestamp: z.number(),
+    source: z.string(),
+    id: z.string(),
+  })
+
   export type AgencyDeletedEventData = z.infer<typeof schema>
+  export type AgencyDeletedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
     const sanitized = schema.parse(data)
@@ -116,6 +148,20 @@ export namespace AgencyDeletedEvent {
       source: "custom",
       id: randomUUID(),
     }
+  }
+
+  export const parse = (input: unknown): AgencyDeletedEventEnvelope => {
+    // Handle EventBridge entry format (Detail is a JSON string)
+    if (typeof input === 'object' && input !== null && 'Detail' in input) {
+      const entry = input as { Detail: string; DetailType?: string }
+      if (entry.DetailType && entry.DetailType !== "agency-deleted") {
+        throw new Error(`Expected event type "agency-deleted", got ${entry.DetailType}`)
+      }
+      const parsed = JSON.parse(entry.Detail)
+      return envelopeSchema.parse(parsed)
+    }
+    // Handle direct envelope object
+    return envelopeSchema.parse(input)
   }
 
   export const build = (data: unknown) => {
@@ -187,7 +233,16 @@ export namespace AgencyUpdatedEvent {
     contactPhone: z.string().optional()
   })
 
+  const envelopeSchema = z.object({
+    type: z.literal("agency-updated"),
+    data: schema,
+    timestamp: z.number(),
+    source: z.string(),
+    id: z.string(),
+  })
+
   export type AgencyUpdatedEventData = z.infer<typeof schema>
+  export type AgencyUpdatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
     const sanitized = schema.parse(data)
@@ -198,6 +253,20 @@ export namespace AgencyUpdatedEvent {
       source: "custom",
       id: randomUUID(),
     }
+  }
+
+  export const parse = (input: unknown): AgencyUpdatedEventEnvelope => {
+    // Handle EventBridge entry format (Detail is a JSON string)
+    if (typeof input === 'object' && input !== null && 'Detail' in input) {
+      const entry = input as { Detail: string; DetailType?: string }
+      if (entry.DetailType && entry.DetailType !== "agency-updated") {
+        throw new Error(`Expected event type "agency-updated", got ${entry.DetailType}`)
+      }
+      const parsed = JSON.parse(entry.Detail)
+      return envelopeSchema.parse(parsed)
+    }
+    // Handle direct envelope object
+    return envelopeSchema.parse(input)
   }
 
   export const build = (data: unknown) => {
@@ -317,7 +386,16 @@ export namespace EventExampleEvent {
     unionArray: z.array(z.union([z.string(), z.number()]))
   })
 
+  const envelopeSchema = z.object({
+    type: z.literal("event-example"),
+    data: schema,
+    timestamp: z.number(),
+    source: z.string(),
+    id: z.string(),
+  })
+
   export type EventExampleEventData = z.infer<typeof schema>
+  export type EventExampleEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
     const sanitized = schema.parse(data)
@@ -328,6 +406,20 @@ export namespace EventExampleEvent {
       source: "custom",
       id: randomUUID(),
     }
+  }
+
+  export const parse = (input: unknown): EventExampleEventEnvelope => {
+    // Handle EventBridge entry format (Detail is a JSON string)
+    if (typeof input === 'object' && input !== null && 'Detail' in input) {
+      const entry = input as { Detail: string; DetailType?: string }
+      if (entry.DetailType && entry.DetailType !== "event-example") {
+        throw new Error(`Expected event type "event-example", got ${entry.DetailType}`)
+      }
+      const parsed = JSON.parse(entry.Detail)
+      return envelopeSchema.parse(parsed)
+    }
+    // Handle direct envelope object
+    return envelopeSchema.parse(input)
   }
 
   export const build = (data: unknown) => {
@@ -411,7 +503,16 @@ export namespace InspectionCreatedEvent {
     status: z.enum(["TO_DO", "IN_PROGRESS", "DONE", "CANCELED"])
   })
 
+  const envelopeSchema = z.object({
+    type: z.literal("inspection-created"),
+    data: schema,
+    timestamp: z.number(),
+    source: z.string(),
+    id: z.string(),
+  })
+
   export type InspectionCreatedEventData = z.infer<typeof schema>
+  export type InspectionCreatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
     const sanitized = schema.parse(data)
@@ -422,6 +523,20 @@ export namespace InspectionCreatedEvent {
       source: "custom",
       id: randomUUID(),
     }
+  }
+
+  export const parse = (input: unknown): InspectionCreatedEventEnvelope => {
+    // Handle EventBridge entry format (Detail is a JSON string)
+    if (typeof input === 'object' && input !== null && 'Detail' in input) {
+      const entry = input as { Detail: string; DetailType?: string }
+      if (entry.DetailType && entry.DetailType !== "inspection-created") {
+        throw new Error(`Expected event type "inspection-created", got ${entry.DetailType}`)
+      }
+      const parsed = JSON.parse(entry.Detail)
+      return envelopeSchema.parse(parsed)
+    }
+    // Handle direct envelope object
+    return envelopeSchema.parse(input)
   }
 
   export const build = (data: unknown) => {
@@ -470,7 +585,16 @@ export namespace InspectionDeletedEvent {
     agencyId: z.string()
   })
 
+  const envelopeSchema = z.object({
+    type: z.literal("inspection-deleted"),
+    data: schema,
+    timestamp: z.number(),
+    source: z.string(),
+    id: z.string(),
+  })
+
   export type InspectionDeletedEventData = z.infer<typeof schema>
+  export type InspectionDeletedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
     const sanitized = schema.parse(data)
@@ -481,6 +605,20 @@ export namespace InspectionDeletedEvent {
       source: "custom",
       id: randomUUID(),
     }
+  }
+
+  export const parse = (input: unknown): InspectionDeletedEventEnvelope => {
+    // Handle EventBridge entry format (Detail is a JSON string)
+    if (typeof input === 'object' && input !== null && 'Detail' in input) {
+      const entry = input as { Detail: string; DetailType?: string }
+      if (entry.DetailType && entry.DetailType !== "inspection-deleted") {
+        throw new Error(`Expected event type "inspection-deleted", got ${entry.DetailType}`)
+      }
+      const parsed = JSON.parse(entry.Detail)
+      return envelopeSchema.parse(parsed)
+    }
+    // Handle direct envelope object
+    return envelopeSchema.parse(input)
   }
 
   export const build = (data: unknown) => {
@@ -535,7 +673,16 @@ export namespace InspectionPdfGeneratedEvent {
     bucketName: z.string()
   })
 
+  const envelopeSchema = z.object({
+    type: z.literal("inspection-pdf-generated"),
+    data: schema,
+    timestamp: z.number(),
+    source: z.string(),
+    id: z.string(),
+  })
+
   export type InspectionPdfGeneratedEventData = z.infer<typeof schema>
+  export type InspectionPdfGeneratedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
     const sanitized = schema.parse(data)
@@ -546,6 +693,20 @@ export namespace InspectionPdfGeneratedEvent {
       source: "custom",
       id: randomUUID(),
     }
+  }
+
+  export const parse = (input: unknown): InspectionPdfGeneratedEventEnvelope => {
+    // Handle EventBridge entry format (Detail is a JSON string)
+    if (typeof input === 'object' && input !== null && 'Detail' in input) {
+      const entry = input as { Detail: string; DetailType?: string }
+      if (entry.DetailType && entry.DetailType !== "inspection-pdf-generated") {
+        throw new Error(`Expected event type "inspection-pdf-generated", got ${entry.DetailType}`)
+      }
+      const parsed = JSON.parse(entry.Detail)
+      return envelopeSchema.parse(parsed)
+    }
+    // Handle direct envelope object
+    return envelopeSchema.parse(input)
   }
 
   export const build = (data: unknown) => {
@@ -629,7 +790,16 @@ export namespace InspectionUpdatedEvent {
     status: z.enum(["TO_DO", "IN_PROGRESS", "DONE", "CANCELED"])
   })
 
+  const envelopeSchema = z.object({
+    type: z.literal("inspection-updated"),
+    data: schema,
+    timestamp: z.number(),
+    source: z.string(),
+    id: z.string(),
+  })
+
   export type InspectionUpdatedEventData = z.infer<typeof schema>
+  export type InspectionUpdatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
     const sanitized = schema.parse(data)
@@ -640,6 +810,20 @@ export namespace InspectionUpdatedEvent {
       source: "custom",
       id: randomUUID(),
     }
+  }
+
+  export const parse = (input: unknown): InspectionUpdatedEventEnvelope => {
+    // Handle EventBridge entry format (Detail is a JSON string)
+    if (typeof input === 'object' && input !== null && 'Detail' in input) {
+      const entry = input as { Detail: string; DetailType?: string }
+      if (entry.DetailType && entry.DetailType !== "inspection-updated") {
+        throw new Error(`Expected event type "inspection-updated", got ${entry.DetailType}`)
+      }
+      const parsed = JSON.parse(entry.Detail)
+      return envelopeSchema.parse(parsed)
+    }
+    // Handle direct envelope object
+    return envelopeSchema.parse(input)
   }
 
   export const build = (data: unknown) => {
@@ -717,7 +901,16 @@ export namespace ModelCreatedEvent {
     }))
   })
 
+  const envelopeSchema = z.object({
+    type: z.literal("model-created"),
+    data: schema,
+    timestamp: z.number(),
+    source: z.string(),
+    id: z.string(),
+  })
+
   export type ModelCreatedEventData = z.infer<typeof schema>
+  export type ModelCreatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
     const sanitized = schema.parse(data)
@@ -728,6 +921,20 @@ export namespace ModelCreatedEvent {
       source: "custom",
       id: randomUUID(),
     }
+  }
+
+  export const parse = (input: unknown): ModelCreatedEventEnvelope => {
+    // Handle EventBridge entry format (Detail is a JSON string)
+    if (typeof input === 'object' && input !== null && 'Detail' in input) {
+      const entry = input as { Detail: string; DetailType?: string }
+      if (entry.DetailType && entry.DetailType !== "model-created") {
+        throw new Error(`Expected event type "model-created", got ${entry.DetailType}`)
+      }
+      const parsed = JSON.parse(entry.Detail)
+      return envelopeSchema.parse(parsed)
+    }
+    // Handle direct envelope object
+    return envelopeSchema.parse(input)
   }
 
   export const build = (data: unknown) => {
@@ -773,7 +980,16 @@ export namespace ModelDeletedEvent {
     agencyId: z.string()
   })
 
+  const envelopeSchema = z.object({
+    type: z.literal("model-deleted"),
+    data: schema,
+    timestamp: z.number(),
+    source: z.string(),
+    id: z.string(),
+  })
+
   export type ModelDeletedEventData = z.infer<typeof schema>
+  export type ModelDeletedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
     const sanitized = schema.parse(data)
@@ -784,6 +1000,20 @@ export namespace ModelDeletedEvent {
       source: "custom",
       id: randomUUID(),
     }
+  }
+
+  export const parse = (input: unknown): ModelDeletedEventEnvelope => {
+    // Handle EventBridge entry format (Detail is a JSON string)
+    if (typeof input === 'object' && input !== null && 'Detail' in input) {
+      const entry = input as { Detail: string; DetailType?: string }
+      if (entry.DetailType && entry.DetailType !== "model-deleted") {
+        throw new Error(`Expected event type "model-deleted", got ${entry.DetailType}`)
+      }
+      const parsed = JSON.parse(entry.Detail)
+      return envelopeSchema.parse(parsed)
+    }
+    // Handle direct envelope object
+    return envelopeSchema.parse(input)
   }
 
   export const build = (data: unknown) => {
@@ -861,7 +1091,16 @@ export namespace ModelUpdatedEvent {
     }))
   })
 
+  const envelopeSchema = z.object({
+    type: z.literal("model-updated"),
+    data: schema,
+    timestamp: z.number(),
+    source: z.string(),
+    id: z.string(),
+  })
+
   export type ModelUpdatedEventData = z.infer<typeof schema>
+  export type ModelUpdatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
     const sanitized = schema.parse(data)
@@ -872,6 +1111,20 @@ export namespace ModelUpdatedEvent {
       source: "custom",
       id: randomUUID(),
     }
+  }
+
+  export const parse = (input: unknown): ModelUpdatedEventEnvelope => {
+    // Handle EventBridge entry format (Detail is a JSON string)
+    if (typeof input === 'object' && input !== null && 'Detail' in input) {
+      const entry = input as { Detail: string; DetailType?: string }
+      if (entry.DetailType && entry.DetailType !== "model-updated") {
+        throw new Error(`Expected event type "model-updated", got ${entry.DetailType}`)
+      }
+      const parsed = JSON.parse(entry.Detail)
+      return envelopeSchema.parse(parsed)
+    }
+    // Handle direct envelope object
+    return envelopeSchema.parse(input)
   }
 
   export const build = (data: unknown) => {
@@ -986,7 +1239,16 @@ export namespace PropertyCreatedEvent {
     }))
   })
 
+  const envelopeSchema = z.object({
+    type: z.literal("property-created"),
+    data: schema,
+    timestamp: z.number(),
+    source: z.string(),
+    id: z.string(),
+  })
+
   export type PropertyCreatedEventData = z.infer<typeof schema>
+  export type PropertyCreatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
     const sanitized = schema.parse(data)
@@ -997,6 +1259,20 @@ export namespace PropertyCreatedEvent {
       source: "custom",
       id: randomUUID(),
     }
+  }
+
+  export const parse = (input: unknown): PropertyCreatedEventEnvelope => {
+    // Handle EventBridge entry format (Detail is a JSON string)
+    if (typeof input === 'object' && input !== null && 'Detail' in input) {
+      const entry = input as { Detail: string; DetailType?: string }
+      if (entry.DetailType && entry.DetailType !== "property-created") {
+        throw new Error(`Expected event type "property-created", got ${entry.DetailType}`)
+      }
+      const parsed = JSON.parse(entry.Detail)
+      return envelopeSchema.parse(parsed)
+    }
+    // Handle direct envelope object
+    return envelopeSchema.parse(input)
   }
 
   export const build = (data: unknown) => {
@@ -1042,7 +1318,16 @@ export namespace PropertyDeletedEvent {
     agencyId: z.string()
   })
 
+  const envelopeSchema = z.object({
+    type: z.literal("property-deleted"),
+    data: schema,
+    timestamp: z.number(),
+    source: z.string(),
+    id: z.string(),
+  })
+
   export type PropertyDeletedEventData = z.infer<typeof schema>
+  export type PropertyDeletedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
     const sanitized = schema.parse(data)
@@ -1053,6 +1338,20 @@ export namespace PropertyDeletedEvent {
       source: "custom",
       id: randomUUID(),
     }
+  }
+
+  export const parse = (input: unknown): PropertyDeletedEventEnvelope => {
+    // Handle EventBridge entry format (Detail is a JSON string)
+    if (typeof input === 'object' && input !== null && 'Detail' in input) {
+      const entry = input as { Detail: string; DetailType?: string }
+      if (entry.DetailType && entry.DetailType !== "property-deleted") {
+        throw new Error(`Expected event type "property-deleted", got ${entry.DetailType}`)
+      }
+      const parsed = JSON.parse(entry.Detail)
+      return envelopeSchema.parse(parsed)
+    }
+    // Handle direct envelope object
+    return envelopeSchema.parse(input)
   }
 
   export const build = (data: unknown) => {
@@ -1167,7 +1466,16 @@ export namespace PropertyUpdatedEvent {
     }))
   })
 
+  const envelopeSchema = z.object({
+    type: z.literal("property-updated"),
+    data: schema,
+    timestamp: z.number(),
+    source: z.string(),
+    id: z.string(),
+  })
+
   export type PropertyUpdatedEventData = z.infer<typeof schema>
+  export type PropertyUpdatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
     const sanitized = schema.parse(data)
@@ -1178,6 +1486,20 @@ export namespace PropertyUpdatedEvent {
       source: "custom",
       id: randomUUID(),
     }
+  }
+
+  export const parse = (input: unknown): PropertyUpdatedEventEnvelope => {
+    // Handle EventBridge entry format (Detail is a JSON string)
+    if (typeof input === 'object' && input !== null && 'Detail' in input) {
+      const entry = input as { Detail: string; DetailType?: string }
+      if (entry.DetailType && entry.DetailType !== "property-updated") {
+        throw new Error(`Expected event type "property-updated", got ${entry.DetailType}`)
+      }
+      const parsed = JSON.parse(entry.Detail)
+      return envelopeSchema.parse(parsed)
+    }
+    // Handle direct envelope object
+    return envelopeSchema.parse(input)
   }
 
   export const build = (data: unknown) => {
@@ -1201,3 +1523,57 @@ export namespace PropertyUpdatedEvent {
 
 
 export const DEFINITIONS = [{"name":"agency-created","description":"Agency created event","attributes":[{"name":"agencyId","type":"string","description":"Agency ID (uuid)","required":true},{"name":"name","type":"string","description":"Agency name","required":true},{"name":"address","attributes":[{"name":"street","type":"string","description":"Agency street","required":true},{"name":"city","type":"string","description":"Agency city","required":true},{"name":"country","type":"string","description":"Agency country","required":true},{"name":"zipCode","type":"string","description":"Agency zip code","required":true},{"name":"number","type":"string","description":"Agency number of the street. String because it can countains 'bis', 'ter', 'quater', etc.","required":true}],"description":"Agency address","required":true},{"name":"contactMail","type":"string","description":"Agency contact mail","required":true},{"name":"contactPhone","type":"string","description":"Agency contact phone number"}],"camelName":"AgencyCreated"},{"name":"agency-deleted","description":"Agency deleted event","attributes":[{"name":"agencyId","type":"string","description":"Agency ID (uuid)","required":true}],"camelName":"AgencyDeleted"},{"name":"agency-updated","description":"Agency updated event","attributes":[{"name":"agencyId","type":"string","description":"Agency ID (uuid)","required":true},{"name":"name","type":"string","description":"Agency name","required":true},{"name":"address","attributes":[{"name":"street","type":"string","description":"Agency street","required":true},{"name":"city","type":"string","description":"Agency city","required":true},{"name":"country","type":"string","description":"Agency country","required":true},{"name":"zipCode","type":"string","description":"Agency zip code","required":true},{"name":"number","type":"string","description":"Agency number of the street. String because it can countains 'bis', 'ter', 'quater', etc.","required":true}],"description":"Agency address","required":true},{"name":"contactMail","type":"string","description":"Agency contact mail","required":true},{"name":"contactPhone","type":"string","description":"Agency contact phone number"}],"camelName":"AgencyUpdated"},{"name":"event-example","description":"Comprehensive example event demonstrating all supported attribute type patterns.","attributes":[{"name":"simpleString","type":"string","description":"A basic string value"},{"name":"simpleNumber","type":"number","description":"A basic number value","required":true},{"name":"simpleBoolean","type":"boolean","description":"A basic boolean value"},{"name":"objectAttribute","required":true,"attributes":[{"name":"id","type":"string","description":"Identifier inside an object","required":true},{"name":"count","type":"number","description":"Numeric field inside an object"},{"name":"nested","required":true,"attributes":[{"name":"enabled","type":"boolean","description":"Nested flag"},{"name":"label","type":"string","description":"Nested label","required":true}],"description":"A nested object attribute"}],"description":"An attribute whose value is an object with its own fields"},{"name":"stringArray","arrayOf":"string","description":"Array of strings"},{"name":"numberArray","arrayOf":"number","description":"Array of numbers"},{"name":"objectArray","arrayOf":{"description":"Value in array of objects","attributes":[{"name":"title","type":"string","description":"Item title"},{"name":"quantity","type":"number","description":"Item quantity"}]},"description":"Array of objects (each object item has title and quantity)"},{"name":"stringEnum","enum":["low","medium","high"],"description":"String enum represented as a union of literals"},{"name":"numberEnum","enum":[0,1,2],"description":"Number enum represented as a union of numeric literals"},{"name":"unionPrimitive","oneOf":["string","number"],"description":"Value can be a string or a number"},{"name":"unionWithObject","required":true,"oneOf":["string",{"attributes":[{"name":"code","type":"string","description":"Object variant code"},{"name":"details","required":true,"attributes":[{"name":"message","type":"string","description":"Detail message"},{"name":"severity","type":"number","description":"Detail severity"}],"description":"Nested details object"}],"description":"Object variant of the union"}],"description":"Union of a string or a structured object"},{"name":"unionArray","arrayOf":["string","number"],"description":"Array whose items can be string or number","required":true}],"camelName":"EventExample"},{"name":"inspection-created","description":"Inspection created event","attributes":[{"name":"inspectionId","type":"string","description":"Inspection ID (uuid)","required":true},{"name":"propertyId","type":"string","description":"Property ID (uuid)","required":true},{"name":"agencyId","type":"string","description":"Agency ID (uuid)","required":true},{"name":"inspectorId","type":"string","description":"Inspector ID (uuid)","required":true},{"name":"rooms","description":"Rooms","arrayOf":{"description":"Room","attributes":[{"name":"name","type":"string","description":"Room name","required":true},{"name":"description","type":"string","description":"Room description"},{"name":"elements","description":"Elements of the room","required":true,"arrayOf":{"description":"Element","attributes":[{"name":"name","type":"string","description":"Element name","required":true},{"name":"description","type":"string","description":"Element description"},{"name":"state","enum":["NEW","GOOD","BAD","BROKEN"],"description":"Element state","required":true},{"name":"images","description":"Images of the element","arrayOf":"string"}]}}]}},{"name":"date","type":"string","description":"Inspection date, in IsoString format: YYYY-MM-DDTHH:mm:ss.sssZ","required":true},{"name":"status","enum":["TO_DO","IN_PROGRESS","DONE","CANCELED"],"description":"Inspection status, on the created events it should always be TO_DO","required":true}],"camelName":"InspectionCreated"},{"name":"inspection-deleted","description":"Inspection deleted event","attributes":[{"name":"inspectionId","type":"string","description":"Inspection ID (uuid)","required":true},{"name":"propertyId","type":"string","description":"Property ID (uuid)","required":true},{"name":"agencyId","type":"string","description":"Agency ID (uuid)","required":true}],"camelName":"InspectionDeleted"},{"name":"inspection-pdf-generated","description":"Inspection PDF generated event","attributes":[{"name":"inspectionId","type":"string","description":"Inspection ID (uuid)","required":true},{"name":"propertyId","type":"string","description":"Property ID (uuid)","required":true},{"name":"agencyId","type":"string","description":"Agency ID (uuid)","required":true},{"name":"key","type":"string","description":"Inspection PDF key in the S3","required":true},{"name":"bucketName","type":"string","description":"S3 bucket name","required":true}],"camelName":"InspectionPdfGenerated"},{"name":"inspection-updated","description":"Inspection updated event","attributes":[{"name":"inspectionId","type":"string","description":"Inspection ID (uuid)","required":true},{"name":"propertyId","type":"string","description":"Property ID (uuid)","required":true},{"name":"agencyId","type":"string","description":"Agency ID (uuid)","required":true},{"name":"inspectorId","type":"string","description":"Inspector ID (uuid)","required":true},{"name":"rooms","description":"Rooms","arrayOf":{"description":"Room","attributes":[{"name":"name","type":"string","description":"Room name","required":true},{"name":"description","type":"string","description":"Room description"},{"name":"elements","description":"Elements of the room","required":true,"arrayOf":{"description":"Element","attributes":[{"name":"name","type":"string","description":"Element name","required":true},{"name":"description","type":"string","description":"Element description"},{"name":"state","enum":["NEW","GOOD","BAD","BROKEN"],"description":"Element state","required":true},{"name":"images","description":"Images of the element","arrayOf":"string"}]}}]}},{"name":"date","type":"string","description":"Inspection date, in IsoString format: YYYY-MM-DDTHH:mm:ss.sssZ","required":true},{"name":"status","enum":["TO_DO","IN_PROGRESS","DONE","CANCELED"],"description":"Inspection status","required":true}],"camelName":"InspectionUpdated"},{"name":"model-created","description":"Model created event","attributes":[{"name":"modelId","type":"string","description":"Model ID (uuid)","required":true},{"name":"agencyId","type":"string","description":"Agency ID (uuid)","required":true},{"name":"name","type":"string","description":"Model name","required":true},{"name":"rooms","description":"Rooms","required":true,"arrayOf":{"description":"Room","attributes":[{"name":"name","type":"string","description":"Room name","required":true},{"name":"description","type":"string","description":"Room description"},{"name":"area","type":"number","description":"Room area in square meters"},{"name":"elements","description":"Elements of the room","required":true,"arrayOf":{"description":"Element","attributes":[{"name":"name","type":"string","description":"Element name","required":true},{"name":"description","type":"string","description":"Element description"},{"name":"images","description":"Images of the element","arrayOf":"string"},{"name":"type","enum":["FURNITURE","STRUCTURAL","ELECTRICAL","PLUMBING","VENTILATION","SURFACE","OTHER"],"description":"Element type","required":true}]}}]}}],"camelName":"ModelCreated"},{"name":"model-deleted","description":"Model deleted event","attributes":[{"name":"modelId","type":"string","description":"Model ID (uuid)","required":true},{"name":"agencyId","type":"string","description":"Agency ID (uuid)","required":true}],"camelName":"ModelDeleted"},{"name":"model-updated","description":"Model updated event","attributes":[{"name":"modelId","type":"string","description":"Model ID (uuid)","required":true},{"name":"agencyId","type":"string","description":"Agency ID (uuid)","required":true},{"name":"name","type":"string","description":"Model name","required":true},{"name":"rooms","description":"Rooms","required":true,"arrayOf":{"description":"Room","attributes":[{"name":"name","type":"string","description":"Room name","required":true},{"name":"description","type":"string","description":"Room description"},{"name":"area","type":"number","description":"Room area in square meters"},{"name":"elements","description":"Elements of the room","required":true,"arrayOf":{"description":"Element","attributes":[{"name":"name","type":"string","description":"Element name","required":true},{"name":"description","type":"string","description":"Element description"},{"name":"images","description":"Images of the element","arrayOf":"string"},{"name":"type","enum":["FURNITURE","STRUCTURAL","ELECTRICAL","PLUMBING","VENTILATION","SURFACE","OTHER"],"description":"Element type","required":true}]}}]}}],"camelName":"ModelUpdated"},{"name":"property-created","description":"Property created event","attributes":[{"name":"propertyId","type":"string","description":"Property ID (uuid)","required":true},{"name":"agencyId","type":"string","description":"Agency ID (uuid)","required":true},{"name":"area","type":"number","description":"Property area in square meters"},{"name":"address","required":true,"attributes":[{"name":"street","type":"string","description":"Property street","required":true},{"name":"city","type":"string","description":"Property city","required":true},{"name":"country","type":"string","description":"Property country","required":true},{"name":"zipCode","type":"string","description":"Property zip code","required":true},{"name":"number","type":"string","description":"Property number of the street. String because it can countains 'bis', 'ter', 'quater', etc.","required":true}]},{"name":"owner","description":"Property owner","attributes":[{"name":"firstName","type":"string","description":"Property owner first name","required":true},{"name":"lastName","type":"string","description":"Property owner last name","required":true},{"name":"mail","type":"string","description":"Property contact mail"},{"name":"phoneNumber","type":"string","description":"Property contact phone"}]},{"name":"rooms","description":"Rooms","required":true,"arrayOf":{"description":"Room","attributes":[{"name":"name","type":"string","description":"Room name","required":true},{"name":"description","type":"string","description":"Room description"},{"name":"area","type":"number","description":"Room area in square meters"},{"name":"elements","description":"Elements of the room","required":true,"arrayOf":{"description":"Element","attributes":[{"name":"name","type":"string","description":"Element name","required":true},{"name":"description","type":"string","description":"Element description"},{"name":"images","description":"Images of the element","arrayOf":"string"},{"name":"type","enum":["FURNITURE","STRUCTURAL","ELECTRICAL","PLUMBING","VENTILATION","SURFACE","OTHER"],"description":"Element type","required":true}]}}]}}],"camelName":"PropertyCreated"},{"name":"property-deleted","description":"Property deleted event","attributes":[{"name":"propertyId","type":"string","description":"Property ID (uuid)","required":true},{"name":"agencyId","type":"string","description":"Agency ID (uuid)","required":true}],"camelName":"PropertyDeleted"},{"name":"property-updated","description":"Property updated event","attributes":[{"name":"propertyId","type":"string","description":"Property ID (uuid)","required":true},{"name":"agencyId","type":"string","description":"Agency ID (uuid)","required":true},{"name":"area","type":"number","description":"Property area in square meters"},{"name":"address","required":true,"attributes":[{"name":"street","type":"string","description":"Property street","required":true},{"name":"city","type":"string","description":"Property city","required":true},{"name":"country","type":"string","description":"Property country","required":true},{"name":"zipCode","type":"string","description":"Property zip code","required":true},{"name":"number","type":"string","description":"Property number of the street. String because it can countains 'bis', 'ter', 'quater', etc.","required":true}]},{"name":"owner","description":"Property owner","attributes":[{"name":"firstName","type":"string","description":"Property owner first name","required":true},{"name":"lastName","type":"string","description":"Property owner last name","required":true},{"name":"mail","type":"string","description":"Property contact mail"},{"name":"phoneNumber","type":"string","description":"Property contact phone"}]},{"name":"rooms","description":"Rooms","required":true,"arrayOf":{"description":"Room","attributes":[{"name":"name","type":"string","description":"Room name","required":true},{"name":"description","type":"string","description":"Room description"},{"name":"area","type":"number","description":"Room area in square meters"},{"name":"elements","description":"Elements of the room","required":true,"arrayOf":{"description":"Element","attributes":[{"name":"name","type":"string","description":"Element name","required":true},{"name":"description","type":"string","description":"Element description"},{"name":"images","description":"Images of the element","arrayOf":"string"},{"name":"type","enum":["FURNITURE","STRUCTURAL","ELECTRICAL","PLUMBING","VENTILATION","SURFACE","OTHER"],"description":"Element type","required":true}]}}]}}],"camelName":"PropertyUpdated"}] 
+
+/**
+ * Parse an EventBridge entry or envelope into a typed event.
+ * Supports both EventBridge entry format (with Detail as JSON string) and direct envelope objects.
+ */
+export function parseEvent(input: unknown): AgencyCreatedEvent.AgencyCreatedEventEnvelope | AgencyDeletedEvent.AgencyDeletedEventEnvelope | AgencyUpdatedEvent.AgencyUpdatedEventEnvelope | EventExampleEvent.EventExampleEventEnvelope | InspectionCreatedEvent.InspectionCreatedEventEnvelope | InspectionDeletedEvent.InspectionDeletedEventEnvelope | InspectionPdfGeneratedEvent.InspectionPdfGeneratedEventEnvelope | InspectionUpdatedEvent.InspectionUpdatedEventEnvelope | ModelCreatedEvent.ModelCreatedEventEnvelope | ModelDeletedEvent.ModelDeletedEventEnvelope | ModelUpdatedEvent.ModelUpdatedEventEnvelope | PropertyCreatedEvent.PropertyCreatedEventEnvelope | PropertyDeletedEvent.PropertyDeletedEventEnvelope | PropertyUpdatedEvent.PropertyUpdatedEventEnvelope {
+  // Handle EventBridge entry format (Detail is a JSON string)
+  let envelope: any
+  if (typeof input === "object" && input !== null && "Detail" in input) {
+    const entry = input as { Detail: string; DetailType?: string }
+    envelope = JSON.parse(entry.Detail)
+  } else {
+    envelope = input
+  }
+
+  if (!envelope || typeof envelope !== "object" || !("type" in envelope)) {
+    throw new Error("Invalid event: missing type field")
+  }
+
+  const eventType = envelope.type as string
+
+  switch (eventType) {
+    case "agency-created":
+      return AgencyCreatedEvent.parse(envelope)
+    case "agency-deleted":
+      return AgencyDeletedEvent.parse(envelope)
+    case "agency-updated":
+      return AgencyUpdatedEvent.parse(envelope)
+    case "event-example":
+      return EventExampleEvent.parse(envelope)
+    case "inspection-created":
+      return InspectionCreatedEvent.parse(envelope)
+    case "inspection-deleted":
+      return InspectionDeletedEvent.parse(envelope)
+    case "inspection-pdf-generated":
+      return InspectionPdfGeneratedEvent.parse(envelope)
+    case "inspection-updated":
+      return InspectionUpdatedEvent.parse(envelope)
+    case "model-created":
+      return ModelCreatedEvent.parse(envelope)
+    case "model-deleted":
+      return ModelDeletedEvent.parse(envelope)
+    case "model-updated":
+      return ModelUpdatedEvent.parse(envelope)
+    case "property-created":
+      return PropertyCreatedEvent.parse(envelope)
+    case "property-deleted":
+      return PropertyDeletedEvent.parse(envelope)
+    case "property-updated":
+      return PropertyUpdatedEvent.parse(envelope)
+    default:
+      throw new Error(`Unknown event type: ${eventType}. Supported types: ${["agency-created", "agency-deleted", "agency-updated", "event-example", "inspection-created", "inspection-deleted", "inspection-pdf-generated", "inspection-updated", "model-created", "model-deleted", "model-updated", "property-created", "property-deleted", "property-updated"].join(", ")}`)
+  }
+}

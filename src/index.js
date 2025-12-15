@@ -221,8 +221,18 @@ function createEvent(jsonType, camelNameEvent) {
   str += generateZodSchema(jsonType.attributes, 2)
   str += `\n  })\n\n`
 
+  // Envelope schema
+  str += `  const envelopeSchema = z.object({\n`
+  str += `    type: z.literal("${jsonType.name}"),\n`
+  str += `    data: schema,\n`
+  str += `    timestamp: z.number(),\n`
+  str += `    source: z.string(),\n`
+  str += `    id: z.string(),\n`
+  str += `  })\n\n`
+
   // Type inference from schema
-  str += `  export type ${camelNameEvent}Data = z.infer<typeof schema>\n\n`
+  str += `  export type ${camelNameEvent}Data = z.infer<typeof schema>\n`
+  str += `  export type ${camelNameEvent}Envelope = z.infer<typeof envelopeSchema>\n\n`
 
   str += `  export const buildData = (data: unknown) => {\n`
   str += `    const sanitized = schema.parse(data)\n`
@@ -233,6 +243,21 @@ function createEvent(jsonType, camelNameEvent) {
       source: "custom",
       id: randomUUID(),
     }\n`
+  str += `  }\n\n`
+
+  // Parse function for envelope
+  str += `  export const parse = (input: unknown): ${camelNameEvent}Envelope => {\n`
+  str += `    // Handle EventBridge entry format (Detail is a JSON string)\n`
+  str += `    if (typeof input === 'object' && input !== null && 'Detail' in input) {\n`
+  str += `      const entry = input as { Detail: string; DetailType?: string }\n`
+  str += `      if (entry.DetailType && entry.DetailType !== "${jsonType.name}") {\n`
+  str += `        throw new Error(\`Expected event type "${jsonType.name}", got \${entry.DetailType}\`)\n`
+  str += `      }\n`
+  str += `      const parsed = JSON.parse(entry.Detail)\n`
+  str += `      return envelopeSchema.parse(parsed)\n`
+  str += `    }\n`
+  str += `    // Handle direct envelope object\n`
+  str += `    return envelopeSchema.parse(input)\n`
   str += `  }\n\n`
 
   // Build AWS EventBridge PutEvents params using the existing envelope
@@ -271,3 +296,55 @@ function createEvent(jsonType, camelNameEvent) {
 
 const def = `\nexport const DEFINITIONS = ${JSON.stringify(eventTypes)} \n`
 fs.writeFileSync('generated/index.ts', def, { flag: 'a+' })
+
+// Generate global parse function
+let parseFunction = '\n'
+parseFunction += '/**\n'
+parseFunction +=
+  ' * Parse an EventBridge entry or envelope into a typed event.\n'
+parseFunction +=
+  ' * Supports both EventBridge entry format (with Detail as JSON string) and direct envelope objects.\n'
+parseFunction += ' */\n'
+parseFunction += 'export function parseEvent(input: unknown): '
+
+// Create union type of all envelopes
+const envelopeTypes = eventTypes.map(
+  (et) =>
+    `${kebabToCamelCase(et.name)}Event.${kebabToCamelCase(
+      et.name
+    )}EventEnvelope`
+)
+parseFunction += envelopeTypes.join(' | ') + ' {\n'
+parseFunction +=
+  '  // Handle EventBridge entry format (Detail is a JSON string)\n'
+parseFunction += '  let envelope: any\n'
+parseFunction +=
+  '  if (typeof input === "object" && input !== null && "Detail" in input) {\n'
+parseFunction +=
+  '    const entry = input as { Detail: string; DetailType?: string }\n'
+parseFunction += '    envelope = JSON.parse(entry.Detail)\n'
+parseFunction += '  } else {\n'
+parseFunction += '    envelope = input\n'
+parseFunction += '  }\n\n'
+parseFunction +=
+  '  if (!envelope || typeof envelope !== "object" || !("type" in envelope)) {\n'
+parseFunction += '    throw new Error("Invalid event: missing type field")\n'
+parseFunction += '  }\n\n'
+parseFunction += '  const eventType = envelope.type as string\n\n'
+
+// Generate switch/case for each event type
+parseFunction += '  switch (eventType) {\n'
+eventTypes.forEach((et) => {
+  const camelName = kebabToCamelCase(et.name) + 'Event'
+  parseFunction += `    case "${et.name}":\n`
+  parseFunction += `      return ${camelName}.parse(envelope)\n`
+})
+parseFunction += '    default:\n'
+parseFunction +=
+  '      throw new Error(`Unknown event type: ${eventType}. Supported types: ${[' +
+  eventTypes.map((et) => `"${et.name}"`).join(', ') +
+  '].join(", ")}`)\n'
+parseFunction += '  }\n'
+parseFunction += '}\n'
+
+fs.writeFileSync('generated/index.ts', parseFunction, { flag: 'a+' })

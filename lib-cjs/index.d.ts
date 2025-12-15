@@ -85,7 +85,99 @@ export declare namespace AgencyCreatedEvent {
         contactMail: string;
         contactPhone?: string | undefined;
     }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"agency-created">;
+        data: z.ZodObject<{
+            agencyId: z.ZodString;
+            name: z.ZodString;
+            address: z.ZodObject<{
+                street: z.ZodString;
+                city: z.ZodString;
+                country: z.ZodString;
+                zipCode: z.ZodString;
+                number: z.ZodString;
+            }, "strip", z.ZodTypeAny, {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            }, {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            }>;
+            contactMail: z.ZodString;
+            contactPhone: z.ZodOptional<z.ZodString>;
+        }, "strip", z.ZodTypeAny, {
+            agencyId: string;
+            name: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            contactMail: string;
+            contactPhone?: string | undefined;
+        }, {
+            agencyId: string;
+            name: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            contactMail: string;
+            contactPhone?: string | undefined;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "agency-created";
+        data: {
+            agencyId: string;
+            name: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            contactMail: string;
+            contactPhone?: string | undefined;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "agency-created";
+        data: {
+            agencyId: string;
+            name: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            contactMail: string;
+            contactPhone?: string | undefined;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
     export type AgencyCreatedEventData = z.infer<typeof schema>;
+    export type AgencyCreatedEventEnvelope = z.infer<typeof envelopeSchema>;
     export const buildData: (data: unknown) => {
         type: string;
         data: {
@@ -105,6 +197,7 @@ export declare namespace AgencyCreatedEvent {
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
+    export const parse: (input: unknown) => AgencyCreatedEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "agency-created";
     export {};
@@ -133,7 +226,37 @@ export declare namespace AgencyDeletedEvent {
     }, {
         agencyId: string;
     }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"agency-deleted">;
+        data: z.ZodObject<{
+            agencyId: z.ZodString;
+        }, "strip", z.ZodTypeAny, {
+            agencyId: string;
+        }, {
+            agencyId: string;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "agency-deleted";
+        data: {
+            agencyId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "agency-deleted";
+        data: {
+            agencyId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
     export type AgencyDeletedEventData = z.infer<typeof schema>;
+    export type AgencyDeletedEventEnvelope = z.infer<typeof envelopeSchema>;
     export const buildData: (data: unknown) => {
         type: string;
         data: {
@@ -143,6 +266,7 @@ export declare namespace AgencyDeletedEvent {
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
+    export const parse: (input: unknown) => AgencyDeletedEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "agency-deleted";
     export {};
@@ -232,7 +356,99 @@ export declare namespace AgencyUpdatedEvent {
         contactMail: string;
         contactPhone?: string | undefined;
     }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"agency-updated">;
+        data: z.ZodObject<{
+            agencyId: z.ZodString;
+            name: z.ZodString;
+            address: z.ZodObject<{
+                street: z.ZodString;
+                city: z.ZodString;
+                country: z.ZodString;
+                zipCode: z.ZodString;
+                number: z.ZodString;
+            }, "strip", z.ZodTypeAny, {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            }, {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            }>;
+            contactMail: z.ZodString;
+            contactPhone: z.ZodOptional<z.ZodString>;
+        }, "strip", z.ZodTypeAny, {
+            agencyId: string;
+            name: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            contactMail: string;
+            contactPhone?: string | undefined;
+        }, {
+            agencyId: string;
+            name: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            contactMail: string;
+            contactPhone?: string | undefined;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "agency-updated";
+        data: {
+            agencyId: string;
+            name: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            contactMail: string;
+            contactPhone?: string | undefined;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "agency-updated";
+        data: {
+            agencyId: string;
+            name: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            contactMail: string;
+            contactPhone?: string | undefined;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
     export type AgencyUpdatedEventData = z.infer<typeof schema>;
+    export type AgencyUpdatedEventEnvelope = z.infer<typeof envelopeSchema>;
     export const buildData: (data: unknown) => {
         type: string;
         data: {
@@ -252,6 +468,7 @@ export declare namespace AgencyUpdatedEvent {
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
+    export const parse: (input: unknown) => AgencyUpdatedEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "agency-updated";
     export {};
@@ -453,7 +670,216 @@ export declare namespace EventExampleEvent {
         numberEnum?: 0 | 1 | 2 | undefined;
         unionPrimitive?: string | number | undefined;
     }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"event-example">;
+        data: z.ZodObject<{
+            simpleString: z.ZodOptional<z.ZodString>;
+            simpleNumber: z.ZodNumber;
+            simpleBoolean: z.ZodOptional<z.ZodBoolean>;
+            objectAttribute: z.ZodObject<{
+                id: z.ZodString;
+                count: z.ZodOptional<z.ZodNumber>;
+                nested: z.ZodObject<{
+                    enabled: z.ZodOptional<z.ZodBoolean>;
+                    label: z.ZodString;
+                }, "strip", z.ZodTypeAny, {
+                    label: string;
+                    enabled?: boolean | undefined;
+                }, {
+                    label: string;
+                    enabled?: boolean | undefined;
+                }>;
+            }, "strip", z.ZodTypeAny, {
+                id: string;
+                nested: {
+                    label: string;
+                    enabled?: boolean | undefined;
+                };
+                count?: number | undefined;
+            }, {
+                id: string;
+                nested: {
+                    label: string;
+                    enabled?: boolean | undefined;
+                };
+                count?: number | undefined;
+            }>;
+            stringArray: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+            numberArray: z.ZodOptional<z.ZodArray<z.ZodNumber, "many">>;
+            objectArray: z.ZodOptional<z.ZodArray<z.ZodObject<{
+                title: z.ZodOptional<z.ZodString>;
+                quantity: z.ZodOptional<z.ZodNumber>;
+            }, "strip", z.ZodTypeAny, {
+                title?: string | undefined;
+                quantity?: number | undefined;
+            }, {
+                title?: string | undefined;
+                quantity?: number | undefined;
+            }>, "many">>;
+            stringEnum: z.ZodOptional<z.ZodEnum<["low", "medium", "high"]>>;
+            numberEnum: z.ZodOptional<z.ZodUnion<[z.ZodLiteral<0>, z.ZodLiteral<1>, z.ZodLiteral<2>]>>;
+            unionPrimitive: z.ZodOptional<z.ZodUnion<[z.ZodString, z.ZodNumber]>>;
+            unionWithObject: z.ZodUnion<[z.ZodString, z.ZodObject<{
+                code: z.ZodOptional<z.ZodString>;
+                details: z.ZodObject<{
+                    message: z.ZodOptional<z.ZodString>;
+                    severity: z.ZodOptional<z.ZodNumber>;
+                }, "strip", z.ZodTypeAny, {
+                    message?: string | undefined;
+                    severity?: number | undefined;
+                }, {
+                    message?: string | undefined;
+                    severity?: number | undefined;
+                }>;
+            }, "strip", z.ZodTypeAny, {
+                details: {
+                    message?: string | undefined;
+                    severity?: number | undefined;
+                };
+                code?: string | undefined;
+            }, {
+                details: {
+                    message?: string | undefined;
+                    severity?: number | undefined;
+                };
+                code?: string | undefined;
+            }>]>;
+            unionArray: z.ZodArray<z.ZodUnion<[z.ZodString, z.ZodNumber]>, "many">;
+        }, "strip", z.ZodTypeAny, {
+            simpleNumber: number;
+            objectAttribute: {
+                id: string;
+                nested: {
+                    label: string;
+                    enabled?: boolean | undefined;
+                };
+                count?: number | undefined;
+            };
+            unionWithObject: string | {
+                details: {
+                    message?: string | undefined;
+                    severity?: number | undefined;
+                };
+                code?: string | undefined;
+            };
+            unionArray: (string | number)[];
+            simpleString?: string | undefined;
+            simpleBoolean?: boolean | undefined;
+            stringArray?: string[] | undefined;
+            numberArray?: number[] | undefined;
+            objectArray?: {
+                title?: string | undefined;
+                quantity?: number | undefined;
+            }[] | undefined;
+            stringEnum?: "low" | "medium" | "high" | undefined;
+            numberEnum?: 0 | 1 | 2 | undefined;
+            unionPrimitive?: string | number | undefined;
+        }, {
+            simpleNumber: number;
+            objectAttribute: {
+                id: string;
+                nested: {
+                    label: string;
+                    enabled?: boolean | undefined;
+                };
+                count?: number | undefined;
+            };
+            unionWithObject: string | {
+                details: {
+                    message?: string | undefined;
+                    severity?: number | undefined;
+                };
+                code?: string | undefined;
+            };
+            unionArray: (string | number)[];
+            simpleString?: string | undefined;
+            simpleBoolean?: boolean | undefined;
+            stringArray?: string[] | undefined;
+            numberArray?: number[] | undefined;
+            objectArray?: {
+                title?: string | undefined;
+                quantity?: number | undefined;
+            }[] | undefined;
+            stringEnum?: "low" | "medium" | "high" | undefined;
+            numberEnum?: 0 | 1 | 2 | undefined;
+            unionPrimitive?: string | number | undefined;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "event-example";
+        data: {
+            simpleNumber: number;
+            objectAttribute: {
+                id: string;
+                nested: {
+                    label: string;
+                    enabled?: boolean | undefined;
+                };
+                count?: number | undefined;
+            };
+            unionWithObject: string | {
+                details: {
+                    message?: string | undefined;
+                    severity?: number | undefined;
+                };
+                code?: string | undefined;
+            };
+            unionArray: (string | number)[];
+            simpleString?: string | undefined;
+            simpleBoolean?: boolean | undefined;
+            stringArray?: string[] | undefined;
+            numberArray?: number[] | undefined;
+            objectArray?: {
+                title?: string | undefined;
+                quantity?: number | undefined;
+            }[] | undefined;
+            stringEnum?: "low" | "medium" | "high" | undefined;
+            numberEnum?: 0 | 1 | 2 | undefined;
+            unionPrimitive?: string | number | undefined;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "event-example";
+        data: {
+            simpleNumber: number;
+            objectAttribute: {
+                id: string;
+                nested: {
+                    label: string;
+                    enabled?: boolean | undefined;
+                };
+                count?: number | undefined;
+            };
+            unionWithObject: string | {
+                details: {
+                    message?: string | undefined;
+                    severity?: number | undefined;
+                };
+                code?: string | undefined;
+            };
+            unionArray: (string | number)[];
+            simpleString?: string | undefined;
+            simpleBoolean?: boolean | undefined;
+            stringArray?: string[] | undefined;
+            numberArray?: number[] | undefined;
+            objectArray?: {
+                title?: string | undefined;
+                quantity?: number | undefined;
+            }[] | undefined;
+            stringEnum?: "low" | "medium" | "high" | undefined;
+            numberEnum?: 0 | 1 | 2 | undefined;
+            unionPrimitive?: string | number | undefined;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
     export type EventExampleEventData = z.infer<typeof schema>;
+    export type EventExampleEventEnvelope = z.infer<typeof envelopeSchema>;
     export const buildData: (data: unknown) => {
         type: string;
         data: {
@@ -490,6 +916,7 @@ export declare namespace EventExampleEvent {
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
+    export const parse: (input: unknown) => EventExampleEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "event-example";
     export {};
@@ -617,7 +1044,140 @@ export declare namespace InspectionCreatedEvent {
             description?: string | undefined;
         }[] | undefined;
     }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"inspection-created">;
+        data: z.ZodObject<{
+            inspectionId: z.ZodString;
+            propertyId: z.ZodString;
+            agencyId: z.ZodString;
+            inspectorId: z.ZodString;
+            rooms: z.ZodOptional<z.ZodArray<z.ZodObject<{
+                name: z.ZodString;
+                description: z.ZodOptional<z.ZodString>;
+                elements: z.ZodArray<z.ZodObject<{
+                    name: z.ZodString;
+                    description: z.ZodOptional<z.ZodString>;
+                    state: z.ZodEnum<["NEW", "GOOD", "BAD", "BROKEN"]>;
+                    images: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+                }, "strip", z.ZodTypeAny, {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }, {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }>, "many">;
+            }, "strip", z.ZodTypeAny, {
+                name: string;
+                elements: {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+            }, {
+                name: string;
+                elements: {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+            }>, "many">>;
+            date: z.ZodString;
+            status: z.ZodEnum<["TO_DO", "IN_PROGRESS", "DONE", "CANCELED"]>;
+        }, "strip", z.ZodTypeAny, {
+            agencyId: string;
+            status: "TO_DO" | "IN_PROGRESS" | "DONE" | "CANCELED";
+            date: string;
+            inspectionId: string;
+            propertyId: string;
+            inspectorId: string;
+            rooms?: {
+                name: string;
+                elements: {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+            }[] | undefined;
+        }, {
+            agencyId: string;
+            status: "TO_DO" | "IN_PROGRESS" | "DONE" | "CANCELED";
+            date: string;
+            inspectionId: string;
+            propertyId: string;
+            inspectorId: string;
+            rooms?: {
+                name: string;
+                elements: {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+            }[] | undefined;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "inspection-created";
+        data: {
+            agencyId: string;
+            status: "TO_DO" | "IN_PROGRESS" | "DONE" | "CANCELED";
+            date: string;
+            inspectionId: string;
+            propertyId: string;
+            inspectorId: string;
+            rooms?: {
+                name: string;
+                elements: {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+            }[] | undefined;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "inspection-created";
+        data: {
+            agencyId: string;
+            status: "TO_DO" | "IN_PROGRESS" | "DONE" | "CANCELED";
+            date: string;
+            inspectionId: string;
+            propertyId: string;
+            inspectorId: string;
+            rooms?: {
+                name: string;
+                elements: {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+            }[] | undefined;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
     export type InspectionCreatedEventData = z.infer<typeof schema>;
+    export type InspectionCreatedEventEnvelope = z.infer<typeof envelopeSchema>;
     export const buildData: (data: unknown) => {
         type: string;
         data: {
@@ -642,6 +1202,7 @@ export declare namespace InspectionCreatedEvent {
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
+    export const parse: (input: unknown) => InspectionCreatedEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "inspection-created";
     export {};
@@ -680,7 +1241,47 @@ export declare namespace InspectionDeletedEvent {
         inspectionId: string;
         propertyId: string;
     }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"inspection-deleted">;
+        data: z.ZodObject<{
+            inspectionId: z.ZodString;
+            propertyId: z.ZodString;
+            agencyId: z.ZodString;
+        }, "strip", z.ZodTypeAny, {
+            agencyId: string;
+            inspectionId: string;
+            propertyId: string;
+        }, {
+            agencyId: string;
+            inspectionId: string;
+            propertyId: string;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "inspection-deleted";
+        data: {
+            agencyId: string;
+            inspectionId: string;
+            propertyId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "inspection-deleted";
+        data: {
+            agencyId: string;
+            inspectionId: string;
+            propertyId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
     export type InspectionDeletedEventData = z.infer<typeof schema>;
+    export type InspectionDeletedEventEnvelope = z.infer<typeof envelopeSchema>;
     export const buildData: (data: unknown) => {
         type: string;
         data: {
@@ -692,6 +1293,7 @@ export declare namespace InspectionDeletedEvent {
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
+    export const parse: (input: unknown) => InspectionDeletedEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "inspection-deleted";
     export {};
@@ -740,7 +1342,57 @@ export declare namespace InspectionPdfGeneratedEvent {
         key: string;
         bucketName: string;
     }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"inspection-pdf-generated">;
+        data: z.ZodObject<{
+            inspectionId: z.ZodString;
+            propertyId: z.ZodString;
+            agencyId: z.ZodString;
+            key: z.ZodString;
+            bucketName: z.ZodString;
+        }, "strip", z.ZodTypeAny, {
+            agencyId: string;
+            inspectionId: string;
+            propertyId: string;
+            key: string;
+            bucketName: string;
+        }, {
+            agencyId: string;
+            inspectionId: string;
+            propertyId: string;
+            key: string;
+            bucketName: string;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "inspection-pdf-generated";
+        data: {
+            agencyId: string;
+            inspectionId: string;
+            propertyId: string;
+            key: string;
+            bucketName: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "inspection-pdf-generated";
+        data: {
+            agencyId: string;
+            inspectionId: string;
+            propertyId: string;
+            key: string;
+            bucketName: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
     export type InspectionPdfGeneratedEventData = z.infer<typeof schema>;
+    export type InspectionPdfGeneratedEventEnvelope = z.infer<typeof envelopeSchema>;
     export const buildData: (data: unknown) => {
         type: string;
         data: {
@@ -754,6 +1406,7 @@ export declare namespace InspectionPdfGeneratedEvent {
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
+    export const parse: (input: unknown) => InspectionPdfGeneratedEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "inspection-pdf-generated";
     export {};
@@ -881,7 +1534,140 @@ export declare namespace InspectionUpdatedEvent {
             description?: string | undefined;
         }[] | undefined;
     }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"inspection-updated">;
+        data: z.ZodObject<{
+            inspectionId: z.ZodString;
+            propertyId: z.ZodString;
+            agencyId: z.ZodString;
+            inspectorId: z.ZodString;
+            rooms: z.ZodOptional<z.ZodArray<z.ZodObject<{
+                name: z.ZodString;
+                description: z.ZodOptional<z.ZodString>;
+                elements: z.ZodArray<z.ZodObject<{
+                    name: z.ZodString;
+                    description: z.ZodOptional<z.ZodString>;
+                    state: z.ZodEnum<["NEW", "GOOD", "BAD", "BROKEN"]>;
+                    images: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+                }, "strip", z.ZodTypeAny, {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }, {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }>, "many">;
+            }, "strip", z.ZodTypeAny, {
+                name: string;
+                elements: {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+            }, {
+                name: string;
+                elements: {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+            }>, "many">>;
+            date: z.ZodString;
+            status: z.ZodEnum<["TO_DO", "IN_PROGRESS", "DONE", "CANCELED"]>;
+        }, "strip", z.ZodTypeAny, {
+            agencyId: string;
+            status: "TO_DO" | "IN_PROGRESS" | "DONE" | "CANCELED";
+            date: string;
+            inspectionId: string;
+            propertyId: string;
+            inspectorId: string;
+            rooms?: {
+                name: string;
+                elements: {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+            }[] | undefined;
+        }, {
+            agencyId: string;
+            status: "TO_DO" | "IN_PROGRESS" | "DONE" | "CANCELED";
+            date: string;
+            inspectionId: string;
+            propertyId: string;
+            inspectorId: string;
+            rooms?: {
+                name: string;
+                elements: {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+            }[] | undefined;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "inspection-updated";
+        data: {
+            agencyId: string;
+            status: "TO_DO" | "IN_PROGRESS" | "DONE" | "CANCELED";
+            date: string;
+            inspectionId: string;
+            propertyId: string;
+            inspectorId: string;
+            rooms?: {
+                name: string;
+                elements: {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+            }[] | undefined;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "inspection-updated";
+        data: {
+            agencyId: string;
+            status: "TO_DO" | "IN_PROGRESS" | "DONE" | "CANCELED";
+            date: string;
+            inspectionId: string;
+            propertyId: string;
+            inspectorId: string;
+            rooms?: {
+                name: string;
+                elements: {
+                    name: string;
+                    state: "NEW" | "GOOD" | "BAD" | "BROKEN";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+            }[] | undefined;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
     export type InspectionUpdatedEventData = z.infer<typeof schema>;
+    export type InspectionUpdatedEventEnvelope = z.infer<typeof envelopeSchema>;
     export const buildData: (data: unknown) => {
         type: string;
         data: {
@@ -906,6 +1692,7 @@ export declare namespace InspectionUpdatedEvent {
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
+    export const parse: (input: unknown) => InspectionUpdatedEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "inspection-updated";
     export {};
@@ -1025,7 +1812,132 @@ export declare namespace ModelCreatedEvent {
         }[];
         modelId: string;
     }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"model-created">;
+        data: z.ZodObject<{
+            modelId: z.ZodString;
+            agencyId: z.ZodString;
+            name: z.ZodString;
+            rooms: z.ZodArray<z.ZodObject<{
+                name: z.ZodString;
+                description: z.ZodOptional<z.ZodString>;
+                area: z.ZodOptional<z.ZodNumber>;
+                elements: z.ZodArray<z.ZodObject<{
+                    name: z.ZodString;
+                    description: z.ZodOptional<z.ZodString>;
+                    images: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+                    type: z.ZodEnum<["FURNITURE", "STRUCTURAL", "ELECTRICAL", "PLUMBING", "VENTILATION", "SURFACE", "OTHER"]>;
+                }, "strip", z.ZodTypeAny, {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }, {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }>, "many">;
+            }, "strip", z.ZodTypeAny, {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }, {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }>, "many">;
+        }, "strip", z.ZodTypeAny, {
+            agencyId: string;
+            name: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            modelId: string;
+        }, {
+            agencyId: string;
+            name: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            modelId: string;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "model-created";
+        data: {
+            agencyId: string;
+            name: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            modelId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "model-created";
+        data: {
+            agencyId: string;
+            name: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            modelId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
     export type ModelCreatedEventData = z.infer<typeof schema>;
+    export type ModelCreatedEventEnvelope = z.infer<typeof envelopeSchema>;
     export const buildData: (data: unknown) => {
         type: string;
         data: {
@@ -1048,6 +1960,7 @@ export declare namespace ModelCreatedEvent {
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
+    export const parse: (input: unknown) => ModelCreatedEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "model-created";
     export {};
@@ -1081,7 +1994,42 @@ export declare namespace ModelDeletedEvent {
         agencyId: string;
         modelId: string;
     }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"model-deleted">;
+        data: z.ZodObject<{
+            modelId: z.ZodString;
+            agencyId: z.ZodString;
+        }, "strip", z.ZodTypeAny, {
+            agencyId: string;
+            modelId: string;
+        }, {
+            agencyId: string;
+            modelId: string;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "model-deleted";
+        data: {
+            agencyId: string;
+            modelId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "model-deleted";
+        data: {
+            agencyId: string;
+            modelId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
     export type ModelDeletedEventData = z.infer<typeof schema>;
+    export type ModelDeletedEventEnvelope = z.infer<typeof envelopeSchema>;
     export const buildData: (data: unknown) => {
         type: string;
         data: {
@@ -1092,6 +2040,7 @@ export declare namespace ModelDeletedEvent {
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
+    export const parse: (input: unknown) => ModelDeletedEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "model-deleted";
     export {};
@@ -1211,7 +2160,132 @@ export declare namespace ModelUpdatedEvent {
         }[];
         modelId: string;
     }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"model-updated">;
+        data: z.ZodObject<{
+            modelId: z.ZodString;
+            agencyId: z.ZodString;
+            name: z.ZodString;
+            rooms: z.ZodArray<z.ZodObject<{
+                name: z.ZodString;
+                description: z.ZodOptional<z.ZodString>;
+                area: z.ZodOptional<z.ZodNumber>;
+                elements: z.ZodArray<z.ZodObject<{
+                    name: z.ZodString;
+                    description: z.ZodOptional<z.ZodString>;
+                    images: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+                    type: z.ZodEnum<["FURNITURE", "STRUCTURAL", "ELECTRICAL", "PLUMBING", "VENTILATION", "SURFACE", "OTHER"]>;
+                }, "strip", z.ZodTypeAny, {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }, {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }>, "many">;
+            }, "strip", z.ZodTypeAny, {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }, {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }>, "many">;
+        }, "strip", z.ZodTypeAny, {
+            agencyId: string;
+            name: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            modelId: string;
+        }, {
+            agencyId: string;
+            name: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            modelId: string;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "model-updated";
+        data: {
+            agencyId: string;
+            name: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            modelId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "model-updated";
+        data: {
+            agencyId: string;
+            name: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            modelId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
     export type ModelUpdatedEventData = z.infer<typeof schema>;
+    export type ModelUpdatedEventEnvelope = z.infer<typeof envelopeSchema>;
     export const buildData: (data: unknown) => {
         type: string;
         data: {
@@ -1234,6 +2308,7 @@ export declare namespace ModelUpdatedEvent {
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
+    export const parse: (input: unknown) => ModelUpdatedEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "model-updated";
     export {};
@@ -1438,7 +2513,219 @@ export declare namespace PropertyCreatedEvent {
             phoneNumber?: string | undefined;
         } | undefined;
     }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"property-created">;
+        data: z.ZodObject<{
+            propertyId: z.ZodString;
+            agencyId: z.ZodString;
+            area: z.ZodOptional<z.ZodNumber>;
+            address: z.ZodObject<{
+                street: z.ZodString;
+                city: z.ZodString;
+                country: z.ZodString;
+                zipCode: z.ZodString;
+                number: z.ZodString;
+            }, "strip", z.ZodTypeAny, {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            }, {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            }>;
+            owner: z.ZodOptional<z.ZodObject<{
+                firstName: z.ZodString;
+                lastName: z.ZodString;
+                mail: z.ZodOptional<z.ZodString>;
+                phoneNumber: z.ZodOptional<z.ZodString>;
+            }, "strip", z.ZodTypeAny, {
+                firstName: string;
+                lastName: string;
+                mail?: string | undefined;
+                phoneNumber?: string | undefined;
+            }, {
+                firstName: string;
+                lastName: string;
+                mail?: string | undefined;
+                phoneNumber?: string | undefined;
+            }>>;
+            rooms: z.ZodArray<z.ZodObject<{
+                name: z.ZodString;
+                description: z.ZodOptional<z.ZodString>;
+                area: z.ZodOptional<z.ZodNumber>;
+                elements: z.ZodArray<z.ZodObject<{
+                    name: z.ZodString;
+                    description: z.ZodOptional<z.ZodString>;
+                    images: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+                    type: z.ZodEnum<["FURNITURE", "STRUCTURAL", "ELECTRICAL", "PLUMBING", "VENTILATION", "SURFACE", "OTHER"]>;
+                }, "strip", z.ZodTypeAny, {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }, {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }>, "many">;
+            }, "strip", z.ZodTypeAny, {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }, {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }>, "many">;
+        }, "strip", z.ZodTypeAny, {
+            agencyId: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            propertyId: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            area?: number | undefined;
+            owner?: {
+                firstName: string;
+                lastName: string;
+                mail?: string | undefined;
+                phoneNumber?: string | undefined;
+            } | undefined;
+        }, {
+            agencyId: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            propertyId: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            area?: number | undefined;
+            owner?: {
+                firstName: string;
+                lastName: string;
+                mail?: string | undefined;
+                phoneNumber?: string | undefined;
+            } | undefined;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "property-created";
+        data: {
+            agencyId: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            propertyId: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            area?: number | undefined;
+            owner?: {
+                firstName: string;
+                lastName: string;
+                mail?: string | undefined;
+                phoneNumber?: string | undefined;
+            } | undefined;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "property-created";
+        data: {
+            agencyId: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            propertyId: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            area?: number | undefined;
+            owner?: {
+                firstName: string;
+                lastName: string;
+                mail?: string | undefined;
+                phoneNumber?: string | undefined;
+            } | undefined;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
     export type PropertyCreatedEventData = z.infer<typeof schema>;
+    export type PropertyCreatedEventEnvelope = z.infer<typeof envelopeSchema>;
     export const buildData: (data: unknown) => {
         type: string;
         data: {
@@ -1474,6 +2761,7 @@ export declare namespace PropertyCreatedEvent {
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
+    export const parse: (input: unknown) => PropertyCreatedEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "property-created";
     export {};
@@ -1507,7 +2795,42 @@ export declare namespace PropertyDeletedEvent {
         agencyId: string;
         propertyId: string;
     }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"property-deleted">;
+        data: z.ZodObject<{
+            propertyId: z.ZodString;
+            agencyId: z.ZodString;
+        }, "strip", z.ZodTypeAny, {
+            agencyId: string;
+            propertyId: string;
+        }, {
+            agencyId: string;
+            propertyId: string;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "property-deleted";
+        data: {
+            agencyId: string;
+            propertyId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "property-deleted";
+        data: {
+            agencyId: string;
+            propertyId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
     export type PropertyDeletedEventData = z.infer<typeof schema>;
+    export type PropertyDeletedEventEnvelope = z.infer<typeof envelopeSchema>;
     export const buildData: (data: unknown) => {
         type: string;
         data: {
@@ -1518,6 +2841,7 @@ export declare namespace PropertyDeletedEvent {
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
+    export const parse: (input: unknown) => PropertyDeletedEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "property-deleted";
     export {};
@@ -1722,7 +3046,219 @@ export declare namespace PropertyUpdatedEvent {
             phoneNumber?: string | undefined;
         } | undefined;
     }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"property-updated">;
+        data: z.ZodObject<{
+            propertyId: z.ZodString;
+            agencyId: z.ZodString;
+            area: z.ZodOptional<z.ZodNumber>;
+            address: z.ZodObject<{
+                street: z.ZodString;
+                city: z.ZodString;
+                country: z.ZodString;
+                zipCode: z.ZodString;
+                number: z.ZodString;
+            }, "strip", z.ZodTypeAny, {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            }, {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            }>;
+            owner: z.ZodOptional<z.ZodObject<{
+                firstName: z.ZodString;
+                lastName: z.ZodString;
+                mail: z.ZodOptional<z.ZodString>;
+                phoneNumber: z.ZodOptional<z.ZodString>;
+            }, "strip", z.ZodTypeAny, {
+                firstName: string;
+                lastName: string;
+                mail?: string | undefined;
+                phoneNumber?: string | undefined;
+            }, {
+                firstName: string;
+                lastName: string;
+                mail?: string | undefined;
+                phoneNumber?: string | undefined;
+            }>>;
+            rooms: z.ZodArray<z.ZodObject<{
+                name: z.ZodString;
+                description: z.ZodOptional<z.ZodString>;
+                area: z.ZodOptional<z.ZodNumber>;
+                elements: z.ZodArray<z.ZodObject<{
+                    name: z.ZodString;
+                    description: z.ZodOptional<z.ZodString>;
+                    images: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+                    type: z.ZodEnum<["FURNITURE", "STRUCTURAL", "ELECTRICAL", "PLUMBING", "VENTILATION", "SURFACE", "OTHER"]>;
+                }, "strip", z.ZodTypeAny, {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }, {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }>, "many">;
+            }, "strip", z.ZodTypeAny, {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }, {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }>, "many">;
+        }, "strip", z.ZodTypeAny, {
+            agencyId: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            propertyId: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            area?: number | undefined;
+            owner?: {
+                firstName: string;
+                lastName: string;
+                mail?: string | undefined;
+                phoneNumber?: string | undefined;
+            } | undefined;
+        }, {
+            agencyId: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            propertyId: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            area?: number | undefined;
+            owner?: {
+                firstName: string;
+                lastName: string;
+                mail?: string | undefined;
+                phoneNumber?: string | undefined;
+            } | undefined;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "property-updated";
+        data: {
+            agencyId: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            propertyId: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            area?: number | undefined;
+            owner?: {
+                firstName: string;
+                lastName: string;
+                mail?: string | undefined;
+                phoneNumber?: string | undefined;
+            } | undefined;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "property-updated";
+        data: {
+            agencyId: string;
+            address: {
+                number: string;
+                street: string;
+                city: string;
+                country: string;
+                zipCode: string;
+            };
+            propertyId: string;
+            rooms: {
+                name: string;
+                elements: {
+                    name: string;
+                    type: "FURNITURE" | "STRUCTURAL" | "ELECTRICAL" | "PLUMBING" | "VENTILATION" | "SURFACE" | "OTHER";
+                    description?: string | undefined;
+                    images?: string[] | undefined;
+                }[];
+                description?: string | undefined;
+                area?: number | undefined;
+            }[];
+            area?: number | undefined;
+            owner?: {
+                firstName: string;
+                lastName: string;
+                mail?: string | undefined;
+                phoneNumber?: string | undefined;
+            } | undefined;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
     export type PropertyUpdatedEventData = z.infer<typeof schema>;
+    export type PropertyUpdatedEventEnvelope = z.infer<typeof envelopeSchema>;
     export const buildData: (data: unknown) => {
         type: string;
         data: {
@@ -1758,6 +3294,7 @@ export declare namespace PropertyUpdatedEvent {
         source: string;
         id: `${string}-${string}-${string}-${string}-${string}`;
     };
+    export const parse: (input: unknown) => PropertyUpdatedEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "property-updated";
     export {};
@@ -2097,3 +3634,8 @@ export declare const DEFINITIONS: ({
     })[];
     camelName: string;
 })[];
+/**
+ * Parse an EventBridge entry or envelope into a typed event.
+ * Supports both EventBridge entry format (with Detail as JSON string) and direct envelope objects.
+ */
+export declare function parseEvent(input: unknown): AgencyCreatedEvent.AgencyCreatedEventEnvelope | AgencyDeletedEvent.AgencyDeletedEventEnvelope | AgencyUpdatedEvent.AgencyUpdatedEventEnvelope | EventExampleEvent.EventExampleEventEnvelope | InspectionCreatedEvent.InspectionCreatedEventEnvelope | InspectionDeletedEvent.InspectionDeletedEventEnvelope | InspectionPdfGeneratedEvent.InspectionPdfGeneratedEventEnvelope | InspectionUpdatedEvent.InspectionUpdatedEventEnvelope | ModelCreatedEvent.ModelCreatedEventEnvelope | ModelDeletedEvent.ModelDeletedEventEnvelope | ModelUpdatedEvent.ModelUpdatedEventEnvelope | PropertyCreatedEvent.PropertyCreatedEventEnvelope | PropertyDeletedEvent.PropertyDeletedEventEnvelope | PropertyUpdatedEvent.PropertyUpdatedEventEnvelope;
