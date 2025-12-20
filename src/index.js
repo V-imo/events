@@ -235,12 +235,13 @@ function createEvent(jsonType, camelNameEvent) {
   str += `  export type ${camelNameEvent}Envelope = z.infer<typeof envelopeSchema>\n\n`
 
   str += `  export const buildData = (data: unknown) => {\n`
+  str += `    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be provided")\n`
   str += `    const sanitized = schema.parse(data)\n`
   str += `    return {
       type: "${jsonType.name}",
       data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
-      source: "custom",
+      source: process.env.SERVICE,
       id: randomUUID(),
     }\n`
   str += `  }\n\n`

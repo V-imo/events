@@ -64,12 +64,13 @@ export namespace AgencyCreatedEvent {
   export type AgencyCreatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be provided")
     const sanitized = schema.parse(data)
     return {
       type: "agency-created",
       data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
-      source: "custom",
+      source: process.env.SERVICE,
       id: randomUUID(),
     }
   }
@@ -140,12 +141,13 @@ export namespace AgencyDeletedEvent {
   export type AgencyDeletedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be provided")
     const sanitized = schema.parse(data)
     return {
       type: "agency-deleted",
       data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
-      source: "custom",
+      source: process.env.SERVICE,
       id: randomUUID(),
     }
   }
@@ -245,12 +247,13 @@ export namespace AgencyUpdatedEvent {
   export type AgencyUpdatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be provided")
     const sanitized = schema.parse(data)
     return {
       type: "agency-updated",
       data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
-      source: "custom",
+      source: process.env.SERVICE,
       id: randomUUID(),
     }
   }
@@ -398,12 +401,13 @@ export namespace EventExampleEvent {
   export type EventExampleEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be provided")
     const sanitized = schema.parse(data)
     return {
       type: "event-example",
       data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
-      source: "custom",
+      source: process.env.SERVICE,
       id: randomUUID(),
     }
   }
@@ -515,12 +519,13 @@ export namespace InspectionCreatedEvent {
   export type InspectionCreatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be provided")
     const sanitized = schema.parse(data)
     return {
       type: "inspection-created",
       data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
-      source: "custom",
+      source: process.env.SERVICE,
       id: randomUUID(),
     }
   }
@@ -597,12 +602,13 @@ export namespace InspectionDeletedEvent {
   export type InspectionDeletedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be provided")
     const sanitized = schema.parse(data)
     return {
       type: "inspection-deleted",
       data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
-      source: "custom",
+      source: process.env.SERVICE,
       id: randomUUID(),
     }
   }
@@ -685,12 +691,13 @@ export namespace InspectionPdfGeneratedEvent {
   export type InspectionPdfGeneratedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be provided")
     const sanitized = schema.parse(data)
     return {
       type: "inspection-pdf-generated",
       data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
-      source: "custom",
+      source: process.env.SERVICE,
       id: randomUUID(),
     }
   }
@@ -802,12 +809,13 @@ export namespace InspectionUpdatedEvent {
   export type InspectionUpdatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be provided")
     const sanitized = schema.parse(data)
     return {
       type: "inspection-updated",
       data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
-      source: "custom",
+      source: process.env.SERVICE,
       id: randomUUID(),
     }
   }
@@ -913,12 +921,13 @@ export namespace ModelCreatedEvent {
   export type ModelCreatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be provided")
     const sanitized = schema.parse(data)
     return {
       type: "model-created",
       data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
-      source: "custom",
+      source: process.env.SERVICE,
       id: randomUUID(),
     }
   }
@@ -992,12 +1001,13 @@ export namespace ModelDeletedEvent {
   export type ModelDeletedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be provided")
     const sanitized = schema.parse(data)
     return {
       type: "model-deleted",
       data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
-      source: "custom",
+      source: process.env.SERVICE,
       id: randomUUID(),
     }
   }
@@ -1103,12 +1113,13 @@ export namespace ModelUpdatedEvent {
   export type ModelUpdatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be provided")
     const sanitized = schema.parse(data)
     return {
       type: "model-updated",
       data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
-      source: "custom",
+      source: process.env.SERVICE,
       id: randomUUID(),
     }
   }
@@ -1251,12 +1262,13 @@ export namespace PropertyCreatedEvent {
   export type PropertyCreatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be provided")
     const sanitized = schema.parse(data)
     return {
       type: "property-created",
       data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
-      source: "custom",
+      source: process.env.SERVICE,
       id: randomUUID(),
     }
   }
@@ -1330,12 +1342,13 @@ export namespace PropertyDeletedEvent {
   export type PropertyDeletedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be provided")
     const sanitized = schema.parse(data)
     return {
       type: "property-deleted",
       data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
-      source: "custom",
+      source: process.env.SERVICE,
       id: randomUUID(),
     }
   }
@@ -1478,12 +1491,13 @@ export namespace PropertyUpdatedEvent {
   export type PropertyUpdatedEventEnvelope = z.infer<typeof envelopeSchema>
 
   export const buildData = (data: unknown) => {
+    if (!process.env.SERVICE) throw new Error("process.env.SERVICE must be provided")
     const sanitized = schema.parse(data)
     return {
       type: "property-updated",
       data: sanitized,
       timestamp: Math.floor(Date.now() / 1000),
-      source: "custom",
+      source: process.env.SERVICE,
       id: randomUUID(),
     }
   }
