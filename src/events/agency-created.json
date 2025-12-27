@@ -61,6 +61,12 @@
       "name": "contactPhone",
       "type": "string",
       "description": "Agency contact phone number"
+    },
+    {
+      "name": "timezone",
+      "type": "string",
+      "description": "Agency timezone",
+      "required": true
     }
   ]
 }
