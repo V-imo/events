@@ -21,9 +21,9 @@
       "required": true
     },
     {
-      "name": "currentAgencyId",
+      "name": "agencyId",
       "type": "string",
-      "description": "Current agency ID of the employee",
+      "description": "agency ID of the user creating the employee",
       "required": true
     }
   ]

@@ -9,7 +9,7 @@
       "required": true
     },
     {
-      "name": "currentAgencyId",
+      "name": "agencyId",
       "type": "string",
       "description": "Current agency ID of the user making the request",
       "required": true

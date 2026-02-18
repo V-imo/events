@@ -505,8 +505,8 @@ export type EmployeeCreatedEventData = {
     given_name: string;
     /** Employee last name */
     family_name: string;
-    /** Current agency ID of the employee */
-    currentAgencyId: string;
+    /** agency ID of the user creating the employee */
+    agencyId: string;
 };
 export type EmployeeCreatedEventEnvelope = {
     type: "employee-created";
@@ -522,17 +522,17 @@ export declare namespace EmployeeCreatedEvent {
         email: z.ZodString;
         given_name: z.ZodString;
         family_name: z.ZodString;
-        currentAgencyId: z.ZodString;
+        agencyId: z.ZodString;
     }, "strip", z.ZodTypeAny, {
+        agencyId: string;
         email: string;
         given_name: string;
         family_name: string;
-        currentAgencyId: string;
     }, {
+        agencyId: string;
         email: string;
         given_name: string;
         family_name: string;
-        currentAgencyId: string;
     }>;
     const envelopeSchema: z.ZodObject<{
         type: z.ZodLiteral<"employee-created">;
@@ -540,17 +540,17 @@ export declare namespace EmployeeCreatedEvent {
             email: z.ZodString;
             given_name: z.ZodString;
             family_name: z.ZodString;
-            currentAgencyId: z.ZodString;
+            agencyId: z.ZodString;
         }, "strip", z.ZodTypeAny, {
+            agencyId: string;
             email: string;
             given_name: string;
             family_name: string;
-            currentAgencyId: string;
         }, {
+            agencyId: string;
             email: string;
             given_name: string;
             family_name: string;
-            currentAgencyId: string;
         }>;
         timestamp: z.ZodNumber;
         source: z.ZodString;
@@ -558,10 +558,10 @@ export declare namespace EmployeeCreatedEvent {
     }, "strip", z.ZodTypeAny, {
         type: "employee-created";
         data: {
+            agencyId: string;
             email: string;
             given_name: string;
             family_name: string;
-            currentAgencyId: string;
         };
         timestamp: number;
         source: string;
@@ -569,10 +569,10 @@ export declare namespace EmployeeCreatedEvent {
     }, {
         type: "employee-created";
         data: {
+            agencyId: string;
             email: string;
             given_name: string;
             family_name: string;
-            currentAgencyId: string;
         };
         timestamp: number;
         source: string;
@@ -583,10 +583,10 @@ export declare namespace EmployeeCreatedEvent {
     export const buildData: (data: unknown) => {
         type: string;
         data: {
+            agencyId: string;
             email: string;
             given_name: string;
             family_name: string;
-            currentAgencyId: string;
         };
         timestamp: number;
         source: string;
@@ -604,7 +604,7 @@ export type EmployeeDeletedEventData = {
     /** Employee ID (Cognito sub) */
     employeeId: string;
     /** Current agency ID of the user making the request */
-    currentAgencyId: string;
+    agencyId: string;
 };
 export type EmployeeDeletedEventEnvelope = {
     type: "employee-deleted";
@@ -618,24 +618,24 @@ export type EmployeeDeletedEventEnvelope = {
 export declare namespace EmployeeDeletedEvent {
     const schema: z.ZodObject<{
         employeeId: z.ZodString;
-        currentAgencyId: z.ZodString;
+        agencyId: z.ZodString;
     }, "strip", z.ZodTypeAny, {
-        currentAgencyId: string;
+        agencyId: string;
         employeeId: string;
     }, {
-        currentAgencyId: string;
+        agencyId: string;
         employeeId: string;
     }>;
     const envelopeSchema: z.ZodObject<{
         type: z.ZodLiteral<"employee-deleted">;
         data: z.ZodObject<{
             employeeId: z.ZodString;
-            currentAgencyId: z.ZodString;
+            agencyId: z.ZodString;
         }, "strip", z.ZodTypeAny, {
-            currentAgencyId: string;
+            agencyId: string;
             employeeId: string;
         }, {
-            currentAgencyId: string;
+            agencyId: string;
             employeeId: string;
         }>;
         timestamp: z.ZodNumber;
@@ -644,7 +644,7 @@ export declare namespace EmployeeDeletedEvent {
     }, "strip", z.ZodTypeAny, {
         type: "employee-deleted";
         data: {
-            currentAgencyId: string;
+            agencyId: string;
             employeeId: string;
         };
         timestamp: number;
@@ -653,7 +653,7 @@ export declare namespace EmployeeDeletedEvent {
     }, {
         type: "employee-deleted";
         data: {
-            currentAgencyId: string;
+            agencyId: string;
             employeeId: string;
         };
         timestamp: number;
@@ -665,7 +665,7 @@ export declare namespace EmployeeDeletedEvent {
     export const buildData: (data: unknown) => {
         type: string;
         data: {
-            currentAgencyId: string;
+            agencyId: string;
             employeeId: string;
         };
         timestamp: number;
@@ -1911,8 +1911,8 @@ export type InspectorCreatedEventData = {
     given_name: string;
     /** Inspector last name */
     family_name: string;
-    /** Current agency ID of the inspector */
-    currentAgencyId: string;
+    /** agency ID of the user creating the inspector */
+    agencyId: string;
 };
 export type InspectorCreatedEventEnvelope = {
     type: "inspector-created";
@@ -1928,17 +1928,17 @@ export declare namespace InspectorCreatedEvent {
         email: z.ZodString;
         given_name: z.ZodString;
         family_name: z.ZodString;
-        currentAgencyId: z.ZodString;
+        agencyId: z.ZodString;
     }, "strip", z.ZodTypeAny, {
+        agencyId: string;
         email: string;
         given_name: string;
         family_name: string;
-        currentAgencyId: string;
     }, {
+        agencyId: string;
         email: string;
         given_name: string;
         family_name: string;
-        currentAgencyId: string;
     }>;
     const envelopeSchema: z.ZodObject<{
         type: z.ZodLiteral<"inspector-created">;
@@ -1946,17 +1946,17 @@ export declare namespace InspectorCreatedEvent {
             email: z.ZodString;
             given_name: z.ZodString;
             family_name: z.ZodString;
-            currentAgencyId: z.ZodString;
+            agencyId: z.ZodString;
         }, "strip", z.ZodTypeAny, {
+            agencyId: string;
             email: string;
             given_name: string;
             family_name: string;
-            currentAgencyId: string;
         }, {
+            agencyId: string;
             email: string;
             given_name: string;
             family_name: string;
-            currentAgencyId: string;
         }>;
         timestamp: z.ZodNumber;
         source: z.ZodString;
@@ -1964,10 +1964,10 @@ export declare namespace InspectorCreatedEvent {
     }, "strip", z.ZodTypeAny, {
         type: "inspector-created";
         data: {
+            agencyId: string;
             email: string;
             given_name: string;
             family_name: string;
-            currentAgencyId: string;
         };
         timestamp: number;
         source: string;
@@ -1975,10 +1975,10 @@ export declare namespace InspectorCreatedEvent {
     }, {
         type: "inspector-created";
         data: {
+            agencyId: string;
             email: string;
             given_name: string;
             family_name: string;
-            currentAgencyId: string;
         };
         timestamp: number;
         source: string;
@@ -1989,10 +1989,10 @@ export declare namespace InspectorCreatedEvent {
     export const buildData: (data: unknown) => {
         type: string;
         data: {
+            agencyId: string;
             email: string;
             given_name: string;
             family_name: string;
-            currentAgencyId: string;
         };
         timestamp: number;
         source: string;
@@ -2010,7 +2010,7 @@ export type InspectorDeletedEventData = {
     /** Inspector ID (Cognito sub) */
     inspectorId: string;
     /** Current agency ID of the user making the request */
-    currentAgencyId: string;
+    agencyId: string;
 };
 export type InspectorDeletedEventEnvelope = {
     type: "inspector-deleted";
@@ -2024,24 +2024,24 @@ export type InspectorDeletedEventEnvelope = {
 export declare namespace InspectorDeletedEvent {
     const schema: z.ZodObject<{
         inspectorId: z.ZodString;
-        currentAgencyId: z.ZodString;
+        agencyId: z.ZodString;
     }, "strip", z.ZodTypeAny, {
-        currentAgencyId: string;
+        agencyId: string;
         inspectorId: string;
     }, {
-        currentAgencyId: string;
+        agencyId: string;
         inspectorId: string;
     }>;
     const envelopeSchema: z.ZodObject<{
         type: z.ZodLiteral<"inspector-deleted">;
         data: z.ZodObject<{
             inspectorId: z.ZodString;
-            currentAgencyId: z.ZodString;
+            agencyId: z.ZodString;
         }, "strip", z.ZodTypeAny, {
-            currentAgencyId: string;
+            agencyId: string;
             inspectorId: string;
         }, {
-            currentAgencyId: string;
+            agencyId: string;
             inspectorId: string;
         }>;
         timestamp: z.ZodNumber;
@@ -2050,7 +2050,7 @@ export declare namespace InspectorDeletedEvent {
     }, "strip", z.ZodTypeAny, {
         type: "inspector-deleted";
         data: {
-            currentAgencyId: string;
+            agencyId: string;
             inspectorId: string;
         };
         timestamp: number;
@@ -2059,7 +2059,7 @@ export declare namespace InspectorDeletedEvent {
     }, {
         type: "inspector-deleted";
         data: {
-            currentAgencyId: string;
+            agencyId: string;
             inspectorId: string;
         };
         timestamp: number;
@@ -2071,7 +2071,7 @@ export declare namespace InspectorDeletedEvent {
     export const buildData: (data: unknown) => {
         type: string;
         data: {
-            currentAgencyId: string;
+            agencyId: string;
             inspectorId: string;
         };
         timestamp: number;
