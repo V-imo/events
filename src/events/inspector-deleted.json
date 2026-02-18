@@ -3,25 +3,13 @@
   "description": "Inspector deleted event",
   "attributes": [
     {
-      "name": "email",
+      "name": "inspectorId",
       "type": "string",
-      "description": "Inspector email",
+      "description": "Inspector ID (Cognito sub)",
       "required": true
     },
     {
-      "name": "given_name",
-      "type": "string",
-      "description": "Inspector first name",
-      "required": true
-    },
-    {
-      "name": "family_name",
-      "type": "string",
-      "description": "Inspector last name",
-      "required": true
-    },
-    {
-      "name": "custom:currentAgency",
+      "name": "currentAgencyId",
       "type": "string",
       "description": "Current agency ID of the user making the request",
       "required": true

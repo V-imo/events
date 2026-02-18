@@ -21,7 +21,7 @@
       "required": true
     },
     {
-      "name": "custom:currentAgency",
+      "name": "currentAgencyId",
       "type": "string",
       "description": "Current agency ID of the inspector",
       "required": true

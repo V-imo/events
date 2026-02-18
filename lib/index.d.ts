@@ -25,6 +25,8 @@ export type AgencyCreatedEventData = {
     contactMail: string;
     /** Agency contact phone number */
     contactPhone?: string;
+    /** Agency timezone */
+    timezone: string;
 };
 export type AgencyCreatedEventEnvelope = {
     type: "agency-created";
@@ -60,6 +62,7 @@ export declare namespace AgencyCreatedEvent {
         }>;
         contactMail: z.ZodString;
         contactPhone: z.ZodOptional<z.ZodString>;
+        timezone: z.ZodString;
     }, "strip", z.ZodTypeAny, {
         agencyId: string;
         name: string;
@@ -71,6 +74,7 @@ export declare namespace AgencyCreatedEvent {
             zipCode: string;
         };
         contactMail: string;
+        timezone: string;
         contactPhone?: string | undefined;
     }, {
         agencyId: string;
@@ -83,6 +87,7 @@ export declare namespace AgencyCreatedEvent {
             zipCode: string;
         };
         contactMail: string;
+        timezone: string;
         contactPhone?: string | undefined;
     }>;
     const envelopeSchema: z.ZodObject<{
@@ -111,6 +116,7 @@ export declare namespace AgencyCreatedEvent {
             }>;
             contactMail: z.ZodString;
             contactPhone: z.ZodOptional<z.ZodString>;
+            timezone: z.ZodString;
         }, "strip", z.ZodTypeAny, {
             agencyId: string;
             name: string;
@@ -122,6 +128,7 @@ export declare namespace AgencyCreatedEvent {
                 zipCode: string;
             };
             contactMail: string;
+            timezone: string;
             contactPhone?: string | undefined;
         }, {
             agencyId: string;
@@ -134,6 +141,7 @@ export declare namespace AgencyCreatedEvent {
                 zipCode: string;
             };
             contactMail: string;
+            timezone: string;
             contactPhone?: string | undefined;
         }>;
         timestamp: z.ZodNumber;
@@ -152,6 +160,7 @@ export declare namespace AgencyCreatedEvent {
                 zipCode: string;
             };
             contactMail: string;
+            timezone: string;
             contactPhone?: string | undefined;
         };
         timestamp: number;
@@ -170,6 +179,7 @@ export declare namespace AgencyCreatedEvent {
                 zipCode: string;
             };
             contactMail: string;
+            timezone: string;
             contactPhone?: string | undefined;
         };
         timestamp: number;
@@ -191,6 +201,7 @@ export declare namespace AgencyCreatedEvent {
                 zipCode: string;
             };
             contactMail: string;
+            timezone: string;
             contactPhone?: string | undefined;
         };
         timestamp: number;
@@ -296,6 +307,8 @@ export type AgencyUpdatedEventData = {
     contactMail: string;
     /** Agency contact phone number */
     contactPhone?: string;
+    /** Agency timezone */
+    timezone: string;
 };
 export type AgencyUpdatedEventEnvelope = {
     type: "agency-updated";
@@ -331,6 +344,7 @@ export declare namespace AgencyUpdatedEvent {
         }>;
         contactMail: z.ZodString;
         contactPhone: z.ZodOptional<z.ZodString>;
+        timezone: z.ZodString;
     }, "strip", z.ZodTypeAny, {
         agencyId: string;
         name: string;
@@ -342,6 +356,7 @@ export declare namespace AgencyUpdatedEvent {
             zipCode: string;
         };
         contactMail: string;
+        timezone: string;
         contactPhone?: string | undefined;
     }, {
         agencyId: string;
@@ -354,6 +369,7 @@ export declare namespace AgencyUpdatedEvent {
             zipCode: string;
         };
         contactMail: string;
+        timezone: string;
         contactPhone?: string | undefined;
     }>;
     const envelopeSchema: z.ZodObject<{
@@ -382,6 +398,7 @@ export declare namespace AgencyUpdatedEvent {
             }>;
             contactMail: z.ZodString;
             contactPhone: z.ZodOptional<z.ZodString>;
+            timezone: z.ZodString;
         }, "strip", z.ZodTypeAny, {
             agencyId: string;
             name: string;
@@ -393,6 +410,7 @@ export declare namespace AgencyUpdatedEvent {
                 zipCode: string;
             };
             contactMail: string;
+            timezone: string;
             contactPhone?: string | undefined;
         }, {
             agencyId: string;
@@ -405,6 +423,7 @@ export declare namespace AgencyUpdatedEvent {
                 zipCode: string;
             };
             contactMail: string;
+            timezone: string;
             contactPhone?: string | undefined;
         }>;
         timestamp: z.ZodNumber;
@@ -423,6 +442,7 @@ export declare namespace AgencyUpdatedEvent {
                 zipCode: string;
             };
             contactMail: string;
+            timezone: string;
             contactPhone?: string | undefined;
         };
         timestamp: number;
@@ -441,6 +461,7 @@ export declare namespace AgencyUpdatedEvent {
                 zipCode: string;
             };
             contactMail: string;
+            timezone: string;
             contactPhone?: string | undefined;
         };
         timestamp: number;
@@ -462,6 +483,7 @@ export declare namespace AgencyUpdatedEvent {
                 zipCode: string;
             };
             contactMail: string;
+            timezone: string;
             contactPhone?: string | undefined;
         };
         timestamp: number;
@@ -471,6 +493,188 @@ export declare namespace AgencyUpdatedEvent {
     export const parse: (input: unknown) => AgencyUpdatedEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "agency-updated";
+    export {};
+}
+/**
+ * Employee created event
+ */
+export type EmployeeCreatedEventData = {
+    /** Employee email */
+    email: string;
+    /** Employee first name */
+    given_name: string;
+    /** Employee last name */
+    family_name: string;
+    /** Current agency ID of the employee */
+    currentAgencyId: string;
+};
+export type EmployeeCreatedEventEnvelope = {
+    type: "employee-created";
+    data: EmployeeCreatedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
+};
+export declare namespace EmployeeCreatedEvent {
+    const schema: z.ZodObject<{
+        email: z.ZodString;
+        given_name: z.ZodString;
+        family_name: z.ZodString;
+        currentAgencyId: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        email: string;
+        given_name: string;
+        family_name: string;
+        currentAgencyId: string;
+    }, {
+        email: string;
+        given_name: string;
+        family_name: string;
+        currentAgencyId: string;
+    }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"employee-created">;
+        data: z.ZodObject<{
+            email: z.ZodString;
+            given_name: z.ZodString;
+            family_name: z.ZodString;
+            currentAgencyId: z.ZodString;
+        }, "strip", z.ZodTypeAny, {
+            email: string;
+            given_name: string;
+            family_name: string;
+            currentAgencyId: string;
+        }, {
+            email: string;
+            given_name: string;
+            family_name: string;
+            currentAgencyId: string;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "employee-created";
+        data: {
+            email: string;
+            given_name: string;
+            family_name: string;
+            currentAgencyId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "employee-created";
+        data: {
+            email: string;
+            given_name: string;
+            family_name: string;
+            currentAgencyId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
+    export type EmployeeCreatedEventData = z.infer<typeof schema>;
+    export type EmployeeCreatedEventEnvelope = z.infer<typeof envelopeSchema>;
+    export const buildData: (data: unknown) => {
+        type: string;
+        data: {
+            email: string;
+            given_name: string;
+            family_name: string;
+            currentAgencyId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
+    };
+    export const parse: (input: unknown) => EmployeeCreatedEventEnvelope;
+    export const build: (data: unknown) => PutEventsCommand;
+    export const type = "employee-created";
+    export {};
+}
+/**
+ * Employee deleted event
+ */
+export type EmployeeDeletedEventData = {
+    /** Employee ID (Cognito sub) */
+    employeeId: string;
+    /** Current agency ID of the user making the request */
+    currentAgencyId: string;
+};
+export type EmployeeDeletedEventEnvelope = {
+    type: "employee-deleted";
+    data: EmployeeDeletedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
+};
+export declare namespace EmployeeDeletedEvent {
+    const schema: z.ZodObject<{
+        employeeId: z.ZodString;
+        currentAgencyId: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        currentAgencyId: string;
+        employeeId: string;
+    }, {
+        currentAgencyId: string;
+        employeeId: string;
+    }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"employee-deleted">;
+        data: z.ZodObject<{
+            employeeId: z.ZodString;
+            currentAgencyId: z.ZodString;
+        }, "strip", z.ZodTypeAny, {
+            currentAgencyId: string;
+            employeeId: string;
+        }, {
+            currentAgencyId: string;
+            employeeId: string;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "employee-deleted";
+        data: {
+            currentAgencyId: string;
+            employeeId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "employee-deleted";
+        data: {
+            currentAgencyId: string;
+            employeeId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
+    export type EmployeeDeletedEventData = z.infer<typeof schema>;
+    export type EmployeeDeletedEventEnvelope = z.infer<typeof envelopeSchema>;
+    export const buildData: (data: unknown) => {
+        type: string;
+        data: {
+            currentAgencyId: string;
+            employeeId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
+    };
+    export const parse: (input: unknown) => EmployeeDeletedEventEnvelope;
+    export const build: (data: unknown) => PutEventsCommand;
+    export const type = "employee-deleted";
     export {};
 }
 /**
@@ -1695,6 +1899,188 @@ export declare namespace InspectionUpdatedEvent {
     export const parse: (input: unknown) => InspectionUpdatedEventEnvelope;
     export const build: (data: unknown) => PutEventsCommand;
     export const type = "inspection-updated";
+    export {};
+}
+/**
+ * Inspector created event
+ */
+export type InspectorCreatedEventData = {
+    /** Inspector email */
+    email: string;
+    /** Inspector first name */
+    given_name: string;
+    /** Inspector last name */
+    family_name: string;
+    /** Current agency ID of the inspector */
+    currentAgencyId: string;
+};
+export type InspectorCreatedEventEnvelope = {
+    type: "inspector-created";
+    data: InspectorCreatedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
+};
+export declare namespace InspectorCreatedEvent {
+    const schema: z.ZodObject<{
+        email: z.ZodString;
+        given_name: z.ZodString;
+        family_name: z.ZodString;
+        currentAgencyId: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        email: string;
+        given_name: string;
+        family_name: string;
+        currentAgencyId: string;
+    }, {
+        email: string;
+        given_name: string;
+        family_name: string;
+        currentAgencyId: string;
+    }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"inspector-created">;
+        data: z.ZodObject<{
+            email: z.ZodString;
+            given_name: z.ZodString;
+            family_name: z.ZodString;
+            currentAgencyId: z.ZodString;
+        }, "strip", z.ZodTypeAny, {
+            email: string;
+            given_name: string;
+            family_name: string;
+            currentAgencyId: string;
+        }, {
+            email: string;
+            given_name: string;
+            family_name: string;
+            currentAgencyId: string;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "inspector-created";
+        data: {
+            email: string;
+            given_name: string;
+            family_name: string;
+            currentAgencyId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "inspector-created";
+        data: {
+            email: string;
+            given_name: string;
+            family_name: string;
+            currentAgencyId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
+    export type InspectorCreatedEventData = z.infer<typeof schema>;
+    export type InspectorCreatedEventEnvelope = z.infer<typeof envelopeSchema>;
+    export const buildData: (data: unknown) => {
+        type: string;
+        data: {
+            email: string;
+            given_name: string;
+            family_name: string;
+            currentAgencyId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
+    };
+    export const parse: (input: unknown) => InspectorCreatedEventEnvelope;
+    export const build: (data: unknown) => PutEventsCommand;
+    export const type = "inspector-created";
+    export {};
+}
+/**
+ * Inspector deleted event
+ */
+export type InspectorDeletedEventData = {
+    /** Inspector ID (Cognito sub) */
+    inspectorId: string;
+    /** Current agency ID of the user making the request */
+    currentAgencyId: string;
+};
+export type InspectorDeletedEventEnvelope = {
+    type: "inspector-deleted";
+    data: InspectorDeletedEventData;
+    time: number;
+    source: string;
+    account: string;
+    version: string;
+    id: string;
+};
+export declare namespace InspectorDeletedEvent {
+    const schema: z.ZodObject<{
+        inspectorId: z.ZodString;
+        currentAgencyId: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        currentAgencyId: string;
+        inspectorId: string;
+    }, {
+        currentAgencyId: string;
+        inspectorId: string;
+    }>;
+    const envelopeSchema: z.ZodObject<{
+        type: z.ZodLiteral<"inspector-deleted">;
+        data: z.ZodObject<{
+            inspectorId: z.ZodString;
+            currentAgencyId: z.ZodString;
+        }, "strip", z.ZodTypeAny, {
+            currentAgencyId: string;
+            inspectorId: string;
+        }, {
+            currentAgencyId: string;
+            inspectorId: string;
+        }>;
+        timestamp: z.ZodNumber;
+        source: z.ZodString;
+        id: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        type: "inspector-deleted";
+        data: {
+            currentAgencyId: string;
+            inspectorId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }, {
+        type: "inspector-deleted";
+        data: {
+            currentAgencyId: string;
+            inspectorId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: string;
+    }>;
+    export type InspectorDeletedEventData = z.infer<typeof schema>;
+    export type InspectorDeletedEventEnvelope = z.infer<typeof envelopeSchema>;
+    export const buildData: (data: unknown) => {
+        type: string;
+        data: {
+            currentAgencyId: string;
+            inspectorId: string;
+        };
+        timestamp: number;
+        source: string;
+        id: `${string}-${string}-${string}-${string}-${string}`;
+    };
+    export const parse: (input: unknown) => InspectorDeletedEventEnvelope;
+    export const build: (data: unknown) => PutEventsCommand;
+    export const type = "inspector-deleted";
     export {};
 }
 /**
@@ -3638,4 +4024,4 @@ export declare const DEFINITIONS: ({
  * Parse an EventBridge entry or envelope into a typed event.
  * Supports both EventBridge entry format (with Detail as JSON string) and direct envelope objects.
  */
-export declare function parseEvent(input: unknown): AgencyCreatedEvent.AgencyCreatedEventEnvelope | AgencyDeletedEvent.AgencyDeletedEventEnvelope | AgencyUpdatedEvent.AgencyUpdatedEventEnvelope | EventExampleEvent.EventExampleEventEnvelope | InspectionCreatedEvent.InspectionCreatedEventEnvelope | InspectionDeletedEvent.InspectionDeletedEventEnvelope | InspectionPdfGeneratedEvent.InspectionPdfGeneratedEventEnvelope | InspectionUpdatedEvent.InspectionUpdatedEventEnvelope | ModelCreatedEvent.ModelCreatedEventEnvelope | ModelDeletedEvent.ModelDeletedEventEnvelope | ModelUpdatedEvent.ModelUpdatedEventEnvelope | PropertyCreatedEvent.PropertyCreatedEventEnvelope | PropertyDeletedEvent.PropertyDeletedEventEnvelope | PropertyUpdatedEvent.PropertyUpdatedEventEnvelope;
+export declare function parseEvent(input: unknown): AgencyCreatedEvent.AgencyCreatedEventEnvelope | AgencyDeletedEvent.AgencyDeletedEventEnvelope | AgencyUpdatedEvent.AgencyUpdatedEventEnvelope | EmployeeCreatedEvent.EmployeeCreatedEventEnvelope | EmployeeDeletedEvent.EmployeeDeletedEventEnvelope | EventExampleEvent.EventExampleEventEnvelope | InspectionCreatedEvent.InspectionCreatedEventEnvelope | InspectionDeletedEvent.InspectionDeletedEventEnvelope | InspectionPdfGeneratedEvent.InspectionPdfGeneratedEventEnvelope | InspectionUpdatedEvent.InspectionUpdatedEventEnvelope | InspectorCreatedEvent.InspectorCreatedEventEnvelope | InspectorDeletedEvent.InspectorDeletedEventEnvelope | ModelCreatedEvent.ModelCreatedEventEnvelope | ModelDeletedEvent.ModelDeletedEventEnvelope | ModelUpdatedEvent.ModelUpdatedEventEnvelope | PropertyCreatedEvent.PropertyCreatedEventEnvelope | PropertyDeletedEvent.PropertyDeletedEventEnvelope | PropertyUpdatedEvent.PropertyUpdatedEventEnvelope;
