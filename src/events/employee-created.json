@@ -1,0 +1,30 @@
+{
+  "name": "employee-created",
+  "description": "Employee created event",
+  "attributes": [
+    {
+      "name": "email",
+      "type": "string",
+      "description": "Employee email",
+      "required": true
+    },
+    {
+      "name": "given_name",
+      "type": "string",
+      "description": "Employee first name",
+      "required": true
+    },
+    {
+      "name": "family_name",
+      "type": "string",
+      "description": "Employee last name",
+      "required": true
+    },
+    {
+      "name": "custom:currentAgency",
+      "type": "string",
+      "description": "Current agency ID of the employee",
+      "required": true
+    }
+  ]
+}
