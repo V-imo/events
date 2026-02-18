@@ -1,0 +1,30 @@
+{
+  "name": "inspector-created",
+  "description": "Inspector created event",
+  "attributes": [
+    {
+      "name": "email",
+      "type": "string",
+      "description": "Inspector email",
+      "required": true
+    },
+    {
+      "name": "given_name",
+      "type": "string",
+      "description": "Inspector first name",
+      "required": true
+    },
+    {
+      "name": "family_name",
+      "type": "string",
+      "description": "Inspector last name",
+      "required": true
+    },
+    {
+      "name": "agencyId",
+      "type": "string",
+      "description": "agency ID of the user creating the inspector",
+      "required": true
+    }
+  ]
+}
