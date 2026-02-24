@@ -3,9 +3,9 @@
   "description": "Inspector deleted event",
   "attributes": [
     {
-      "name": "inspectorId",
+      "name": "email",
       "type": "string",
-      "description": "Inspector ID (Cognito sub)",
+      "description": "Inspector email",
       "required": true
     },
     {

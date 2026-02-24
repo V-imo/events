@@ -3,9 +3,9 @@
   "description": "Employee deleted event",
   "attributes": [
     {
-      "name": "employeeId",
+      "name": "email",
       "type": "string",
-      "description": "Employee ID (Cognito sub)",
+      "description": "Employee email",
       "required": true
     },
     {
