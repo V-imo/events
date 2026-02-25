@@ -601,8 +601,8 @@ export declare namespace EmployeeCreatedEvent {
  * Employee deleted event
  */
 export type EmployeeDeletedEventData = {
-    /** Employee ID (Cognito sub) */
-    employeeId: string;
+    /** Employee email */
+    email: string;
     /** Current agency ID of the user making the request */
     agencyId: string;
 };
@@ -617,26 +617,26 @@ export type EmployeeDeletedEventEnvelope = {
 };
 export declare namespace EmployeeDeletedEvent {
     const schema: z.ZodObject<{
-        employeeId: z.ZodString;
+        email: z.ZodString;
         agencyId: z.ZodString;
     }, "strip", z.ZodTypeAny, {
         agencyId: string;
-        employeeId: string;
+        email: string;
     }, {
         agencyId: string;
-        employeeId: string;
+        email: string;
     }>;
     const envelopeSchema: z.ZodObject<{
         type: z.ZodLiteral<"employee-deleted">;
         data: z.ZodObject<{
-            employeeId: z.ZodString;
+            email: z.ZodString;
             agencyId: z.ZodString;
         }, "strip", z.ZodTypeAny, {
             agencyId: string;
-            employeeId: string;
+            email: string;
         }, {
             agencyId: string;
-            employeeId: string;
+            email: string;
         }>;
         timestamp: z.ZodNumber;
         source: z.ZodString;
@@ -645,7 +645,7 @@ export declare namespace EmployeeDeletedEvent {
         type: "employee-deleted";
         data: {
             agencyId: string;
-            employeeId: string;
+            email: string;
         };
         timestamp: number;
         source: string;
@@ -654,7 +654,7 @@ export declare namespace EmployeeDeletedEvent {
         type: "employee-deleted";
         data: {
             agencyId: string;
-            employeeId: string;
+            email: string;
         };
         timestamp: number;
         source: string;
@@ -666,7 +666,7 @@ export declare namespace EmployeeDeletedEvent {
         type: string;
         data: {
             agencyId: string;
-            employeeId: string;
+            email: string;
         };
         timestamp: number;
         source: string;
@@ -2007,8 +2007,8 @@ export declare namespace InspectorCreatedEvent {
  * Inspector deleted event
  */
 export type InspectorDeletedEventData = {
-    /** Inspector ID (Cognito sub) */
-    inspectorId: string;
+    /** Inspector email */
+    email: string;
     /** Current agency ID of the user making the request */
     agencyId: string;
 };
@@ -2023,26 +2023,26 @@ export type InspectorDeletedEventEnvelope = {
 };
 export declare namespace InspectorDeletedEvent {
     const schema: z.ZodObject<{
-        inspectorId: z.ZodString;
+        email: z.ZodString;
         agencyId: z.ZodString;
     }, "strip", z.ZodTypeAny, {
         agencyId: string;
-        inspectorId: string;
+        email: string;
     }, {
         agencyId: string;
-        inspectorId: string;
+        email: string;
     }>;
     const envelopeSchema: z.ZodObject<{
         type: z.ZodLiteral<"inspector-deleted">;
         data: z.ZodObject<{
-            inspectorId: z.ZodString;
+            email: z.ZodString;
             agencyId: z.ZodString;
         }, "strip", z.ZodTypeAny, {
             agencyId: string;
-            inspectorId: string;
+            email: string;
         }, {
             agencyId: string;
-            inspectorId: string;
+            email: string;
         }>;
         timestamp: z.ZodNumber;
         source: z.ZodString;
@@ -2051,7 +2051,7 @@ export declare namespace InspectorDeletedEvent {
         type: "inspector-deleted";
         data: {
             agencyId: string;
-            inspectorId: string;
+            email: string;
         };
         timestamp: number;
         source: string;
@@ -2060,7 +2060,7 @@ export declare namespace InspectorDeletedEvent {
         type: "inspector-deleted";
         data: {
             agencyId: string;
-            inspectorId: string;
+            email: string;
         };
         timestamp: number;
         source: string;
@@ -2072,7 +2072,7 @@ export declare namespace InspectorDeletedEvent {
         type: string;
         data: {
             agencyId: string;
-            inspectorId: string;
+            email: string;
         };
         timestamp: number;
         source: string;
